@@ -13,13 +13,22 @@ public class GameBoardPanel extends JPanel {
     public static final int CANVAS_WIDTH  = CELL_SIZE * COLS;
     public static final int CANVAS_HEIGHT = CELL_SIZE * ROWS;
 
+    Menu menu;
+    
     Cell cells[][] = new Cell[ROWS][COLS];
     boolean[][] isMined = new boolean[ROWS][COLS];
-    int numMines = 10;
+    boolean[][] marcado;
+    int numMines = 15;
     int vidas = 3;
     int clicks = 0;
+    int bvclicks = 0;
+    double bvs = 0;
+    int puntos = 0;
+    
+    int seg = 0;
 
-    public GameBoardPanel() {
+    public GameBoardPanel(Menu menu) {
+        this.menu = menu;
         super.setLayout(new GridLayout(ROWS, COLS, 2, 2));
         for (int row = 0; row < ROWS; ++row) {
             for (int col = 0; col < COLS; ++col) {
@@ -33,8 +42,11 @@ public class GameBoardPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e){
                 Cell cell = (Cell) e.getSource();
-                clicks++;
+                
                 if(SwingUtilities.isLeftMouseButton(e)){
+                    if(clicks==0){
+                        newGame(cell.getRow(),cell.getCol());
+                    }
                     revealCell(cell.getRow(),cell.getCol());
                 }else if(SwingUtilities.isRightMouseButton (e)){
                     if(cell.isRevealed()==false){
@@ -47,6 +59,7 @@ public class GameBoardPanel extends JPanel {
                         }
                     }
                 }
+                clicks++;
             }
 
             @Override
@@ -70,9 +83,9 @@ public class GameBoardPanel extends JPanel {
    }
 
     // Initialize and re-initialize a new game
-    public void newGame() {
+    public void newGame(int fRow, int fCol) {
         //Hacer el mapa de minas
-        MineMap mineMap = new MineMap();
+        MineMap mineMap = new MineMap(fRow, fCol);
         mineMap.newMineMap(numMines);
 
         // Resetear todo
@@ -81,6 +94,8 @@ public class GameBoardPanel extends JPanel {
                 cells[row][col].newGame(mineMap.isMined[row][col]);
             }
         }
+        menu.setCrono();
+        calcular3BV();
     }
 
     //Minas alrededor
@@ -104,6 +119,7 @@ public class GameBoardPanel extends JPanel {
         cells[srcRow][srcCol].paint();
         if (cells[srcRow][srcCol].isMined){
             cells[srcRow][srcCol].setText("mina");
+            System.out.println("Perdio una vida!");
             vidas--;
             if(vidas==0){
                 lost();
@@ -130,24 +146,89 @@ public class GameBoardPanel extends JPanel {
         }
     }
 
-    // Return true if the player has won (all cells have been revealed or were mined)
+    //Verdadero si ha ganado
     public boolean hasWon() {
-        /*boolean lost;
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLS; col++) {
-                if(cells[row][col].isMined()){
-                    cells[row][col].isRevealed();
-                    lost=true;
+                if(cells[row][col].isMined()==false){
+                    if(cells[row][col].isRevealed()==false){
+                        return false;
+                    }
                 }
             }
-        }*/
+        }
+        System.out.println("ganaste guapo");
+        seg = menu.pararCrono();
+        calcularPuntaje();
         return true;
     }
     
     public void lost() {
-        System.out.println("perdedor");
+        System.out.println("perdedor bish");
+        seg = menu.pararCrono();
+        calcularPuntaje();
     }
 
-    // [TODO 2] Define a Listener Inner Class
-    // .........
+    public void calcular3BV(){
+        marcado = new boolean[ROWS][COLS];
+        for (int row = 0; row < ROWS; row++) {
+            for (int col = 0; col < COLS; col++) {
+                if(!cells[row][col].isMined() && !marcado[row][col]){
+                    if(getSurroundingMines(row,col)==0){
+                        marcado[row][col] = true;
+                        flood(row,col);
+                        bvclicks++;
+                    }
+                    if(!alrededorCero(row,col)){
+                        marcado[row][col] = true;
+                        bvclicks++;
+                    }
+                }
+            }
+        }
+    }
+    
+    public void flood(int row, int col){
+        for(int r=row-1 ; r<=row+1 ; r++){
+            for(int c=col-1 ; c<=col+1 ; c++){
+                if (r >= 0 && r < ROWS && c >= 0 && c < COLS) {
+                    if(!cells[r][c].isMined() && !marcado[r][c]){
+                        marcado[r][c] = true;
+                        if(getSurroundingMines(r,c)==0){
+                            flood(r,c);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    public boolean alrededorCero(int row, int col){
+        for(int r=row-1 ; r<=row+1 ; r++){
+            for(int c=col-1 ; c<=col+1 ; c++){
+                if (r >= 0 && r < ROWS && c >= 0 && c < COLS) {
+                    if(getSurroundingMines(r,c)==0){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
+    public void calcularPuntaje(){
+        bvs = (double)bvclicks/(double)seg;
+        puntos = (int)Math.ceil(bvs*1000);
+        if(vidas==2){
+            puntos = (int)Math.ceil(puntos*0.95);
+        }else if(vidas==1){
+            puntos = (int)Math.ceil(puntos*0.85);
+        }else if(vidas==0){
+            puntos = (int)Math.ceil(puntos*0.50);
+        }
+        System.out.println(bvclicks);
+        System.out.println(seg);
+        System.out.println(bvs);
+        System.out.println(puntos);
+    }
 }

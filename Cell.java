@@ -26,6 +26,7 @@ public class Cell extends JButton {
        this.row = row;
        this.col = col;
        super.setFont(FONT_NUMBERS);
+       super.setBackground(BG_NOT_REVEALED);
     }
 
     public void newGame(boolean isMined) {

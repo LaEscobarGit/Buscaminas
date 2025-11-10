@@ -6,11 +6,15 @@ import static poo.proyecto.MineSweeperConstants.COLS;
 //esta clase define donde se encuentran las minas
 public class MineMap {
     int numMines;
+    int fRow;
+    int fCol;
     boolean[][] isMined = new boolean[ROWS][COLS];
     Random random = new Random();
 
-    public MineMap() {
+    public MineMap(int fRow, int fCol) {
         super();
+        this.fRow = fRow;
+        this.fCol = fCol;
     }
 
     //Donde estan las minas
@@ -23,7 +27,7 @@ public class MineMap {
             do{
                 row = random.nextInt(ROWS);
                 col = random.nextInt(COLS);
-            }while(isMined[row][col]==true);
+            }while(isMined[row][col]==true || (fRow==row && fCol==col));
             isMined[row][col] = true;
         }
     }

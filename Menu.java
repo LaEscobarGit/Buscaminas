@@ -12,7 +12,13 @@ import javax.swing.plaf.basic.BasicButtonUI;
 
 public class Menu extends javax.swing.JFrame {
     CardLayout cardLayout;
-    GameBoardPanel board = new GameBoardPanel();
+    GameBoardPanel board = new GameBoardPanel(this);
+    
+    //tiempo
+    private Thread hiloCrono;
+    private boolean cronoCorre=false;
+    int seg = 0;
+    
     public Menu() {
         initComponents();
         
@@ -68,7 +74,7 @@ public class Menu extends javax.swing.JFrame {
         gamePane = new javax.swing.JPanel();
         boardPane = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
+        tiempoLabel = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
@@ -414,8 +420,8 @@ public class Menu extends javax.swing.JFrame {
             .addGap(0, 410, Short.MAX_VALUE)
         );
 
-        jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel7.setText("00:00");
+        tiempoLabel.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        tiempoLabel.setText("000");
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel8.setText("Jugador 2");
@@ -462,7 +468,7 @@ public class Menu extends javax.swing.JFrame {
                                 .addComponent(jLabel8)))
                         .addGap(30, 30, 30))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gamePaneLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
+                        .addComponent(tiempoLabel)
                         .addGap(444, 444, 444))))
         );
         gamePaneLayout.setVerticalGroup(
@@ -478,7 +484,7 @@ public class Menu extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel8)))
                         .addGap(29, 29, 29)
-                        .addComponent(jLabel7))
+                        .addComponent(tiempoLabel))
                     .addGroup(gamePaneLayout.createSequentialGroup()
                         .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -574,13 +580,38 @@ public class Menu extends javax.swing.JFrame {
         boardPane.add(board, BorderLayout.CENTER);
         boardPane.revalidate();
         boardPane.repaint();
-        board.newGame();
+        //board.newGame();
     }//GEN-LAST:event_jugarBot2ActionPerformed
 
     private void sigBotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sigBotActionPerformed
         cardLayout.show(mainPane, "perPane");
     }//GEN-LAST:event_sigBotActionPerformed
 
+    //tiempo
+    public void setCrono(){
+        cronoCorre=true;
+        seg=0;
+        tiempoLabel.setText("000");
+        hiloCrono = new Thread(() -> {
+            try {
+                while(cronoCorre){
+                    Thread.sleep(1000);
+                    seg++;
+                    String tiempo = String.format("%02d",seg);
+                    tiempoLabel.setText(tiempo);
+                }
+            }catch(InterruptedException ex){
+                ex.printStackTrace();
+            }
+        });
+        hiloCrono.start();
+    }
+    public int pararCrono(){
+        hiloCrono.interrupt();
+        cronoCorre=false;
+        return seg;
+    }
+    
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -600,7 +631,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -623,6 +653,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel perPane;
     private javax.swing.JButton salirBot;
     private javax.swing.JButton sigBot;
+    private javax.swing.JLabel tiempoLabel;
     private javax.swing.JButton topBot;
     // End of variables declaration//GEN-END:variables
 }

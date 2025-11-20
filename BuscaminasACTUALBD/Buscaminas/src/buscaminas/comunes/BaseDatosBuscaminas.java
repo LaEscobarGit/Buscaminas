@@ -2,7 +2,6 @@ package buscaminas.comunes;
 
 import com.db4o.*;
 import com.db4o.query.Query;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -17,16 +16,15 @@ public class BaseDatosBuscaminas {
         db = Db4o.openFile(ARCHIVO_DB);
     }
 
-    
-    
+
     public void guardarConfiguracion(ConfiguracionJuego config) {
-        // Borra configuraciones previas para solo tener 1 activa
+        
         List<ConfiguracionJuego> previas = db.query(ConfiguracionJuego.class);
         for (ConfiguracionJuego c : previas) db.delete(c);
 
         db.store(config);
         db.commit();
-        System.out.println("Configuración guardada: " + config);
+        System.out.println("Configuración guardada: " + config.getDificultad());
     }
 
     public ConfiguracionJuego obtenerConfiguracion() {
@@ -35,65 +33,56 @@ public class BaseDatosBuscaminas {
     }
 
 
-    
-
-    public void guardarJugador(String nombre, boolean gano, int tiempoPartida) {
-        Jugador jugador = obtenerJugador(nombre);
+    public void guardarJugador(String nombre, boolean gano, int puntaje, int tiempoPartida) {
+        JugadorStats jugador = obtenerJugador(nombre);
 
         if (jugador == null) {
-            jugador = new Jugador(nombre);
+            jugador = new JugadorStats(nombre);
         }
 
-        // Actualizar estadísticas
-        if (gano) jugador.ganadas++;
-        else jugador.perdidas++;
-
-        jugador.tiempoTotal += tiempoPartida;
+        jugador.actualizarEstadisticas(gano, puntaje, tiempoPartida);
 
         db.store(jugador);
         db.commit();
-        System.out.println("Jugador actualizado/guardado: " + jugador);
+        System.out.println("Jugador actualizado/guardado: " + jugador.getNombre());
     }
 
-    public Jugador obtenerJugador(String nombre) {
+    public JugadorStats obtenerJugador(String nombre) {
         Query q = db.query();
-        q.constrain(Jugador.class);
+        q.constrain(JugadorStats.class);
         q.descend("nombre").constrain(nombre);
 
-        List<Jugador> lista = q.execute();
+        List<JugadorStats> lista = q.execute();
         return lista.isEmpty() ? null : lista.get(0);
     }
 
-    public List<Jugador> obtenerJugadores() {
-        return db.query(Jugador.class);
+    public List<JugadorStats> obtenerJugadores() {
+        return db.query(JugadorStats.class);
     }
 
-    public List<Jugador> obtenerTop10() {
-        List<Jugador> jugadores = obtenerJugadores();
+    public List<JugadorStats> obtenerTop10() {
+        List<JugadorStats> jugadores = obtenerJugadores();
 
-        Collections.sort(jugadores, new Comparator<Jugador>() {
+        Collections.sort(jugadores, new Comparator<JugadorStats>() {
             @Override
-            public int compare(Jugador a, Jugador b) {
-                return Integer.compare(b.ganadas, a.ganadas); // ordenar por más victorias
+            public int compare(JugadorStats a, JugadorStats b) {
+                return Integer.compare(b.getMejorPuntaje(), a.getMejorPuntaje());
             }
         });
 
         return jugadores.size() > 10 ? jugadores.subList(0, 10) : jugadores;
     }
 
-    
 
-
-    public void guardarPartida(Partida partida) {
+    public void guardarPartida(HistorialPartida partida) {
         db.store(partida);
         db.commit();
-        System.out.println("Partida registrada: " + partida);
+        System.out.println("Partida registrada de: " + partida.getJugador());
     }
 
-    public List<Partida> obtenerHistorial() {
-        return db.query(Partida.class);
+    public List<HistorialPartida> obtenerHistorial() {
+        return db.query(HistorialPartida.class);
     }
-
 
 
     public void cerrar() {

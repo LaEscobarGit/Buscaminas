@@ -19,9 +19,19 @@ public class ConfiguracionJuego {
         this.fecha = new Date();
     }
 
-    public String getDificultad() { return dificultad; }
-    public int getFilas() { return filas; }
-    public int getColumnas() { return columnas; }
-    public int getMinas() { return minas; }
-    public Date getFecha() { return fecha; }
+    public String getDificultad() { 
+        return dificultad; 
+    }
+    public int getFilas() { 
+        return filas; 
+    }
+    public int getColumnas() {
+         return columnas;
+         }
+    public int getMinas() {
+         return minas; 
+        }
+    public Date getFecha() { 
+        return fecha; 
+    }
 }

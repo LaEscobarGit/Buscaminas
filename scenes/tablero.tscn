@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://cqsdkjg38h6jq"]
+
+[ext_resource type="Script" uid="uid://c2w83fmltmhrx" path="res://scripts/Tablero.cs" id="1_15a0m"]
+[ext_resource type="PackedScene" uid="uid://boi55qianpdri" path="res://scenes/celda.tscn" id="2_afy4m"]
+[ext_resource type="Texture2D" uid="uid://dd1vrojpkhyg1" path="res://assets/imgs/gamePanel.png" id="2_ee34m"]
+
+[node name="Tablero" type="Control" unique_id=441914226]
+layout_mode = 3
+anchors_preset = 0
+pivot_offset = Vector2(228, 228)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_15a0m")
+CeldaScene = ExtResource("2_afy4m")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1226751884]
+texture_filter = 1
+layout_mode = 0
+offset_right = 456.0
+offset_bottom = 456.0
+texture = ExtResource("2_ee34m")
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=1965576789]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 440.0
+offset_bottom = 440.0

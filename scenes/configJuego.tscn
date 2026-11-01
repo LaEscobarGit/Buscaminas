@@ -1,0 +1,155 @@
+[gd_scene format=3 uid="uid://e3xhsylpv657"]
+
+[ext_resource type="Script" uid="uid://bmme3d1gabdao" path="res://scripts/ConfigJuego.cs" id="1_mo5ol"]
+[ext_resource type="VideoStream" uid="uid://bonr80tgw1pdq" path="res://assets/imgs/Fondo.ogv" id="2_3wuio"]
+[ext_resource type="PackedScene" uid="uid://byj0a3na3fu4y" path="res://scenes/boton.tscn" id="3_4iuo0"]
+[ext_resource type="FontFile" uid="uid://b6y4qw4h75aht" path="res://assets/fonts/PixelMplus10-Bold.ttf" id="4_du3kj"]
+[ext_resource type="AudioStream" uid="uid://b8patdgr6gdd4" path="res://assets/audio/NeedyGirl.wav" id="5_wl40t"]
+[ext_resource type="Texture2D" uid="uid://0l8uotro4p1b" path="res://assets/imgs/mina.png" id="6_mo5ol"]
+
+[node name="ConfigJuego" type="Control" unique_id=2083391954 node_paths=PackedStringArray("filasBox", "colsBox", "minasBox")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mo5ol")
+filasBox = NodePath("TableroContainer/Grid/Filas")
+colsBox = NodePath("TableroContainer/Grid/Columnas")
+minasBox = NodePath("TableroContainer/Grid/Minas")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=876782601]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.6, 0.6)
+stream = ExtResource("2_3wuio")
+autoplay = true
+loop = true
+
+[node name="BotonContainer" type="VBoxContainer" parent="." unique_id=1522222470]
+layout_mode = 0
+offset_left = 97.0
+offset_top = 289.0
+offset_right = 265.0
+offset_bottom = 453.0
+theme_override_constants/separation = 10
+
+[node name="Tablero" parent="BotonContainer" unique_id=511730408 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
+layout_mode = 2
+text = "Tablero"
+
+[node name="B&D" parent="BotonContainer" unique_id=737292347 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
+layout_mode = 2
+text = "Buffs & Debuffs"
+
+[node name="PlayerMusica" type="AudioStreamPlayer" parent="." unique_id=1357234752]
+stream = ExtResource("5_wl40t")
+autoplay = true
+bus = &"Musica"
+
+[node name="PlayerSFX" type="AudioStreamPlayer" parent="." unique_id=43386578]
+bus = &"SFX"
+
+[node name="TableroContainer" type="Container" parent="." unique_id=602560184]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 159.0
+offset_right = 1062.0
+offset_bottom = 508.0
+
+[node name="Grid" type="GridContainer" parent="TableroContainer" unique_id=1197974001]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="LabelFilas" type="Label" parent="TableroContainer/Grid" unique_id=1156568744]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_du3kj")
+text = "Filas"
+
+[node name="Filas" type="SpinBox" parent="TableroContainer/Grid" unique_id=930247490]
+layout_mode = 2
+min_value = 4.0
+max_value = 16.0
+value = 10.0
+
+[node name="LabelColumnas" type="Label" parent="TableroContainer/Grid" unique_id=2066528441]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_du3kj")
+text = "Columnas"
+
+[node name="Columnas" type="SpinBox" parent="TableroContainer/Grid" unique_id=1750662013]
+layout_mode = 2
+min_value = 4.0
+max_value = 16.0
+value = 10.0
+
+[node name="LabelMinas" type="Label" parent="TableroContainer/Grid" unique_id=1550473773]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_du3kj")
+text = "Minas"
+
+[node name="Minas" type="SpinBox" parent="TableroContainer/Grid" unique_id=1837828266]
+layout_mode = 2
+min_value = 4.0
+max_value = 99.0
+value = 30.0
+
+[node name="LabelLimite" type="Label" parent="TableroContainer/Grid" unique_id=357520531]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_du3kj")
+text = "Limite de tiempo"
+
+[node name="Limite" type="CheckBox" parent="TableroContainer/Grid" unique_id=529005908]
+layout_mode = 2
+
+[node name="LabelTiempo" type="Label" parent="TableroContainer/Grid" unique_id=316791689]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_du3kj")
+text = "Tiempo limite (seg)"
+
+[node name="Tiempo" type="SpinBox" parent="TableroContainer/Grid" unique_id=437695456]
+layout_mode = 2
+min_value = 1.0
+max_value = 999.0
+value = 200.0
+
+[node name="B&DContainer" type="Container" parent="." unique_id=319062961]
+visible = false
+layout_mode = 0
+offset_left = 410.0
+offset_top = 115.0
+offset_right = 1062.0
+offset_bottom = 540.0
+
+[node name="GridContainer" type="GridContainer" parent="B&DContainer" unique_id=135141016]
+layout_mode = 2
+columns = 2
+
+[node name="MasVida" parent="B&DContainer/GridContainer" unique_id=2097516549 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
+layout_mode = 2
+icon = ExtResource("6_mo5ol")
+
+[node name="MenosVida" parent="B&DContainer/GridContainer" unique_id=554953992 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
+layout_mode = 2
+icon = ExtResource("6_mo5ol")
+
+[node name="MasVida4" parent="B&DContainer/GridContainer" unique_id=1549382755 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
+layout_mode = 2
+icon = ExtResource("6_mo5ol")
+
+[node name="MasVida2" parent="B&DContainer/GridContainer" unique_id=664781265 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
+layout_mode = 2
+icon = ExtResource("6_mo5ol")
+
+[node name="¡A Jugar!" parent="." unique_id=456125997 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
+layout_mode = 0
+offset_left = 949.0
+offset_top = 592.0
+offset_right = 1117.0
+offset_bottom = 619.0
+text = "Jugar"

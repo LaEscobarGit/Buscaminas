@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://boi55qianpdri"]
+
+[ext_resource type="Script" uid="uid://dqexdsm0f1cwj" path="res://scripts/Celda.cs" id="1_is6es"]
+[ext_resource type="FontFile" uid="uid://b6y4qw4h75aht" path="res://assets/fonts/PixelMplus10-Bold.ttf" id="1_jdgio"]
+[ext_resource type="StyleBox" uid="uid://bga78b248g2g" path="res://celdaNormal.tres" id="1_llmcr"]
+[ext_resource type="StyleBox" uid="uid://cpiipvd7c4t72" path="res://celdaHover.tres" id="2_553d0"]
+[ext_resource type="StyleBox" uid="uid://bv00g887ps10p" path="res://celdaDisabled.tres" id="3_jdgio"]
+[ext_resource type="Texture2D" uid="uid://b5i2v4ns2m77e" path="res://assets/imgs/bandera.png" id="6_vdn1o"]
+[ext_resource type="Texture2D" uid="uid://0l8uotro4p1b" path="res://assets/imgs/mina.png" id="7_ko5ay"]
+
+[node name="Celda" type="Button" unique_id=900455361]
+offset_right = 30.0
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(0.414857, 0.19192311, 0.20519993, 1)
+theme_override_fonts/font = ExtResource("1_jdgio")
+theme_override_styles/normal = ExtResource("1_llmcr")
+theme_override_styles/hover = ExtResource("2_553d0")
+theme_override_styles/disabled = ExtResource("3_jdgio")
+script = ExtResource("1_is6es")
+banderaIcon = ExtResource("6_vdn1o")
+minaIcon = ExtResource("7_ko5ay")

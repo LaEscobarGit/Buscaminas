@@ -5,9 +5,19 @@
 [ext_resource type="PackedScene" uid="uid://byj0a3na3fu4y" path="res://scenes/boton.tscn" id="2_mhnvy"]
 [ext_resource type="FontFile" uid="uid://b6y4qw4h75aht" path="res://assets/fonts/PixelMplus10-Bold.ttf" id="5_4ytvr"]
 [ext_resource type="AudioStream" uid="uid://b8patdgr6gdd4" path="res://assets/audio/NeedyGirl.wav" id="5_i6lef"]
+[ext_resource type="FontFile" uid="uid://d33yvu28wn2o3" path="res://assets/fonts/DinkieBitmap-7pxDemo.ttf" id="6_g3eks"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_g3eks"]
 load_path = "res://.godot/imported/gamePanel.png-8ff6ffe765d89af3cfe9aa3445415a86.ctex"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v86rl"]
+bg_color = Color(0.91764706, 0.7176471, 0.7137255, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
 
 [node name="Menu" type="Control" unique_id=2083391954]
 layout_mode = 3
@@ -63,7 +73,6 @@ volume_db = 5.0
 bus = &"SFX"
 
 [node name="Panel" type="PanelContainer" parent="." unique_id=97621084]
-visible = false
 layout_mode = 0
 offset_left = 437.0
 offset_top = 227.0
@@ -86,6 +95,7 @@ alignment = 1
 
 [node name="RichTextLabel" type="Label" parent="Panel/CenterContainer/VBoxContainer" unique_id=1131221643]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
 theme_override_fonts/font = ExtResource("5_4ytvr")
 theme_override_font_sizes/font_size = 25
 text = "Opciones"
@@ -93,25 +103,55 @@ horizontal_alignment = 1
 
 [node name="GridContainer" type="GridContainer" parent="Panel/CenterContainer/VBoxContainer" unique_id=739836991]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/h_separation = 30
 theme_override_constants/v_separation = 10
-columns = 2
+columns = 3
 
 [node name="LabelMusica" type="Label" parent="Panel/CenterContainer/VBoxContainer/GridContainer" unique_id=892533008]
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
+theme_override_fonts/font = ExtResource("6_g3eks")
 text = "Musica"
 
 [node name="SliderMusica" type="HSlider" parent="Panel/CenterContainer/VBoxContainer/GridContainer" unique_id=1789802125]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/slider = SubResource("StyleBoxFlat_v86rl")
+
+[node name="ValorMusica" type="Label" parent="Panel/CenterContainer/VBoxContainer/GridContainer" unique_id=591813981]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
+theme_override_fonts/font = ExtResource("5_4ytvr")
+theme_override_font_sizes/font_size = 24
+text = "100"
 
 [node name="LabelSFX" type="Label" parent="Panel/CenterContainer/VBoxContainer/GridContainer" unique_id=121542146]
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
+theme_override_fonts/font = ExtResource("6_g3eks")
 text = "SFX"
 
-[node name="SliderSFX" type="HSlider" parent="Panel/CenterContainer/VBoxContainer/GridContainer" unique_id=1599218630]
+[node name="SliderSFX" type="HSlider" parent="Panel/CenterContainer/VBoxContainer/GridContainer" unique_id=1315865689]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-offset_transform_scale = Vector2(0.415, 0.415)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/slider = SubResource("StyleBoxFlat_v86rl")
+
+[node name="ValorSFX" type="Label" parent="Panel/CenterContainer/VBoxContainer/GridContainer" unique_id=1739843783]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
+theme_override_fonts/font = ExtResource("5_4ytvr")
+theme_override_font_sizes/font_size = 24
+text = "100"
 
 [node name="Cerrar" parent="Panel/CenterContainer/VBoxContainer" unique_id=643854205 groups=["botones_menu"] instance=ExtResource("2_mhnvy")]
 custom_minimum_size = Vector2(120, 0)

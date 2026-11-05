@@ -72,26 +72,24 @@ offset_bottom = 459.0
 texture = ExtResource("5_abq0j")
 
 [node name="TextoTablero" type="Label" parent="." unique_id=1403818805]
-visible = false
 texture_filter = 1
 layout_mode = 0
-offset_left = 425.0
-offset_top = 134.0
-offset_right = 795.0
-offset_bottom = 160.0
+offset_left = 401.0
+offset_top = 138.0
+offset_right = 817.0
+offset_bottom = 168.0
 theme_override_colors/font_shadow_color = Color(0.16257033, 0.023349661, 0.0604435, 1)
 theme_override_fonts/font = ExtResource("4_du3kj")
-theme_override_font_sizes/font_size = 23
+theme_override_font_sizes/font_size = 26
 text = "Configura el tablero a tu gusto!"
 
 [node name="TableroContainer" type="Container" parent="." unique_id=602560184]
-visible = false
 texture_filter = 1
 layout_mode = 0
-offset_left = 451.0
-offset_top = 198.0
-offset_right = 746.0
-offset_bottom = 482.0
+offset_left = 444.0
+offset_top = 200.0
+offset_right = 770.99817
+offset_bottom = 448.0
 
 [node name="Grid" type="GridContainer" parent="TableroContainer" unique_id=1197974001]
 layout_mode = 2
@@ -103,6 +101,7 @@ columns = 2
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_du3kj")
+theme_override_font_sizes/font_size = 18
 text = "Filas"
 
 [node name="Filas" type="SpinBox" parent="TableroContainer/Grid" unique_id=930247490]
@@ -115,6 +114,7 @@ value = 10.0
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_du3kj")
+theme_override_font_sizes/font_size = 18
 text = "Columnas"
 
 [node name="Columnas" type="SpinBox" parent="TableroContainer/Grid" unique_id=1750662013]
@@ -127,6 +127,7 @@ value = 10.0
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_du3kj")
+theme_override_font_sizes/font_size = 18
 text = "Minas"
 
 [node name="Minas" type="SpinBox" parent="TableroContainer/Grid" unique_id=1837828266]
@@ -139,6 +140,7 @@ value = 30.0
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_du3kj")
+theme_override_font_sizes/font_size = 18
 text = "Limite de tiempo"
 
 [node name="Limite" type="CheckBox" parent="TableroContainer/Grid" unique_id=529005908]
@@ -148,6 +150,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_du3kj")
+theme_override_font_sizes/font_size = 18
 text = "Tiempo limite (seg)"
 
 [node name="Tiempo" type="SpinBox" parent="TableroContainer/Grid" unique_id=437695456]
@@ -156,24 +159,26 @@ min_value = 1.0
 max_value = 999.0
 value = 200.0
 
-[node name="TextoB&D" type="Label" parent="." unique_id=1050262197]
+[node name="TextoD&D" type="Label" parent="." unique_id=909971865]
+visible = false
 texture_filter = 1
 layout_mode = 0
-offset_left = 425.0
-offset_top = 134.0
-offset_right = 795.0
-offset_bottom = 160.0
+offset_left = 401.0
+offset_top = 138.0
+offset_right = 817.0
+offset_bottom = 168.0
 theme_override_colors/font_shadow_color = Color(0.16257033, 0.023349661, 0.0604435, 1)
 theme_override_fonts/font = ExtResource("4_du3kj")
-theme_override_font_sizes/font_size = 23
-text = "Personaliza tus buffs y debuffs"
+theme_override_font_sizes/font_size = 26
+text = "Personaliza tus buffs y debuffs!"
 
 [node name="B&DContainer" type="Container" parent="." unique_id=319062961]
+visible = false
 layout_mode = 0
 offset_left = 436.0
-offset_top = 178.0
-offset_right = 776.0
-offset_bottom = 353.0
+offset_top = 191.68
+offset_right = 776.00073
+offset_bottom = 366.68008
 
 [node name="GridContainer" type="GridContainer" parent="B&DContainer" unique_id=135141016]
 layout_mode = 2

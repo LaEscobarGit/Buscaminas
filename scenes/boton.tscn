@@ -6,16 +6,20 @@
 [ext_resource type="AudioStream" uid="uid://db3u7mps161fp" path="res://assets/audio/click1.wav" id="3_05w2u"]
 [ext_resource type="StyleBox" uid="uid://dqfga57i77pe1" path="res://botonHover.tres" id="3_dciyr"]
 [ext_resource type="AudioStream" uid="uid://b5da4uuo7qa0c" path="res://assets/audio/hover.wav" id="4_5rts8"]
+[ext_resource type="Texture2D" uid="uid://ctf3pcjd0skq2" path="res://assets/imgs/button1.png" id="7_a3hf0"]
 
 [node name="Boton" type="Button" unique_id=511730408 node_paths=PackedStringArray("sfx")]
-offset_right = 8.0
-offset_bottom = 8.0
-theme_override_colors/font_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
-theme_override_colors/font_focus_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
-theme_override_colors/font_pressed_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
+texture_filter = 1
+custom_minimum_size = Vector2(168, 32)
+custom_maximum_size = Vector2(168, 32)
+offset_right = 168.0
+offset_bottom = 32.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.9843137, 0.9411765, 0.9372549, 1)
 theme_override_fonts/font = ExtResource("1_kbunx")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = ExtResource("2_5rts8")
 theme_override_styles/pressed = ExtResource("2_5rts8")
 theme_override_styles/hover = ExtResource("3_dciyr")
@@ -26,3 +30,12 @@ sfx = NodePath("SFX")
 
 [node name="SFX" type="AudioStreamPlayer" parent="." unique_id=1947533195]
 bus = &"SFX"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1703836511]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_right = 168.0
+offset_bottom = 32.0
+mouse_filter = 2
+texture = ExtResource("7_a3hf0")

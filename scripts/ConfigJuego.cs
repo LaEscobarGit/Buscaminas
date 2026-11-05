@@ -40,6 +40,9 @@ public partial class ConfigJuego : Control
 			case "Extras":
 				
 				break;
+			case "Regresar":
+				GetTree().ChangeSceneToFile("res://scenes/menu.tscn");
+				break;
 		}
 	}
 }

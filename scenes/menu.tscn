@@ -3,9 +3,13 @@
 [ext_resource type="Script" uid="uid://b3166hexpc34u" path="res://scripts/Menu.cs" id="1_4ytvr"]
 [ext_resource type="VideoStream" uid="uid://bonr80tgw1pdq" path="res://assets/imgs/Fondo.ogv" id="2_g3eks"]
 [ext_resource type="PackedScene" uid="uid://byj0a3na3fu4y" path="res://scenes/boton.tscn" id="2_mhnvy"]
+[ext_resource type="Texture2D" uid="uid://bgjpeu0y4ynue" path="res://assets/imgs/FondoImagen2.png" id="2_ufwb2"]
 [ext_resource type="FontFile" uid="uid://b6y4qw4h75aht" path="res://assets/fonts/PixelMplus10-Bold.ttf" id="5_4ytvr"]
 [ext_resource type="AudioStream" uid="uid://b8patdgr6gdd4" path="res://assets/audio/NeedyGirl.wav" id="5_i6lef"]
 [ext_resource type="FontFile" uid="uid://d33yvu28wn2o3" path="res://assets/fonts/DinkieBitmap-7pxDemo.ttf" id="6_g3eks"]
+[ext_resource type="Shader" uid="uid://c6k6kuuqpydmu" path="res://scenes/menu.gdshader" id="7_i6lef"]
+[ext_resource type="Script" uid="uid://nda4fbi56lnu" path="res://scripts/Logo.cs" id="8_13sgg"]
+[ext_resource type="Texture2D" uid="uid://dyiyar4pydwhg" path="res://assets/imgs/logoBlack2.png" id="9_70i5f"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_g3eks"]
 load_path = "res://.godot/imported/gamePanel.png-8ff6ffe765d89af3cfe9aa3445415a86.ctex"
@@ -19,6 +23,15 @@ corner_radius_bottom_left = 4
 expand_margin_top = 4.0
 expand_margin_bottom = 4.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_13sgg"]
+shader = ExtResource("7_i6lef")
+shader_parameter/progreso = -0.5
+shader_parameter/ancho = 0.08
+shader_parameter/inclinacion = 0.35
+shader_parameter/intensidad = 1.0
+shader_parameter/opacidad = 1.0
+shader_parameter/color_brillo = Color(1, 1, 1, 1)
+
 [node name="Menu" type="Control" unique_id=2083391954]
 layout_mode = 3
 anchors_preset = 15
@@ -28,11 +41,39 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4ytvr")
 
+[node name="FondoTest" type="TextureRect" parent="." unique_id=1052611663]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -2.0
+offset_right = 1153.0
+offset_bottom = 650.0
+mouse_filter = 2
+texture = ExtResource("2_ufwb2")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Polvo" type="CPUParticles2D" parent="." unique_id=939376463]
+position = Vector2(568.61, 321)
+scale = Vector2(0.78, 0.78)
+amount = 50
+lifetime = 12.0
+preprocess = 12.0
+emission_shape = 3
+emission_rect_extents = Vector2(960, 450)
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 20.0
+scale_amount_min = 0.5
+scale_amount_max = 1.5
+
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=876782601]
+visible = false
 texture_filter = 1
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 scale = Vector2(0.6, 0.6)
 stream = ExtResource("2_g3eks")
 autoplay = true
@@ -43,12 +84,16 @@ layout_mode = 0
 offset_left = 486.0
 offset_top = 395.0
 offset_right = 654.0
-offset_bottom = 559.0
+offset_bottom = 595.0
 theme_override_constants/separation = 10
 
-[node name="Jugar" parent="BotonContainer" unique_id=511730408 groups=["botones_menu"] instance=ExtResource("2_mhnvy")]
+[node name="Aventura" parent="BotonContainer" unique_id=511730408 groups=["botones_menu"] instance=ExtResource("2_mhnvy")]
 layout_mode = 2
-text = "Jugar"
+text = "Modo Aventura"
+
+[node name="Solo" parent="BotonContainer" unique_id=694261657 groups=["botones_menu"] instance=ExtResource("2_mhnvy")]
+layout_mode = 2
+text = "Solo"
 
 [node name="Puntajes" parent="BotonContainer" unique_id=873735596 groups=["botones_menu"] instance=ExtResource("2_mhnvy")]
 layout_mode = 2
@@ -73,6 +118,7 @@ volume_db = 5.0
 bus = &"SFX"
 
 [node name="Panel" type="PanelContainer" parent="." unique_id=97621084]
+visible = false
 layout_mode = 0
 offset_left = 437.0
 offset_top = 227.0
@@ -158,3 +204,15 @@ custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Cerrar"
+
+[node name="Logo" type="TextureRect" parent="." unique_id=2055737631]
+material = SubResource("ShaderMaterial_13sgg")
+layout_mode = 0
+offset_left = 179.0
+offset_top = 70.0
+offset_right = 960.0
+offset_bottom = 381.0
+texture = ExtResource("9_70i5f")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("8_13sgg")

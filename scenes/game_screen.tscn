@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://cfc1eneqqaxlh" path="res://assets/audio/Banderella.wav" id="6_2yu03"]
 [ext_resource type="AudioStream" uid="uid://cd3s0ps225maf" path="res://assets/audio/Detonia.wav" id="7_5vo8s"]
 [ext_resource type="Texture2D" uid="uid://boribcvc4b737" path="res://assets/imgs/vida.png" id="7_r01d7"]
+[ext_resource type="Script" uid="uid://bn1ysn323x0h1" path="res://scripts/GuardarPuntaje.cs" id="10_4m8lb"]
 
 [node name="GameScreen" type="Control" unique_id=2083391954 node_paths=PackedStringArray("sfx", "musica", "Vida1", "Vida2", "Vida3")]
 layout_mode = 3
@@ -96,5 +97,8 @@ volume_db = 5.0
 bus = &"SFX"
 
 [node name="Timer" type="Timer" parent="." unique_id=951713294]
+
+[node name="GuardarPuntaje" type="Node" parent="." unique_id=369626410]
+script = ExtResource("10_4m8lb")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

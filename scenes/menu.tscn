@@ -159,3 +159,5 @@ custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Cerrar"
+
+[connection signal="pressed" from="BotonContainer/Puntajes" to="." method="_on_puntajes_pressed"]

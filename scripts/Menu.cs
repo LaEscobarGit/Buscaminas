@@ -36,4 +36,8 @@ public partial class Menu : Control
 				break;
 		}
 	}
+		private void _on_puntajes_pressed()
+	{
+		GetTree().ChangeSceneToFile("res://scenes/ranking.tscn");
+	}
 }

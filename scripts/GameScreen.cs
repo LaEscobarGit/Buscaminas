@@ -183,6 +183,8 @@ public partial class GameScreen : Control
 	{
 		if (juegoTerminado) return;
 		juegoTerminado = true;
+		//esto lo puse porque seaguia corriendo el timer aunque perdieras
+ 		timer.Stop();
  
 		CalcularPuntaje();
 		EmitSignal(SignalName.JuegoTerminado, vivir, puntos);

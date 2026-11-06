@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://cu0s8mnyhoy3"
-path="res://.godot/imported/boot.wav-8317a989c8598756e38580af0515e9c1.sample"
+uid="uid://dnwg0627yigia"
+path="res://.godot/imported/talk3.wav-8992443907edbfe9639c2d16c544a99d.sample"
 
 [deps]
 
-source_file="res://assets/audio/boot.wav"
-dest_files=["res://.godot/imported/boot.wav-8317a989c8598756e38580af0515e9c1.sample"]
+source_file="res://assets/audio/talk3.wav"
+dest_files=["res://.godot/imported/talk3.wav-8992443907edbfe9639c2d16c544a99d.sample"]
 
 [params]
 

@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://u0n42j8fsbb0"]
+
+[ext_resource type="Script" uid="uid://cs5o8nwxe0y8e" path="res://scripts/Profecia.cs" id="1_iiq54"]
+[ext_resource type="VideoStream" uid="uid://6stixfoas11" path="res://assets/imgs/Profecia.ogv" id="2_osh3i"]
+
+[node name="Profecia" type="Control" unique_id=1838556267 node_paths=PackedStringArray("video")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iiq54")
+video = NodePath("VideoStreamPlayer")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=1434203608]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+scale = Vector2(0.6, 0.6)
+stream = ExtResource("2_osh3i")
+autoplay = true

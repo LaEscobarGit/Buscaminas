@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://6yyb65yuuvdn"]
+
+[ext_resource type="Script" uid="uid://dcfpwym81wown" path="res://scripts/Mapa.cs" id="1_k7lwh"]
+[ext_resource type="VideoStream" uid="uid://bonr80tgw1pdq" path="res://assets/imgs/Fondo.ogv" id="2_6i2c2"]
+[ext_resource type="PackedScene" uid="uid://byj0a3na3fu4y" path="res://scenes/boton.tscn" id="3_6pxv8"]
+[ext_resource type="Texture2D" uid="uid://b811kdg1rgr4" path="res://assets/imgs/Kingdom4.png" id="7_k3j34"]
+[ext_resource type="Material" uid="uid://ciaf0l3x6m14j" path="res://outlineShader.tres" id="7_pu8w0"]
+[ext_resource type="Texture2D" uid="uid://drthx5hirtg4k" path="res://assets/imgs/Kingdom2.png" id="8_pu8w0"]
+[ext_resource type="Texture2D" uid="uid://cihpmwvkmwcya" path="res://assets/imgs/Kingdom3.png" id="9_66cqs"]
+[ext_resource type="Script" uid="uid://ddawobk7o4i8e" path="res://scripts/Region.cs" id="9_k3j34"]
+[ext_resource type="AudioStream" uid="uid://1a575cbc8chc" path="res://assets/audio/Fondo1.wav" id="10_mt72o"]
+[ext_resource type="Texture2D" uid="uid://c8uad1gl82cvj" path="res://assets/imgs/Kingdom1.png" id="11_2bj6j"]
+
+[node name="Mapa" type="Control" unique_id=2083391954]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k7lwh")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=876782601]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.6, 0.6)
+stream = ExtResource("2_6i2c2")
+autoplay = true
+loop = true
+
+[node name="Regresar" parent="." unique_id=511730408 groups=["botones_menu"] instance=ExtResource("3_6pxv8")]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 208.0
+offset_bottom = 72.0
+text = "Regresar"
+SonidoClick = null
+SonidoHover = null
+
+[node name="Region0" type="Sprite2D" parent="." unique_id=387817118]
+texture_filter = 1
+material = ExtResource("7_pu8w0")
+position = Vector2(839.0001, 567.9999)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("7_k3j34")
+
+[node name="Region2" type="Sprite2D" parent="." unique_id=1448738393]
+material = ExtResource("7_pu8w0")
+position = Vector2(469.00006, 297.00003)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("8_pu8w0")
+script = ExtResource("9_k3j34")
+
+[node name="Area2D" type="Area2D" parent="Region2" unique_id=208766651]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Region2/Area2D" unique_id=20491688]
+polygon = PackedVector2Array(-311.42865, -78.57147, -360.0001, -12.857178, -365.71436, 105.7142, -337.14294, 138.57138, -197.14294, 134.28568, -145.71436, 115.7142, -95.714355, 131.4285, -25.714355, 107.14279, -4.2858276, 95.7142, 21.428467, 81.42853, 75.71417, 97.14279, 142.85706, 87.14279, 138.57129, 47.142822, 99.99988, 22.857086, 135.71417, 9.999939, 185.71417, 21.428528, 344.28558, -5.714325, 367.14276, -84.28577, 308.5713, -121.42862, 199.99988, -137.14288, 198.57129, -111.42862, 141.42847, -75.714325, 69.99988, -47.142914, -42.85724, -38.571472, -154.28583, -54.285767, -242.85724, -77.142914, -248.5715, -122.85718)
+
+[node name="Region1" type="Sprite2D" parent="." unique_id=1340636363]
+material = ExtResource("7_pu8w0")
+position = Vector2(510.99994, 418.99994)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("9_66cqs")
+script = ExtResource("9_k3j34")
+
+[node name="Area2D" type="Area2D" parent="Region1" unique_id=727817575]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Region1/Area2D" unique_id=1882449534]
+polygon = PackedVector2Array(-377.14276, -4.2855835, -342.85706, 34.285828, -275.7142, 42.85724, -149.99994, 44.285828, -122.857056, 67.142944, -107.14276, 94.28583, -77.14276, 114.28583, 21.42865, 122.85724, 180.00006, 87.142944, 238.57147, 107.142944, 270.00006, 94.28583, 235.71436, 78.57153, 291.42865, 58.571533, 344.28577, 42.85724, 368.57153, 21.42865, 378.57153, -64.28558, 328.57153, -91.42847, 320, -104.285614, 208.57147, -119.99988, 178.57147, -111.42847, 150.00006, -74.28558, 150.00006, -62.857056, 68.57153, -67.14276, -2.8570557, -71.42847, -41.428467, -82.857056, -52.857056, -74.28558, -44.285645, -59.999878, -49.99994, -55.714172, -71.42847, -69.99988, -95.71417, -58.57135, -81.42847, -42.857056, -152.85706, -32.857056, -224.28561, -37.14276, -264.2856, -25.714172, -354.2856, -22.857056)
+
+[node name="Region3" type="Sprite2D" parent="." unique_id=1088350364]
+material = ExtResource("7_pu8w0")
+position = Vector2(453, 151.99998)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("11_2bj6j")
+script = ExtResource("9_k3j34")
+
+[node name="Area2D" type="Area2D" parent="Region3" unique_id=1099348677]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Region3/Area2D" unique_id=1720366971]
+polygon = PackedVector2Array(20, -164.28568, 44.285706, -129.99997, 84.285706, 1.4285889, 210, 22.857162, 217.14282, 92.85715, 160, 130, 87.14282, 157.14288, -15.714294, 164.28574, -122.85712, 150, -217.14285, 125.714294, -217.14285, 70.00003, -191.42856, 41.42859, -95.714294, 5.7143097, -45.714294, -118.571396)
+
+[node name="PlayerMusica" type="AudioStreamPlayer" parent="." unique_id=1357234752]
+stream = ExtResource("10_mt72o")
+volume_db = -5.0
+autoplay = true
+bus = &"Musica"
+
+[node name="PlayerSFX" type="AudioStreamPlayer" parent="." unique_id=43386578]
+volume_db = 5.0
+bus = &"SFX"

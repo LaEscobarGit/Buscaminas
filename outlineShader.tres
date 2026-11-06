@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://ciaf0l3x6m14j"]
+
+[ext_resource type="Shader" uid="uid://clu2l8w0gahip" path="res://mapa.gdshader" id="1_yftdt"]
+
+[resource]
+shader = ExtResource("1_yftdt")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 5.0000002375
+shader_parameter/outline_alpha = 0.0

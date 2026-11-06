@@ -8,6 +8,7 @@ public partial class GameScreen : Control
 	[Signal] public delegate void JuegoTerminadoEventHandler(bool gano, int puntos);
  
 	[Export] private AudioStreamPlayer sfx;
+	[Export] private AudioStreamPlayer musica;
 	[Export] private AudioStream SonidoBandera;
 	[Export] private AudioStream SonidoClick;
 	[Export] private AudioStream SonidoHover;
@@ -16,6 +17,7 @@ public partial class GameScreen : Control
 	[Export] private TextureRect Vida1;
 	[Export] private TextureRect Vida2;
 	[Export] private TextureRect Vida3;
+	[Export] private AudioStream[] canciones;
  
 	public int Filas;
 	public int Cols;
@@ -53,6 +55,10 @@ public partial class GameScreen : Control
 		Filas = GameManager.filas;
 		Cols = GameManager.columnas;
 		NumMinas = GameManager.minas;
+		
+		musica.Stream = canciones[GameManager.getActual()];
+		musica.Play();
+		
 		NuevaPartida();
 	}
  
@@ -82,6 +88,7 @@ public partial class GameScreen : Control
 	private void OnClickDerecho(Celda celda)
 	{
 		if (juegoTerminado || !juegoIniciado || celda.Revelado) return;
+		if(GameManager.debuff == "flagless") return;
 		celda.AlternarBandera();
 		clicks++;
 	}

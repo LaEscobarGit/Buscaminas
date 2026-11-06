@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://b8patdgr6gdd4"
-path="res://.godot/imported/NeedyGirl.wav-64942e81cf68ff36d4c6147771c610c4.sample"
+uid="uid://0lmly4i4xipp"
+path="res://.godot/imported/Fondo2.wav-77be5eea6f8fb296442df3d9cb0b8147.sample"
 
 [deps]
 
-source_file="res://assets/audio/NeedyGirl.wav"
-dest_files=["res://.godot/imported/NeedyGirl.wav-64942e81cf68ff36d4c6147771c610c4.sample"]
+source_file="res://assets/audio/Fondo2.wav"
+dest_files=["res://.godot/imported/Fondo2.wav-77be5eea6f8fb296442df3d9cb0b8147.sample"]
 
 [params]
 

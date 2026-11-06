@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://b3166hexpc34u" path="res://scripts/Menu.cs" id="1_4ytvr"]
 [ext_resource type="VideoStream" uid="uid://bonr80tgw1pdq" path="res://assets/imgs/Fondo.ogv" id="2_g3eks"]
 [ext_resource type="PackedScene" uid="uid://byj0a3na3fu4y" path="res://scenes/boton.tscn" id="2_mhnvy"]
+[ext_resource type="AudioStream" uid="uid://wswenxoasft7" path="res://assets/audio/Main Theme.wav" id="4_g3eks"]
 [ext_resource type="FontFile" uid="uid://b6y4qw4h75aht" path="res://assets/fonts/PixelMplus10-Bold.ttf" id="5_4ytvr"]
-[ext_resource type="AudioStream" uid="uid://b8patdgr6gdd4" path="res://assets/audio/NeedyGirl.wav" id="5_i6lef"]
 [ext_resource type="FontFile" uid="uid://d33yvu28wn2o3" path="res://assets/fonts/DinkieBitmap-7pxDemo.ttf" id="6_g3eks"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_g3eks"]
@@ -63,7 +63,7 @@ layout_mode = 2
 text = "Salir"
 
 [node name="PlayerMusica" type="AudioStreamPlayer" parent="." unique_id=1357234752]
-stream = ExtResource("5_i6lef")
+stream = ExtResource("4_g3eks")
 volume_db = -5.0
 autoplay = true
 bus = &"Musica"
@@ -73,6 +73,7 @@ volume_db = 5.0
 bus = &"SFX"
 
 [node name="Panel" type="PanelContainer" parent="." unique_id=97621084]
+visible = false
 layout_mode = 0
 offset_left = 437.0
 offset_top = 227.0

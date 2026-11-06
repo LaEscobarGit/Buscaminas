@@ -1,0 +1,148 @@
+[gd_scene format=3 uid="uid://b7ba70ek58r67"]
+
+[ext_resource type="Script" uid="uid://dhh2qk4pbyqya" path="res://scripts/Historia.cs" id="1_ot215"]
+[ext_resource type="AudioStream" uid="uid://1a575cbc8chc" path="res://assets/audio/Fondo1.wav" id="2_5mm1x"]
+[ext_resource type="Texture2D" uid="uid://bcwltox7oxj04" path="res://assets/imgs/buscaminas.png" id="2_qhayu"]
+[ext_resource type="Texture2D" uid="uid://c7or4wpcq0mis" path="res://assets/imgs/coast.png" id="3_m1824"]
+[ext_resource type="PackedScene" uid="uid://byj0a3na3fu4y" path="res://scenes/boton.tscn" id="3_rchb1"]
+[ext_resource type="Shader" uid="uid://blf4keind4orm" path="res://client_desvanecer.gdshader" id="4_rchb1"]
+[ext_resource type="Texture2D" uid="uid://upbuovhe1h1q" path="res://assets/imgs/church1.png" id="4_svk7x"]
+[ext_resource type="Texture2D" uid="uid://chlqk1aoqnhu6" path="res://assets/imgs/church2.png" id="5_cfjir"]
+[ext_resource type="FontFile" uid="uid://b6y4qw4h75aht" path="res://assets/fonts/PixelMplus10-Bold.ttf" id="5_rhdqg"]
+[ext_resource type="Texture2D" uid="uid://cchsdkxvp5fu2" path="res://assets/imgs/city1.png" id="6_in3ko"]
+[ext_resource type="FontFile" uid="uid://d33yvu28wn2o3" path="res://assets/fonts/DinkieBitmap-7pxDemo.ttf" id="6_lfuhp"]
+[ext_resource type="Texture2D" uid="uid://elffkyobpx8i" path="res://assets/imgs/city2.png" id="7_rapo4"]
+[ext_resource type="Script" uid="uid://de3cw8x0620y3" path="res://scripts/Texto.cs" id="7_vtt1t"]
+[ext_resource type="AudioStream" uid="uid://d0ha8xoun6m8w" path="res://assets/audio/talk1.wav" id="8_b3mjc"]
+[ext_resource type="Texture2D" uid="uid://c17021o0ia5ge" path="res://assets/imgs/castle1.jpg" id="8_ot2no"]
+[ext_resource type="AudioStream" uid="uid://fcmgigv05mn5" path="res://assets/audio/talk2.wav" id="9_qhayu"]
+[ext_resource type="Texture2D" uid="uid://cnqclndh3ttc" path="res://assets/imgs/castle2.jpg" id="9_u66v4"]
+[ext_resource type="AudioStream" uid="uid://dnwg0627yigia" path="res://assets/audio/talk3.wav" id="10_5mm1x"]
+[ext_resource type="AudioStream" uid="uid://bg2avlqebkytl" path="res://assets/audio/talk4.wav" id="11_34fsk"]
+[ext_resource type="AudioStream" uid="uid://si4lb6dmsull" path="res://assets/audio/buscaminas.wav" id="13_5mm1x"]
+[ext_resource type="Shader" uid="uid://b6vbnq7o1yjt2" path="res://scenes/portal.gdshader" id="13_qhayu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vtt1t"]
+shader = ExtResource("4_rchb1")
+shader_parameter/progress = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b3mjc"]
+shader = ExtResource("13_qhayu")
+shader_parameter/intensidad = 0.0
+shader_parameter/velocidad = 0.0
+shader_parameter/color_portal = Color(0.15, 0.55, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ot215"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.91764706, 0.7176471, 0.7137255, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0.44705883, 0.21176471, 0.22352941, 0.33333334)
+shadow_size = 2
+shadow_offset = Vector2(0, 1)
+
+[node name="HistoriaEscena" type="Control" unique_id=2083391954 node_paths=PackedStringArray("burbuja", "texto", "nombre", "spritePersonaje", "Portal", "musica", "fondo")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ot215")
+burbuja = NodePath("TextBox")
+texto = NodePath("TextBox/Margin/VBox/Texto")
+nombre = NodePath("TextBox/Margin/VBox/Nombre")
+spritePersonaje = NodePath("SpriteNPC")
+Portal = NodePath("Portal")
+canciones = Array[AudioStream]([ExtResource("2_5mm1x")])
+musica = NodePath("PlayerMusica")
+fondo = NodePath("Fondo")
+fondos = Array[Texture2D]([ExtResource("3_m1824"), ExtResource("4_svk7x"), ExtResource("5_cfjir"), ExtResource("6_in3ko"), ExtResource("7_rapo4"), ExtResource("8_ot2no"), ExtResource("9_u66v4")])
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=876782601]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.6, 0.6)
+autoplay = true
+loop = true
+
+[node name="Fondo" type="TextureRect" parent="." unique_id=172371545]
+layout_mode = 0
+offset_left = -93.455
+offset_right = 1250.545
+offset_bottom = 648.0
+texture = ExtResource("2_qhayu")
+expand_mode = 2
+
+[node name="SpriteNPC" type="TextureRect" parent="." unique_id=425572514]
+material = SubResource("ShaderMaterial_vtt1t")
+layout_mode = 0
+offset_left = 289.0
+offset_right = 864.701
+offset_bottom = 651.0
+expand_mode = 3
+
+[node name="Portal" type="ColorRect" parent="." unique_id=1988849503]
+material = SubResource("ShaderMaterial_b3mjc")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Regresar" parent="." unique_id=120396452 groups=["botones_menu"] instance=ExtResource("3_rchb1")]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 208.0
+offset_bottom = 72.0
+text = "Regresar"
+
+[node name="TextBox" type="PanelContainer" parent="." unique_id=1360376769]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 489.0
+offset_right = 1021.0
+offset_bottom = 624.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ot215")
+
+[node name="Margin" type="MarginContainer" parent="TextBox" unique_id=1894028221]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBox" type="VBoxContainer" parent="TextBox/Margin" unique_id=822381399]
+layout_mode = 2
+
+[node name="Nombre" type="Label" parent="TextBox/Margin/VBox" unique_id=1607267453]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
+theme_override_fonts/font = ExtResource("5_rhdqg")
+
+[node name="Texto" type="RichTextLabel" parent="TextBox/Margin/VBox" unique_id=1005224325]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
+theme_override_fonts/normal_font = ExtResource("6_lfuhp")
+bbcode_enabled = true
+fit_content = true
+script = ExtResource("7_vtt1t")
+sonidos = Array[AudioStream]([ExtResource("8_b3mjc"), ExtResource("9_qhayu"), ExtResource("10_5mm1x"), ExtResource("11_34fsk")])
+
+[node name="PlayerSFX" type="AudioStreamPlayer" parent="." unique_id=43386578]
+volume_db = 5.0
+bus = &"SFX"
+
+[node name="PlayerMusica" type="AudioStreamPlayer" parent="." unique_id=534054285]
+stream = ExtResource("13_5mm1x")
+autoplay = true
+bus = &"Musica"

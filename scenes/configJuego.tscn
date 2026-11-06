@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://b8patdgr6gdd4" path="res://assets/audio/NeedyGirl.wav" id="5_wl40t"]
 [ext_resource type="Texture2D" uid="uid://0l8uotro4p1b" path="res://assets/imgs/mina.png" id="6_mo5ol"]
 
-[node name="ConfigJuego" type="Control" unique_id=2083391954 node_paths=PackedStringArray("filasBox", "colsBox", "minasBox")]
+[node name="ConfigJuego" type="Control" unique_id=2083391954 node_paths=PackedStringArray("filasBox", "colsBox", "minasBox", "textoTablero", "tableroContainer", "textoBD", "bdContainer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,6 +19,10 @@ script = ExtResource("1_mo5ol")
 filasBox = NodePath("TableroContainer/Grid/Filas")
 colsBox = NodePath("TableroContainer/Grid/Columnas")
 minasBox = NodePath("TableroContainer/Grid/Minas")
+textoTablero = NodePath("TextoTablero")
+tableroContainer = NodePath("TableroContainer")
+textoBD = NodePath("TextoB&D")
+bdContainer = NodePath("B&DContainer")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=876782601]
 texture_filter = 1
@@ -159,7 +163,7 @@ min_value = 1.0
 max_value = 999.0
 value = 200.0
 
-[node name="TextoD&D" type="Label" parent="." unique_id=909971865]
+[node name="TextoB&D" type="Label" parent="." unique_id=909971865]
 visible = false
 texture_filter = 1
 layout_mode = 0
@@ -175,13 +179,15 @@ text = "Personaliza tus buffs y debuffs!"
 [node name="B&DContainer" type="Container" parent="." unique_id=319062961]
 visible = false
 layout_mode = 0
-offset_left = 436.0
-offset_top = 191.68
-offset_right = 776.00073
-offset_bottom = 366.68008
+offset_left = 434.0
+offset_top = 194.0
+offset_right = 774.00073
+offset_bottom = 369.0001
 
 [node name="GridContainer" type="GridContainer" parent="B&DContainer" unique_id=135141016]
 layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
 columns = 2
 
 [node name="MasVida" parent="B&DContainer/GridContainer" unique_id=2097516549 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]

@@ -7,6 +7,10 @@ public partial class ConfigJuego : Control
 	[Export] private SpinBox filasBox;
 	[Export] private SpinBox colsBox;
 	[Export] private SpinBox minasBox;
+	[Export] private Control textoTablero;
+	[Export] private Control tableroContainer;
+	[Export] private Control textoBD;
+	[Export] private Control bdContainer;
 	
 	public override void _Ready()
 	{
@@ -15,16 +19,28 @@ public partial class ConfigJuego : Control
 			if (nodo is Boton boton)
 				boton.Click += OnBotonClick;
 		}
+		
+		MostrarPestana(true);
+		
+	}
+	
+	private void MostrarPestana(bool tablero)
+	{
+	textoTablero.Visible = tablero;
+	tableroContainer.Visible = tablero;
+	textoBD.Visible = !tablero;
+	bdContainer.Visible = !tablero;
 	}
 	
 	private void OnBotonClick(Boton boton)
 	{
 		switch (boton.Name)
 		{
-			case "Tablero"://
+			case "Tablero":
+				MostrarPestana(true);
 				break;
 			case "B&D":
-				//
+				MostrarPestana(false);
 				break;
 			case "¡A Jugar!":
 				GameManager.filas = (int) filasBox.Value;

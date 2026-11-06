@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://b6y4qw4h75aht" path="res://assets/fonts/PixelMplus10-Bold.ttf" id="4_rxmqw"]
 [ext_resource type="AudioStream" uid="uid://7ahdcx130bpj" path="res://assets/audio/bomb.wav" id="4_vnpv3"]
 [ext_resource type="Texture2D" uid="uid://boribcvc4b737" path="res://assets/imgs/vida.png" id="7_r01d7"]
+[ext_resource type="Script" uid="uid://bn1ysn323x0h1" path="res://scripts/GuardarPuntaje.cs" id="10_4m8lb"]
 
 [node name="GameScreen" type="Control" unique_id=2083391954 node_paths=PackedStringArray("sfx", "Vida1", "Vida2", "Vida3")]
 layout_mode = 3
@@ -93,5 +94,8 @@ volume_db = 5.0
 bus = &"SFX"
 
 [node name="Timer" type="Timer" parent="." unique_id=951713294]
+
+[node name="GuardarPuntaje" type="Node" parent="." unique_id=369626410]
+script = ExtResource("10_4m8lb")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

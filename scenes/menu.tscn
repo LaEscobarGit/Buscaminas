@@ -73,6 +73,7 @@ volume_db = 5.0
 bus = &"SFX"
 
 [node name="Panel" type="PanelContainer" parent="." unique_id=97621084]
+visible = false
 layout_mode = 0
 offset_left = 437.0
 offset_top = 227.0
@@ -158,3 +159,5 @@ custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Cerrar"
+
+[connection signal="pressed" from="BotonContainer/Puntajes" to="." method="_on_puntajes_pressed"]

@@ -10,6 +10,8 @@
 [ext_resource type="AudioStream" uid="uid://cptn8rna5lx5w" path="res://assets/audio/Velaria.wav" id="5_mjl5p"]
 [ext_resource type="AudioStream" uid="uid://cfc1eneqqaxlh" path="res://assets/audio/Banderella.wav" id="6_2yu03"]
 [ext_resource type="AudioStream" uid="uid://cd3s0ps225maf" path="res://assets/audio/Detonia.wav" id="7_5vo8s"]
+[ext_resource type="Script" uid="uid://cp5xfxjrr83o4" path="res://scripts/FondoPasto.cs" id="5_4m8lb"]
+[ext_resource type="Texture2D" uid="uid://21qqhs83vbr5" path="res://assets/imgs/grassSpritesheet.png" id="6_mjl5p"]
 [ext_resource type="Texture2D" uid="uid://boribcvc4b737" path="res://assets/imgs/vida.png" id="7_r01d7"]
 [ext_resource type="Script" uid="uid://bn1ysn323x0h1" path="res://scripts/GuardarPuntaje.cs" id="10_4m8lb"]
 
@@ -31,7 +33,12 @@ Vida2 = NodePath("VBoxContainer/Vida2")
 Vida3 = NodePath("VBoxContainer/Vida3")
 canciones = Array[AudioStream]([ExtResource("5_mjl5p"), ExtResource("6_2yu03"), ExtResource("7_5vo8s")])
 
+[node name="FondoPasto" type="Sprite2D" parent="." unique_id=152782763]
+script = ExtResource("5_4m8lb")
+spritesheet = ExtResource("6_mjl5p")
+
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=876782601]
+visible = false
 texture_filter = 1
 layout_mode = 0
 offset_right = 40.0
@@ -76,6 +83,7 @@ texture = ExtResource("7_r01d7")
 expand_mode = 5
 
 [node name="TimerLabel" type="Label" parent="." unique_id=461294384]
+texture_filter = 1
 layout_mode = 0
 offset_left = 351.0
 offset_top = 584.035

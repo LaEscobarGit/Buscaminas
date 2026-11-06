@@ -6,6 +6,12 @@ public partial class Celda : Button
 	[Export] private CompressedTexture2D banderaIcon;
 	[Export] private CompressedTexture2D minaIcon;
 	
+	// colores para las celdas
+	[Export] private Color verdeClaro = new Color("559575ff");
+	[Export] private Color verdeOscuro = new Color("5a8964ff");
+	[Export] private Color reveladoClaro = new Color("e5c29f");
+	[Export] private Color reveladoOscuro = new Color("d7b899");
+	
 	[Signal] public delegate void ClickIzquierdoEventHandler(Celda celda);
 	[Signal] public delegate void ClickDerechoEventHandler(Celda celda);
 
@@ -22,6 +28,7 @@ public partial class Celda : Button
 		ExpandIcon = true;
 		IconAlignment = HorizontalAlignment.Center;
 		FocusMode = FocusModeEnum.None;
+		AplicarColores();
 	}
 
 	public void NewGame(bool esMina)
@@ -80,5 +87,25 @@ public partial class Celda : Button
 			else if (mouse.ButtonIndex == MouseButton.Right)
 				EmitSignal(SignalName.ClickDerecho, this);
 		}
+	}
+	
+	// estos métodos los puse para que las celdas alternen color
+	private void AplicarColores()
+	{
+	bool par = (Fila + Col) % 2 == 0;
+	Color normal = par ? verdeClaro : verdeOscuro;
+	Color revelado = par ? reveladoClaro : reveladoOscuro;
+
+	AddThemeStyleboxOverride("normal", CrearEstilo(normal));
+	AddThemeStyleboxOverride("hover", CrearEstilo(normal.Lightened(0.15f)));
+	AddThemeStyleboxOverride("pressed", CrearEstilo(normal.Darkened(0.1f)));
+	AddThemeStyleboxOverride("disabled", CrearEstilo(revelado));
+	}
+
+	private StyleBoxFlat CrearEstilo(Color color)
+	{
+	StyleBoxFlat estilo = new StyleBoxFlat();
+	estilo.BgColor = color;
+	return estilo;
 	}
 }

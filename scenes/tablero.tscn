@@ -21,6 +21,7 @@ offset_bottom = 456.0
 texture = ExtResource("2_ee34m")
 
 [node name="GridContainer" type="GridContainer" parent="." unique_id=1965576789]
+texture_filter = 1
 layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0

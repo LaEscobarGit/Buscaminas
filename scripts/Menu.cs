@@ -22,7 +22,7 @@ public partial class Menu : Control
 	{
 		switch (boton.Name)
 		{
-			case "Jugar":
+			case "Solo":
 				GetTree().ChangeSceneToFile("res://scenes/configJuego.tscn");
 				break;
 			case "Puntajes":

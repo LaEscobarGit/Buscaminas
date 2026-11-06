@@ -1,0 +1,23 @@
+{
+	"Celda": {
+		"nombre": "Celda",
+		"descripcion": "Una guerrera novata del reino de Numeria, es conocida por su rapidez en el tablero y por su actitud positiva. Celda fue quien invocó al guerrero de la profecía, con esperanzas de que restaurara a su querido reino.",
+		"buff": "Tiempo de Sobra",
+		"descBuff": "El tiempo es oro: Celda te otorgará 50 segundos extra.",
+		"imgBuff": "res://assets/imgs/buffTiempo.png"
+	},
+	"Velaria": {
+		"nombre": "Velaria",
+		"descripcion": "Una de las segundas en mano de la Reina Detonia, es la gran guerrera sacerdotiza. En batalla, su especialidad son las incógnitas: esconde y revela pistas a su favor, siendo un oponente peligroso.",
+		"buff": "Pista Divina",
+		"descBuff": "Velaria te otorga 3 oportunidades para revelar el contenido de una celda de tu elección.",
+		"imgBuff": "res://assets/imgs/buffPista.png"
+	},
+	"Banderella": {
+		"nombre": "Banderella",
+		"descripcion": "Una de las segundas en mano de la Reina Detonia, representa el orden en el reino de Numeria. En batalla, su especialidad son las banderas. Como enemiga, inhabilita el uso de las banderas para confundir a su enemigo; y como aliada, las banderas se vuelven una fuente de protección.",
+		"buff": "Bandera Protectora",
+		"descBuff": "Banderella te otorga 3 cargas de Bandera Protectora. Con esta habilidad, si seleccionas una mina y hay una bandera alrededor de ella, evitas el daño de la explosión.",
+		"imgBuff": "res://assets/imgs/buffProteccion.png"
+	}
+}

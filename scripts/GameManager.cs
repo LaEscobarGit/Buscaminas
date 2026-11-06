@@ -8,11 +8,11 @@ public partial class GameManager : Node
 	public static int minas;
 	public static int tiempo;
 	public static int vidas;
-	public static string buff;
-	public static string debuff;
+	public static Godot.Collections.Array buffs = new();
+	public static Godot.Collections.Array debuffs = new();
 	
 	public static bool[] jugados = {false, false, false};
-	public static bool actual = 0;
+	public static int actual = 0;
 	
 	public static string dialogoActual = "introduccion";
 	
@@ -38,23 +38,27 @@ public partial class GameManager : Node
 		return false;
 	}
 	
-	public static bool getActual(){
+	public static int getActual(){
 		return actual;
 	}
 	
-	public static void setJuego(int filas, int cols, int minas, int tiempo, int vidas){
-		this.filas = filas;
-		this.columnas = cols;
-		this.minas = minas;
-		
-		if(buff.Equals("tiempo"))
-			this.tiempo = tiempo + 50;
-		else
-			this.tiempo = tiempo;
-		
-		if(debuff.Equals("muerteSubita"))
-			this.vidas = 1;
-		else
-			this.vidas = vidas;
+	public static void setJuego(int f, int c, int m, int t, int v){
+		filas = f;
+		columnas = c;
+		minas = m;
+		tiempo = t;
+		vidas = v;
+	}
+	
+	public static void setBuff(int b){
+		buffs.Add(b);
+		if(buffs.Contains(0))
+			tiempo += 50;
+	}
+	
+	public static void setDebuff(int db){
+		debuffs.Add(db);
+		if(debuffs.Contains(2))
+			vidas = 1;
 	}
 }

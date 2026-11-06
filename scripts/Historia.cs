@@ -37,6 +37,7 @@ public partial class Historia : Control
 		dialogManager.PersonajeEntra += onPersonajeEntra;
 		
 		dialogManager.iniciarDialogo(GameManager.dialogoActual);
+		actualizarPresentacion();
 	}
 	
 	public override void _ExitTree(){
@@ -87,15 +88,15 @@ public partial class Historia : Control
 				musica.Play();
 				break;
 			case "numeria": GameManager.setDialogoActual("region1_antes");
-				fondo.Texture = fondos[1];
-				musica.Stream = canciones[0];
-				musica.Play();
+				//fondo.Texture = fondos[1];
+				//musica.Stream = canciones[0];
+				//musica.Play();
 				GetTree().ChangeSceneToFile("res://scenes/mapa.tscn");
 				break;
 			case "region1_antes": GameManager.setDialogoActual("region1_despues");
 				fondo.Texture = fondos[2];
 				GameManager.setJuego(16,16,90,200,3);
-				GameManager.debuff = "incognitas";
+				GameManager.setDebuff(0);
 				break;
 			case "region1_despues": GameManager.setDialogoActual("region2_antes");
 				fondo.Texture = fondos[3];
@@ -104,7 +105,7 @@ public partial class Historia : Control
 			case "region2_antes": GameManager.setDialogoActual("region2_despues");
 				fondo.Texture = fondos[4];
 				GameManager.setJuego(16,16,90,200,3);
-				GameManager.debuff = "flagless";
+				GameManager.setDebuff(1);
 				break;
 			case "region2_despues": GameManager.setDialogoActual("region3_antes");
 				fondo.Texture = fondos[5];
@@ -113,7 +114,7 @@ public partial class Historia : Control
 			case "region3_antes": GameManager.setDialogoActual("region3_despues");
 				fondo.Texture = fondos[6];
 				GameManager.setJuego(16,16,90,150,3);
-				GameManager.debuff = "muerteSubita";
+				GameManager.setDebuff(2);
 				break;
 			case "region3_despues":
 				GameManager.completarNivel(2);
@@ -121,9 +122,35 @@ public partial class Historia : Control
 				return;
 		}
 		if(actual.Contains("antes"))
-			GetTree().ChangeSceneToFile("res://scenes/game_screen.tscn");
+			GetTree().ChangeSceneToFile("res://scenes/seleccion.tscn");
 		else if(actual.Contains("despues"))
 			GetTree().ChangeSceneToFile("res://scenes/mapa.tscn");
+	}
+	
+	private void actualizarPresentacion(){
+		string actual = GameManager.getDialogoActual();
+		switch (actual){
+			case "introduccion": break;
+			case "numeria": fondo.Texture = fondos[0];
+				break;
+			case "region1_antes": fondo.Texture = fondos[1];
+				break;
+			case "region1_despues": fondo.Texture = fondos[2];
+				break;
+			case "region2_antes": fondo.Texture = fondos[3];
+				break;
+			case "region2_despues": fondo.Texture = fondos[4];
+				break;
+			case "region3_antes": fondo.Texture = fondos[5];
+				break;
+			case "region3_despues": fondo.Texture = fondos[6];
+				break;
+		}
+
+		if (actual != "introduccion"){
+			musica.Stream = canciones[0];
+			musica.Play();
+		}
 	}
 	
 	public async void onPersonajeSale(string personaje){

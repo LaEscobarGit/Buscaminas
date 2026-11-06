@@ -23,6 +23,7 @@ public partial class GameScreen : Control
 	public int Cols;
 	public int NumMinas;
 	private const int VidasIniciales = 3;
+	private const int Tiempo = null;
 	private Tablero tablero;
 	private Timer timer;
 	private Label timerLabel;
@@ -55,6 +56,8 @@ public partial class GameScreen : Control
 		Filas = GameManager.filas;
 		Cols = GameManager.columnas;
 		NumMinas = GameManager.minas;
+		Tiempo = GameManager.tiempo;
+		VidasIniciales = GameManager.vidas;
 		
 		musica.Stream = canciones[GameManager.getActual()];
 		musica.Play();
@@ -88,7 +91,9 @@ public partial class GameScreen : Control
 	private void OnClickDerecho(Celda celda)
 	{
 		if (juegoTerminado || !juegoIniciado || celda.Revelado) return;
-		if(GameManager.debuff == "flagless") return;
+		if(GameManager.debuffs.Contains(1))
+			return;
+		
 		celda.AlternarBandera();
 		clicks++;
 	}
@@ -297,6 +302,12 @@ public partial class GameScreen : Control
 	
 	private void _on_timer_timeout(){
 		seg++;
-		timerLabel.Text = Convert.ToString(seg);
+		if(Tiempo!=null){
+			timerLabel.Text = Convert.ToString(Tiempo - seg);
+			if(seg == Tiempo){
+				//se acabo
+			}
+		}else
+			timerLabel.Text = Convert.ToString(seg);
 	}
 }

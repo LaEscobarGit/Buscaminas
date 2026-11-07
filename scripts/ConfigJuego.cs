@@ -11,6 +11,11 @@ public partial class ConfigJuego : Control
 	[Export] private Control tableroContainer;
 	[Export] private Control textoBD;
 	[Export] private Control bdContainer;
+	[Export] private CheckBox limiteCheck;
+	[Export] private Control tiempoLabel;
+	[Export] private SpinBox tiempoSpin;
+	
+	private bool limite;
 	
 	public override void _Ready()
 	{
@@ -20,8 +25,8 @@ public partial class ConfigJuego : Control
 				boton.Click += OnBotonClick;
 		}
 		
+		limiteCheck.Toggled += onLimiteToggled;
 		MostrarPestana(true);
-		
 	}
 	
 	private void MostrarPestana(bool tablero)
@@ -46,6 +51,10 @@ public partial class ConfigJuego : Control
 				GameManager.filas = (int) filasBox.Value;
 				GameManager.columnas = (int) colsBox.Value;
 				GameManager.minas = (int) minasBox.Value;
+				if(limite)
+					GameManager.tiempo = (int) tiempoSpin.Value;
+				else
+					GameManager.tiempo = 0;
 				int espacios = (GameManager.filas*GameManager.columnas)-10;
 				if(GameManager.minas < espacios)
 					GetTree().ChangeSceneToFile("res://scenes/game_screen.tscn");
@@ -60,5 +69,11 @@ public partial class ConfigJuego : Control
 				GetTree().ChangeSceneToFile("res://scenes/menu.tscn");
 				break;
 		}
+	}
+	
+	public void onLimiteToggled(bool toggledOn){
+		tiempoLabel.Visible = toggledOn;
+		tiempoSpin.Visible = toggledOn;
+		limite = toggledOn;
 	}
 }

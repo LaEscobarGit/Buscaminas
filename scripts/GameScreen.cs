@@ -22,8 +22,8 @@ public partial class GameScreen : Control
 	public int Filas;
 	public int Cols;
 	public int NumMinas;
-	private const int VidasIniciales = 3;
-	private const int Tiempo = null;
+	private int VidasIniciales = 3;
+	private int Tiempo = 0;
 	private Tablero tablero;
 	private Timer timer;
 	private Label timerLabel;
@@ -304,7 +304,7 @@ public partial class GameScreen : Control
 	
 	private void _on_timer_timeout(){
 		seg++;
-		if(Tiempo!=null){
+		if(Tiempo!=0){
 			timerLabel.Text = Convert.ToString(Tiempo - seg);
 			if(seg == Tiempo){
 				//se acabo

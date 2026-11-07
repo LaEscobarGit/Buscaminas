@@ -31,10 +31,11 @@ public partial class GameManager : Node
 	}
 	
 	public static bool getHabilitado(int indice){
-		if(jugados[indice]==false)
+		if(jugados[indice]==false){
 			if(indice == 0)
 				return true;
 			return jugados[indice-1];
+		}
 		return false;
 	}
 	

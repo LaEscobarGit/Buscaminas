@@ -7,11 +7,11 @@
 [ext_resource type="AudioStream" uid="uid://db3u7mps161fp" path="res://assets/audio/click1.wav" id="3_r01d7"]
 [ext_resource type="FontFile" uid="uid://b6y4qw4h75aht" path="res://assets/fonts/PixelMplus10-Bold.ttf" id="4_rxmqw"]
 [ext_resource type="AudioStream" uid="uid://7ahdcx130bpj" path="res://assets/audio/bomb.wav" id="4_vnpv3"]
+[ext_resource type="Script" uid="uid://cp5xfxjrr83o4" path="res://scripts/FondoPasto.cs" id="5_4m8lb"]
 [ext_resource type="AudioStream" uid="uid://cptn8rna5lx5w" path="res://assets/audio/Velaria.wav" id="5_mjl5p"]
 [ext_resource type="AudioStream" uid="uid://cfc1eneqqaxlh" path="res://assets/audio/Banderella.wav" id="6_2yu03"]
-[ext_resource type="AudioStream" uid="uid://cd3s0ps225maf" path="res://assets/audio/Detonia.wav" id="7_5vo8s"]
-[ext_resource type="Script" uid="uid://cp5xfxjrr83o4" path="res://scripts/FondoPasto.cs" id="5_4m8lb"]
 [ext_resource type="Texture2D" uid="uid://21qqhs83vbr5" path="res://assets/imgs/grassSpritesheet.png" id="6_mjl5p"]
+[ext_resource type="AudioStream" uid="uid://cd3s0ps225maf" path="res://assets/audio/Detonia.wav" id="7_5vo8s"]
 [ext_resource type="Texture2D" uid="uid://boribcvc4b737" path="res://assets/imgs/vida.png" id="7_r01d7"]
 [ext_resource type="Script" uid="uid://bn1ysn323x0h1" path="res://scripts/GuardarPuntaje.cs" id="10_4m8lb"]
 

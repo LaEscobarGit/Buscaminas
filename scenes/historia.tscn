@@ -75,9 +75,9 @@ loop = true
 
 [node name="Fondo" type="TextureRect" parent="." unique_id=172371545]
 layout_mode = 0
-offset_left = -93.455
-offset_right = 1250.545
-offset_bottom = 648.0
+offset_top = -19.0
+offset_right = 1152.0
+offset_bottom = 690.0
 texture = ExtResource("2_qhayu")
 expand_mode = 2
 

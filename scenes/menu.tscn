@@ -3,13 +3,22 @@
 [ext_resource type="Script" uid="uid://b3166hexpc34u" path="res://scripts/Menu.cs" id="1_4ytvr"]
 [ext_resource type="VideoStream" uid="uid://bonr80tgw1pdq" path="res://assets/imgs/Fondo.ogv" id="2_g3eks"]
 [ext_resource type="PackedScene" uid="uid://byj0a3na3fu4y" path="res://scenes/boton.tscn" id="2_mhnvy"]
-[ext_resource type="AudioStream" uid="uid://wswenxoasft7" path="res://assets/audio/Main Theme.wav" id="4_g3eks"]
 [ext_resource type="Texture2D" uid="uid://bgjpeu0y4ynue" path="res://assets/imgs/FondoImagen2.png" id="2_ufwb2"]
+[ext_resource type="AudioStream" uid="uid://wswenxoasft7" path="res://assets/audio/Main Theme.wav" id="4_g3eks"]
 [ext_resource type="FontFile" uid="uid://b6y4qw4h75aht" path="res://assets/fonts/PixelMplus10-Bold.ttf" id="5_4ytvr"]
 [ext_resource type="FontFile" uid="uid://d33yvu28wn2o3" path="res://assets/fonts/DinkieBitmap-7pxDemo.ttf" id="6_g3eks"]
 [ext_resource type="Shader" uid="uid://c6k6kuuqpydmu" path="res://scenes/menu.gdshader" id="7_i6lef"]
 [ext_resource type="Script" uid="uid://nda4fbi56lnu" path="res://scripts/Logo.cs" id="8_13sgg"]
 [ext_resource type="Texture2D" uid="uid://dyiyar4pydwhg" path="res://assets/imgs/logoBlack2.png" id="9_70i5f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_13sgg"]
+shader = ExtResource("7_i6lef")
+shader_parameter/progreso = -0.5
+shader_parameter/ancho = 0.08
+shader_parameter/inclinacion = 0.35
+shader_parameter/intensidad = 1.0
+shader_parameter/opacidad = 1.0
+shader_parameter/color_brillo = Color(1, 1, 1, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_g3eks"]
 load_path = "res://.godot/imported/gamePanel.png-8ff6ffe765d89af3cfe9aa3445415a86.ctex"
@@ -23,16 +32,7 @@ corner_radius_bottom_left = 4
 expand_margin_top = 4.0
 expand_margin_bottom = 4.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_13sgg"]
-shader = ExtResource("7_i6lef")
-shader_parameter/progreso = -0.5
-shader_parameter/ancho = 0.08
-shader_parameter/inclinacion = 0.35
-shader_parameter/intensidad = 1.0
-shader_parameter/opacidad = 1.0
-shader_parameter/color_brillo = Color(1, 1, 1, 1)
-
-[node name="Menu" type="Control" unique_id=2083391954]
+[node name="Menu" type="Control" unique_id=2083391954 node_paths=PackedStringArray("opciones")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -40,6 +40,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4ytvr")
+opciones = NodePath("Opciones")
 
 [node name="FondoTest" type="TextureRect" parent="." unique_id=1052611663]
 layout_mode = 0
@@ -117,95 +118,6 @@ bus = &"Musica"
 volume_db = 5.0
 bus = &"SFX"
 
-[node name="Panel" type="PanelContainer" parent="." unique_id=97621084]
-visible = false
-layout_mode = 0
-offset_left = 437.0
-offset_top = 227.0
-offset_right = 701.0
-offset_bottom = 429.0
-
-[node name="TextureRect" type="TextureRect" parent="Panel" unique_id=943419873]
-texture_filter = 1
-layout_mode = 2
-texture = SubResource("CompressedTexture2D_g3eks")
-expand_mode = 1
-
-[node name="CenterContainer" type="CenterContainer" parent="Panel" unique_id=1249869170]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/CenterContainer" unique_id=1420416575]
-layout_mode = 2
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="RichTextLabel" type="Label" parent="Panel/CenterContainer/VBoxContainer" unique_id=1131221643]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
-theme_override_fonts/font = ExtResource("5_4ytvr")
-theme_override_font_sizes/font_size = 25
-text = "Opciones"
-horizontal_alignment = 1
-
-[node name="GridContainer" type="GridContainer" parent="Panel/CenterContainer/VBoxContainer" unique_id=739836991]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/h_separation = 30
-theme_override_constants/v_separation = 10
-columns = 3
-
-[node name="LabelMusica" type="Label" parent="Panel/CenterContainer/VBoxContainer/GridContainer" unique_id=892533008]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
-theme_override_fonts/font = ExtResource("6_g3eks")
-text = "Musica"
-
-[node name="SliderMusica" type="HSlider" parent="Panel/CenterContainer/VBoxContainer/GridContainer" unique_id=1789802125]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/slider = SubResource("StyleBoxFlat_v86rl")
-
-[node name="ValorMusica" type="Label" parent="Panel/CenterContainer/VBoxContainer/GridContainer" unique_id=591813981]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
-theme_override_fonts/font = ExtResource("5_4ytvr")
-theme_override_font_sizes/font_size = 24
-text = "100"
-
-[node name="LabelSFX" type="Label" parent="Panel/CenterContainer/VBoxContainer/GridContainer" unique_id=121542146]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
-theme_override_fonts/font = ExtResource("6_g3eks")
-text = "SFX"
-
-[node name="SliderSFX" type="HSlider" parent="Panel/CenterContainer/VBoxContainer/GridContainer" unique_id=1315865689]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/slider = SubResource("StyleBoxFlat_v86rl")
-
-[node name="ValorSFX" type="Label" parent="Panel/CenterContainer/VBoxContainer/GridContainer" unique_id=1739843783]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
-theme_override_fonts/font = ExtResource("5_4ytvr")
-theme_override_font_sizes/font_size = 24
-text = "100"
-
-[node name="Cerrar" parent="Panel/CenterContainer/VBoxContainer" unique_id=643854205 groups=["botones_menu"] instance=ExtResource("2_mhnvy")]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Cerrar"
-
-[connection signal="pressed" from="BotonContainer/Puntajes" to="." method="_on_puntajes_pressed"]
 [node name="Logo" type="TextureRect" parent="." unique_id=2055737631]
 material = SubResource("ShaderMaterial_13sgg")
 layout_mode = 0
@@ -217,3 +129,92 @@ texture = ExtResource("9_70i5f")
 expand_mode = 1
 stretch_mode = 5
 script = ExtResource("8_13sgg")
+
+[node name="Opciones" type="PanelContainer" parent="." unique_id=97621084]
+visible = false
+layout_mode = 0
+offset_left = 406.0
+offset_top = 226.0
+offset_right = 731.0
+offset_bottom = 449.0
+
+[node name="TextureRect" type="TextureRect" parent="Opciones" unique_id=943419873]
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("CompressedTexture2D_g3eks")
+expand_mode = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="Opciones" unique_id=1249869170]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Opciones/CenterContainer" unique_id=1420416575]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="RichTextLabel" type="Label" parent="Opciones/CenterContainer/VBoxContainer" unique_id=1131221643]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
+theme_override_fonts/font = ExtResource("5_4ytvr")
+theme_override_font_sizes/font_size = 25
+text = "Opciones"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="Opciones/CenterContainer/VBoxContainer" unique_id=739836991]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 10
+columns = 3
+
+[node name="LabelMusica" type="Label" parent="Opciones/CenterContainer/VBoxContainer/GridContainer" unique_id=892533008]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
+theme_override_fonts/font = ExtResource("6_g3eks")
+text = "Musica"
+
+[node name="SliderMusica" type="HSlider" parent="Opciones/CenterContainer/VBoxContainer/GridContainer" unique_id=1789802125]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/slider = SubResource("StyleBoxFlat_v86rl")
+
+[node name="ValorMusica" type="Label" parent="Opciones/CenterContainer/VBoxContainer/GridContainer" unique_id=591813981]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
+theme_override_fonts/font = ExtResource("5_4ytvr")
+theme_override_font_sizes/font_size = 24
+text = "100"
+
+[node name="LabelSFX" type="Label" parent="Opciones/CenterContainer/VBoxContainer/GridContainer" unique_id=121542146]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
+theme_override_fonts/font = ExtResource("6_g3eks")
+text = "SFX"
+
+[node name="SliderSFX" type="HSlider" parent="Opciones/CenterContainer/VBoxContainer/GridContainer" unique_id=1315865689]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/slider = SubResource("StyleBoxFlat_v86rl")
+
+[node name="ValorSFX" type="Label" parent="Opciones/CenterContainer/VBoxContainer/GridContainer" unique_id=1739843783]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
+theme_override_fonts/font = ExtResource("5_4ytvr")
+theme_override_font_sizes/font_size = 24
+text = "100"
+
+[node name="Cerrar" parent="Opciones/CenterContainer/VBoxContainer" unique_id=643854205 groups=["botones_menu"] instance=ExtResource("2_mhnvy")]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Cerrar"
+
+[connection signal="pressed" from="BotonContainer/Puntajes" to="." method="_on_puntajes_pressed"]

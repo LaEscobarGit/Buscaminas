@@ -7,8 +7,9 @@
 [ext_resource type="StyleBox" uid="uid://bv00g887ps10p" path="res://celdaDisabled.tres" id="3_jdgio"]
 [ext_resource type="Texture2D" uid="uid://b5i2v4ns2m77e" path="res://assets/imgs/bandera.png" id="6_vdn1o"]
 [ext_resource type="Texture2D" uid="uid://0l8uotro4p1b" path="res://assets/imgs/mina.png" id="7_ko5ay"]
+[ext_resource type="Texture2D" uid="uid://d34gbuntxvnyb" path="res://assets/imgs/escudo.png" id="8_ko5ay"]
 
-[node name="Celda" type="Button" unique_id=900455361]
+[node name="Celda" type="Button" unique_id=900455361 node_paths=PackedStringArray("sfx", "efectoEscudo")]
 offset_right = 30.0
 offset_bottom = 30.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -19,3 +20,18 @@ theme_override_styles/disabled = ExtResource("3_jdgio")
 script = ExtResource("1_is6es")
 banderaIcon = ExtResource("6_vdn1o")
 minaIcon = ExtResource("7_ko5ay")
+sfx = NodePath("SFXPlayer")
+sonidos = Array[AudioStream]([null, null])
+efectoEscudo = NodePath("TextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1734020063]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+mouse_filter = 2
+texture = ExtResource("8_ko5ay")
+expand_mode = 4
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="." unique_id=1148619273]

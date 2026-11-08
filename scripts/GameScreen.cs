@@ -9,15 +9,16 @@ public partial class GameScreen : Control
  
 	[Export] private AudioStreamPlayer sfx;
 	[Export] private AudioStreamPlayer musica;
-	[Export] private AudioStream SonidoBandera;
-	[Export] private AudioStream SonidoClick;
-	[Export] private AudioStream SonidoHover;
 	[Export] private AudioStream SonidoBomba;
-	[Export] private AudioStream SonidoMorir;
 	[Export] private TextureRect Vida1;
 	[Export] private TextureRect Vida2;
 	[Export] private TextureRect Vida3;
 	[Export] private AudioStream[] canciones;
+	[Export] private AcceptDialog dialog;
+	[Export] private PanelContainer menuMuerte;
+	[Export] private TextureRect[] imgDB;
+	[Export] private Button buffPista;
+	[Export] private Label pistaLabel;
  
 	public int Filas;
 	public int Cols;
@@ -44,12 +45,22 @@ public partial class GameScreen : Control
 	private Vector2 tableroOrigen;
 	private Tween tweenShake;
 
+	//buffs
+	private bool pistaToggle;
+	private int cargasPistas = 0;
+	private int cargasBandera = 0;
+	private int cargasIncognita = 0;
+
 	public override void _Ready()
 	{
 		tablero = GetNode<Tablero>("Tablero");
 		tableroOrigen = tablero.Position;
 		timer = GetNode<Timer>("Timer");
 		timerLabel = GetNode<Label>("TimerLabel");
+		foreach (Node nodo in GetTree().GetNodesInGroup("botones_menu")){
+			if (nodo is Boton boton)
+				boton.Click += OnBotonClick;
+		}
 		
 		tablero.ClickIzquierdo += OnClickIzquierdo;
 		tablero.ClickDerecho += OnClickDerecho;
@@ -58,6 +69,29 @@ public partial class GameScreen : Control
 		NumMinas = GameManager.minas;
 		Tiempo = GameManager.tiempo;
 		VidasIniciales = GameManager.vidas;
+		
+		if(GameManager.buffs.Contains(0)){
+			imgDB[0].Visible = true;
+		}if(GameManager.buffs.Contains(1)){
+			imgDB[1].Visible = true;
+			buffPista.Visible = true;
+			pistaLabel.Visible = true;
+			cargasPistas = 3;
+		}if(GameManager.buffs.Contains(2)){
+			imgDB[2].Visible = true;
+			cargasBandera = 3;
+		}if(GameManager.debuffs.Contains(0)){
+			imgDB[3].Visible = true;
+			cargasIncognita = 8;
+		}if(GameManager.debuffs.Contains(1)){
+			imgDB[4].Visible = true;
+		}if(GameManager.debuffs.Contains(2)){
+			imgDB[5].Visible = true;
+		}
+		
+		buffPista.Toggled += onPistaToggled;
+		
+		configurarVidas();
 		
 		musica.Stream = canciones[GameManager.getActual()];
 		musica.Play();
@@ -136,22 +170,46 @@ public partial class GameScreen : Control
 		Celda celda = tablero.GetCelda(srcRow, srcCol);
 		if (celda.Revelado || celda.Banderado || juegoTerminado) return;
  
-		if (celda.EsMina)
-		{
+		if (celda.EsMina){
 			celda.RevelarMina();
+			if(GameManager.buffs.Contains(2) && cargasBandera > 0){
+				cargasBandera--;
+				celda.mostrarProteccion();
+				return;
+			}
+			if(GameManager.buffs.Contains(1) && pistaToggle && cargasPistas > 0){
+				cargasPistas--;
+				pistaLabel.Text = "Cargas: " + cargasPistas.ToString();
+				if(cargasPistas == 0){
+					buffPista.ButtonPressed = false;
+					buffPista.Disabled = true;
+				}
+				return;
+			}
 			perderVida();
 			return;
 		}
  
 		int countMines = GetSurroundingMines(srcRow, srcCol);
-		celda.Revelar(countMines);
- 
-		if (countMines != 0)
-		{
-			//PlaySonido(SonidoCelda1);
+		bool incognita = false;
+		if(GameManager.debuffs.Contains(0) && cargasIncognita > 0 && countMines > 0){
+			incognita = GD.Randf() < 0.25f;
+			if (incognita)
+				cargasIncognita--;
 		}
-		else
-		{
+		
+		celda.Revelar(countMines,incognita);
+		if(GameManager.buffs.Contains(1) && pistaToggle && cargasPistas > 0){
+			cargasPistas--;
+			pistaLabel.Text = "Cargas: " + cargasPistas.ToString();
+			if(cargasPistas == 0){
+				buffPista.ButtonPressed = false;
+				buffPista.Disabled = true;
+			}
+			return;
+		}
+		
+		if (countMines == 0){
 			for (int fila = srcRow - 1; fila <= srcRow + 1; fila++)
 			{
 				for (int col = srcCol - 1; col <= srcCol + 1; col++)
@@ -160,7 +218,6 @@ public partial class GameScreen : Control
 						RevealCelda(fila, col);
 				}
 			}
-			//PlaySonido(SonidoCelda);
 		}
  
 		if (!juegoTerminado && CompletadoTablero())
@@ -179,15 +236,22 @@ public partial class GameScreen : Control
 		return true;
 	}
  
-	private void TerminarJuego(bool vivir)
-	{
+	private void TerminarJuego(bool vivir){
 		if (juegoTerminado) return;
 		juegoTerminado = true;
-		//esto lo puse porque seaguia corriendo el timer aunque perdieras
  		timer.Stop();
  
 		CalcularPuntaje();
-		EmitSignal(SignalName.JuegoTerminado, vivir, puntos);
+		if(!GameManager.modoAventura){
+			dialog.Visible = true;
+			EmitSignal(SignalName.JuegoTerminado, vivir, puntos);
+		}else{
+			if(vivir)
+				GetTree().ChangeSceneToFile("res://scenes/historia.tscn");
+			else{
+				menuMuerte.Visible = true;
+			}
+		}
 	}
  
 	// ---------- 3BV ----------
@@ -282,8 +346,11 @@ public partial class GameScreen : Control
 			t.TweenProperty(vida, "position:x", x + 2.0f, 0.1f);
 			t.TweenProperty(vida, "position:x", x, 0.1f);
 		}
-		if (vidas == 0)
+		if (vidas == 0){
+			GD.Print("murio");
+			explotarTablero();
 			TerminarJuego(false);
+		}
 	}
 	private void ShakeTablero(){
 		float intensidad = 20.0f;
@@ -293,13 +360,43 @@ public partial class GameScreen : Control
 		tablero.Position = tableroOrigen;
 
 		tweenShake = CreateTween();
-		for (int i = 0; i < sacudidas; i++)
-		{
+		for (int i = 0; i < sacudidas; i++){
 			float fuerza = intensidad * (1.0f - (float)i / sacudidas);
 			Vector2 offset = new Vector2((float)GD.RandRange(-1.0, 1.0),(float)GD.RandRange(-1.0, 1.0)) * fuerza;
 			tweenShake.TweenProperty(tablero, "position", tableroOrigen + offset, duracion);
 		}
 		tweenShake.TweenProperty(tablero, "position", tableroOrigen, duracion);
+	}
+	
+	private void explotarTablero(){
+		tweenShake?.Kill();
+
+		tablero.Position = tableroOrigen;
+		tablero.Rotation = 0;
+
+		tweenShake = CreateTween();
+		tweenShake.SetParallel(true);
+
+		tweenShake.TweenProperty(tablero,"position",new Vector2(tableroOrigen.X + 150, GetViewportRect().Size.Y + tablero.Size.Y),0.8f)
+		.SetTrans(Tween.TransitionType.Expo).SetEase(Tween.EaseType.In);
+
+		tweenShake.TweenProperty(tablero,"rotation",Mathf.DegToRad(35), 0.8f)
+		.SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.In);
+
+		tweenShake.TweenProperty(tablero,"scale",new Vector2(0.7f, 0.7f),0.8f)
+		.SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.In);
+	}
+	
+	private void configurarVidas(){
+		Vida1.Visible = true;
+		if(VidasIniciales>1)
+			Vida2.Visible = true;
+		else
+			Vida2.Visible = false;
+		if(VidasIniciales == 3)
+			Vida3.Visible = true;
+		else
+			Vida3.Visible = false;
 	}
 	
 	private void _on_timer_timeout(){
@@ -311,5 +408,20 @@ public partial class GameScreen : Control
 			}
 		}else
 			timerLabel.Text = Convert.ToString(seg);
+	}
+	
+	private void onPistaToggled(bool toggledOn){
+		pistaToggle = toggledOn;
+	}
+	
+	private void OnBotonClick(Boton boton){
+		switch (boton.Name){
+			case "Reiniciar":
+				GetTree().ChangeSceneToFile("res://scenes/seleccion.tscn");
+				break;
+			case "Regresar":
+				GetTree().ChangeSceneToFile("res://scenes/menu.tscn");
+				break;
+		}
 	}
 }

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c2imy4o7fwr86" path="res://scripts/Seleccion.cs" id="1_4335n"]
 [ext_resource type="VideoStream" uid="uid://bonr80tgw1pdq" path="res://assets/imgs/Fondo.ogv" id="1_guc25"]
+[ext_resource type="AudioStream" uid="uid://1a575cbc8chc" path="res://assets/audio/Fondo1.wav" id="3_guc25"]
 [ext_resource type="Texture2D" uid="uid://dutcerofhl2s3" path="res://assets/imgs/celda.png" id="4_tr1rn"]
 [ext_resource type="FontFile" uid="uid://b6y4qw4h75aht" path="res://assets/fonts/PixelMplus10-Bold.ttf" id="5_i6v5p"]
 [ext_resource type="FontFile" uid="uid://d33yvu28wn2o3" path="res://assets/fonts/DinkieBitmap-7pxDemo.ttf" id="6_xaxrp"]
@@ -35,6 +36,7 @@ autoplay = true
 loop = true
 
 [node name="PlayerMusica" type="AudioStreamPlayer" parent="." unique_id=1877754882]
+stream = ExtResource("3_guc25")
 autoplay = true
 bus = &"Musica"
 

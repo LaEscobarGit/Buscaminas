@@ -38,7 +38,7 @@ public partial class Menu : Control
 			case "Cerrar":
 				opciones.Visible = false;
 				break;
-			case "Exit":
+			case "Salir":
 				GetTree().Quit();
 				break;
 		}

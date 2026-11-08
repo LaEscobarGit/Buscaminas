@@ -4,9 +4,9 @@
 [ext_resource type="VideoStream" uid="uid://bonr80tgw1pdq" path="res://assets/imgs/Fondo.ogv" id="2_3wuio"]
 [ext_resource type="PackedScene" uid="uid://byj0a3na3fu4y" path="res://scenes/boton.tscn" id="3_4iuo0"]
 [ext_resource type="AudioStream" uid="uid://1a575cbc8chc" path="res://assets/audio/Fondo1.wav" id="4_abq0j"]
-[ext_resource type="FontFile" uid="uid://b6y4qw4h75aht" path="res://assets/fonts/PixelMplus10-Bold.ttf" id="4_du3kj"]
 [ext_resource type="Texture2D" uid="uid://c0l4vd10cs2o1" path="res://assets/imgs/configTablero.png" id="5_abq0j"]
 [ext_resource type="Texture2D" uid="uid://0l8uotro4p1b" path="res://assets/imgs/mina.png" id="6_mo5ol"]
+[ext_resource type="FontFile" uid="uid://byhrep8piue7x" path="res://assets/fonts/NotJamOldStyle14.ttf" id="6_wma0d"]
 
 [node name="ConfigJuego" type="Control" unique_id=2083391954 node_paths=PackedStringArray("filasBox", "colsBox", "minasBox", "textoTablero", "tableroContainer", "textoBD", "bdContainer", "limiteCheck", "tiempoLabel", "tiempoSpin")]
 layout_mode = 3
@@ -67,7 +67,7 @@ offset_left = 334.0
 offset_top = 73.0
 offset_right = 874.0
 offset_bottom = 523.0
-color = Color(0.5474945, 0.120673455, 0.19121441, 0.93333334)
+color = Color(0.54901963, 0.12156863, 0.19215687, 0.93333334)
 
 [node name="Marco" type="TextureRect" parent="CajaDeOpciones" unique_id=401188054]
 texture_filter = 1
@@ -85,8 +85,8 @@ offset_left = 401.0
 offset_top = 138.0
 offset_right = 817.0
 offset_bottom = 168.0
-theme_override_colors/font_shadow_color = Color(0.16257033, 0.023349661, 0.0604435, 1)
-theme_override_fonts/font = ExtResource("4_du3kj")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_wma0d")
 theme_override_font_sizes/font_size = 26
 text = "Configura el tablero a tu gusto!"
 
@@ -107,7 +107,7 @@ columns = 2
 [node name="LabelFilas" type="Label" parent="TableroContainer/Grid" unique_id=1156568744]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_du3kj")
+theme_override_fonts/font = ExtResource("6_wma0d")
 theme_override_font_sizes/font_size = 18
 text = "Filas"
 
@@ -120,7 +120,7 @@ value = 10.0
 [node name="LabelColumnas" type="Label" parent="TableroContainer/Grid" unique_id=2066528441]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_du3kj")
+theme_override_fonts/font = ExtResource("6_wma0d")
 theme_override_font_sizes/font_size = 18
 text = "Columnas"
 
@@ -133,7 +133,7 @@ value = 10.0
 [node name="LabelMinas" type="Label" parent="TableroContainer/Grid" unique_id=1550473773]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_du3kj")
+theme_override_fonts/font = ExtResource("6_wma0d")
 theme_override_font_sizes/font_size = 18
 text = "Minas"
 
@@ -146,7 +146,7 @@ value = 30.0
 [node name="LabelLimite" type="Label" parent="TableroContainer/Grid" unique_id=357520531]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_du3kj")
+theme_override_fonts/font = ExtResource("6_wma0d")
 theme_override_font_sizes/font_size = 18
 text = "Limite de tiempo"
 
@@ -156,7 +156,7 @@ layout_mode = 2
 [node name="LabelTiempo" type="Label" parent="TableroContainer/Grid" unique_id=316791689]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_du3kj")
+theme_override_fonts/font = ExtResource("6_wma0d")
 theme_override_font_sizes/font_size = 18
 text = "Tiempo limite (seg)"
 
@@ -175,7 +175,7 @@ offset_top = 138.0
 offset_right = 817.0
 offset_bottom = 168.0
 theme_override_colors/font_shadow_color = Color(0.16257033, 0.023349661, 0.0604435, 1)
-theme_override_fonts/font = ExtResource("4_du3kj")
+theme_override_fonts/font = ExtResource("6_wma0d")
 theme_override_font_sizes/font_size = 26
 text = "Personaliza tus buffs y debuffs!"
 

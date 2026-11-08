@@ -2,11 +2,18 @@
 
 [ext_resource type="Script" uid="uid://c2imy4o7fwr86" path="res://scripts/Seleccion.cs" id="1_4335n"]
 [ext_resource type="VideoStream" uid="uid://bonr80tgw1pdq" path="res://assets/imgs/Fondo.ogv" id="1_guc25"]
+[ext_resource type="Texture2D" uid="uid://2s835ybxqoxl" path="res://assets/imgs/seleccionSpriteContainer.png" id="3_4ttul"]
+[ext_resource type="Texture2D" uid="uid://bycjxqxmxlkda" path="res://assets/imgs/seleccionContainer.png" id="4_4335n"]
 [ext_resource type="Texture2D" uid="uid://dutcerofhl2s3" path="res://assets/imgs/celda.png" id="4_tr1rn"]
-[ext_resource type="FontFile" uid="uid://b6y4qw4h75aht" path="res://assets/fonts/PixelMplus10-Bold.ttf" id="5_i6v5p"]
-[ext_resource type="FontFile" uid="uid://d33yvu28wn2o3" path="res://assets/fonts/DinkieBitmap-7pxDemo.ttf" id="6_xaxrp"]
+[ext_resource type="Texture2D" uid="uid://4v73wdbdotwr" path="res://assets/imgs/seleccionSpriteContainerMarco.png" id="5_tr1rn"]
 [ext_resource type="Texture2D" uid="uid://b5i2v4ns2m77e" path="res://assets/imgs/bandera.png" id="7_e664m"]
+[ext_resource type="FontFile" uid="uid://dx25chtipg51m" path="res://assets/fonts/OldeTome.ttf" id="7_tr1rn"]
+[ext_resource type="FontFile" uid="uid://byhrep8piue7x" path="res://assets/fonts/NotJamOldStyle14.ttf" id="8_i6v5p"]
 [ext_resource type="PackedScene" uid="uid://byj0a3na3fu4y" path="res://scenes/boton.tscn" id="8_ux1hj"]
+[ext_resource type="Texture2D" uid="uid://defrl2u4srccg" path="res://assets/imgs/seleccionPersonajesContainer.png" id="9_4ttul"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tr1rn"]
+bg_color = Color(0.54901963, 0.12156863, 0.19215687, 0.93333334)
 
 [node name="seleccion" type="Control" unique_id=363268908 node_paths=PackedStringArray("selector", "sprite", "nombre", "desc", "buff", "buffDesc", "imgBuff")]
 layout_mode = 3
@@ -17,7 +24,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4335n")
 selector = NodePath("SeleccionContainer")
-sprite = NodePath("SpriteNPC")
+sprite = NodePath("ContainerNPCMarco/SpriteNPC")
 nombre = NodePath("Container/MarginContainer/VBox/VBoxPersonaje/Nombre")
 desc = NodePath("Container/MarginContainer/VBox/VBoxPersonaje/Descripcion")
 buff = NodePath("Container/MarginContainer/VBox/VBoxBuff/Buff")
@@ -41,26 +48,46 @@ bus = &"Musica"
 [node name="PlayerSFX" type="AudioStreamPlayer" parent="." unique_id=1370626526]
 bus = &"SFX"
 
-[node name="SpriteNPC" type="TextureRect" parent="." unique_id=304514143]
+[node name="ContainerNPCMarco" type="TextureRect" parent="." unique_id=565510402]
+texture_filter = 1
 layout_mode = 0
-offset_left = 138.0
+offset_left = 128.535
 offset_top = 34.0
-offset_right = 601.0
-offset_bottom = 557.5582
+offset_right = 591.5353
+offset_bottom = 559.0
+texture = ExtResource("3_4ttul")
+
+[node name="SpriteNPC" type="TextureRect" parent="ContainerNPCMarco" unique_id=304514143]
+layout_mode = 0
+offset_right = 463.00018
+offset_bottom = 525.0
 texture = ExtResource("4_tr1rn")
 expand_mode = 5
 
+[node name="TextureRect" type="TextureRect" parent="ContainerNPCMarco/SpriteNPC" unique_id=1765444599]
+texture_filter = 1
+layout_mode = 0
+offset_right = 463.00018
+offset_bottom = 525.0
+texture = ExtResource("5_tr1rn")
+
 [node name="Container" type="PanelContainer" parent="." unique_id=885980711]
+custom_minimum_size = Vector2(400, 525)
+custom_maximum_size = Vector2(400, 525)
 layout_mode = 0
 offset_left = 616.0
 offset_top = 34.0
 offset_right = 1016.0
 offset_bottom = 559.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_tr1rn")
 
 [node name="TextureRect" type="TextureRect" parent="Container" unique_id=799993417]
+texture_filter = 1
 layout_mode = 2
+texture = ExtResource("4_4335n")
 
 [node name="MarginContainer" type="MarginContainer" parent="Container" unique_id=2116757458]
+texture_filter = 1
 layout_mode = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 30
@@ -75,10 +102,19 @@ theme_override_constants/separation = 50
 layout_mode = 2
 theme_override_constants/separation = 10
 
+[node name="TextoSeleccion" type="Label" parent="Container/MarginContainer/VBox/VBoxPersonaje" unique_id=1098496483]
+texture_filter = 1
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.16078432, 0.023529412, 0.05882353, 1)
+theme_override_fonts/font = ExtResource("7_tr1rn")
+theme_override_font_sizes/font_size = 30
+text = "Selecciona tu personaje!"
+
 [node name="Nombre" type="Label" parent="Container/MarginContainer/VBox/VBoxPersonaje" unique_id=85089823]
 custom_maximum_size = Vector2(400, -1)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_i6v5p")
+theme_override_colors/font_shadow_color = Color(0.16078432, 0.023529412, 0.05882353, 1)
+theme_override_fonts/font = ExtResource("8_i6v5p")
 theme_override_font_sizes/font_size = 25
 text = "Nombre"
 autowrap_mode = 3
@@ -86,7 +122,8 @@ autowrap_mode = 3
 [node name="Descripcion" type="Label" parent="Container/MarginContainer/VBox/VBoxPersonaje" unique_id=2034490456]
 custom_maximum_size = Vector2(400, -1)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xaxrp")
+theme_override_colors/font_shadow_color = Color(0.16078432, 0.023529412, 0.05882353, 1)
+theme_override_fonts/font = ExtResource("8_i6v5p")
 theme_override_font_sizes/font_size = 20
 text = "Descripcion"
 autowrap_mode = 3
@@ -98,7 +135,8 @@ theme_override_constants/separation = 10
 [node name="Buff" type="Label" parent="Container/MarginContainer/VBox/VBoxBuff" unique_id=454357611]
 custom_maximum_size = Vector2(400, -1)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_i6v5p")
+theme_override_colors/font_shadow_color = Color(0.16078432, 0.023529412, 0.05882353, 1)
+theme_override_fonts/font = ExtResource("8_i6v5p")
 theme_override_font_sizes/font_size = 25
 text = "Nombre Buff"
 autowrap_mode = 3
@@ -111,23 +149,36 @@ texture = ExtResource("7_e664m")
 [node name="DescripcionBuff" type="Label" parent="Container/MarginContainer/VBox/VBoxBuff" unique_id=1077158615]
 custom_maximum_size = Vector2(400, -1)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xaxrp")
+theme_override_colors/font_shadow_color = Color(0.16078432, 0.023529412, 0.05882353, 1)
+theme_override_fonts/font = ExtResource("8_i6v5p")
 theme_override_font_sizes/font_size = 20
 text = "Descripcion"
 autowrap_mode = 3
 
-[node name="Seleccionar" parent="Container/MarginContainer/VBox" unique_id=511730408 groups=["botones_menu"] instance=ExtResource("8_ux1hj")]
-layout_mode = 2
+[node name="Seleccionar" parent="." unique_id=511730408 groups=["botones_menu"] instance=ExtResource("8_ux1hj")]
+layout_mode = 0
+offset_left = 825.0
+offset_top = 507.0
+offset_right = 993.0
+offset_bottom = 539.0
 text = "Seleccionar"
 
 [node name="SeleccionContainer" type="ItemList" parent="." unique_id=1285131753]
 layout_mode = 0
-offset_left = 465.0
-offset_top = 566.0
-offset_right = 687.0
-offset_bottom = 628.0
+offset_left = 254.805
+offset_top = 572.0
+offset_right = 444.80524
+offset_bottom = 632.0
 item_count = 3
 max_columns = 3
+fixed_icon_size = Vector2i(30, 30)
 item_0/icon = ExtResource("7_e664m")
 item_1/icon = ExtResource("7_e664m")
 item_2/icon = ExtResource("7_e664m")
+
+[node name="TextureRect" type="TextureRect" parent="SeleccionContainer" unique_id=1889802195]
+texture_filter = 1
+layout_mode = 0
+offset_right = 190.0
+offset_bottom = 60.0
+texture = ExtResource("9_4ttul")

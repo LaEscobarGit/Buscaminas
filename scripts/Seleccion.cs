@@ -34,6 +34,9 @@ public partial class Seleccion : Control
 		selector.ItemSelected += onItemSelected;
 		selector.SetItemDisabled(1, !GameManager.jugados[0]);
 		selector.SetItemDisabled(2, !GameManager.jugados[1]);
+		
+		selector.Select(0);
+		onItemSelected(0);
 	}
 
 	public override void _Process(double delta)

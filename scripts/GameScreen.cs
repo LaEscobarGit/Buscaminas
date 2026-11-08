@@ -18,6 +18,7 @@ public partial class GameScreen : Control
 	[Export] private TextureRect Vida2;
 	[Export] private TextureRect Vida3;
 	[Export] private AudioStream[] canciones;
+	[Export] private Boton botonRendirse;
  
 	public int Filas;
 	public int Cols;
@@ -59,7 +60,9 @@ public partial class GameScreen : Control
 		Tiempo = GameManager.tiempo;
 		VidasIniciales = GameManager.vidas;
 		
-		musica.Stream = canciones[GameManager.getActual()];
+		botonRendirse.Click += OnRendirseClick;
+		
+		//musica.Stream = canciones[GameManager.getActual()];
 		musica.Play();
 		
 		NuevaPartida();
@@ -311,5 +314,12 @@ public partial class GameScreen : Control
 			}
 		}else
 			timerLabel.Text = Convert.ToString(seg);
+	}
+	
+	// agregué esto aquí - miguel (o 3 o)
+	private void OnRendirseClick(Boton boton)
+	{
+		timer.Stop();
+		GetTree().ChangeSceneToFile("res://scenes/menu.tscn");
 	}
 }

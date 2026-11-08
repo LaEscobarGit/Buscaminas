@@ -51,6 +51,7 @@ public partial class ConfigJuego : Control
 				GameManager.filas = (int) filasBox.Value;
 				GameManager.columnas = (int) colsBox.Value;
 				GameManager.minas = (int) minasBox.Value;
+				GameManager.vidas = 3;
 				if(limite)
 					GameManager.tiempo = (int) tiempoSpin.Value;
 				else

@@ -2,15 +2,12 @@
 
 [ext_resource type="Script" uid="uid://dhh2qk4pbyqya" path="res://scripts/Historia.cs" id="1_ot215"]
 [ext_resource type="AudioStream" uid="uid://1a575cbc8chc" path="res://assets/audio/Fondo1.wav" id="2_5mm1x"]
-[ext_resource type="Texture2D" uid="uid://bcwltox7oxj04" path="res://assets/imgs/buscaminas.png" id="2_qhayu"]
 [ext_resource type="Texture2D" uid="uid://c7or4wpcq0mis" path="res://assets/imgs/coast.png" id="3_m1824"]
 [ext_resource type="PackedScene" uid="uid://byj0a3na3fu4y" path="res://scenes/boton.tscn" id="3_rchb1"]
 [ext_resource type="Shader" uid="uid://blf4keind4orm" path="res://client_desvanecer.gdshader" id="4_rchb1"]
 [ext_resource type="Texture2D" uid="uid://upbuovhe1h1q" path="res://assets/imgs/church1.png" id="4_svk7x"]
 [ext_resource type="Texture2D" uid="uid://chlqk1aoqnhu6" path="res://assets/imgs/church2.png" id="5_cfjir"]
-[ext_resource type="FontFile" uid="uid://b6y4qw4h75aht" path="res://assets/fonts/PixelMplus10-Bold.ttf" id="5_rhdqg"]
 [ext_resource type="Texture2D" uid="uid://cchsdkxvp5fu2" path="res://assets/imgs/city1.png" id="6_in3ko"]
-[ext_resource type="FontFile" uid="uid://d33yvu28wn2o3" path="res://assets/fonts/DinkieBitmap-7pxDemo.ttf" id="6_lfuhp"]
 [ext_resource type="Texture2D" uid="uid://elffkyobpx8i" path="res://assets/imgs/city2.png" id="7_rapo4"]
 [ext_resource type="Script" uid="uid://de3cw8x0620y3" path="res://scripts/Texto.cs" id="7_vtt1t"]
 [ext_resource type="AudioStream" uid="uid://d0ha8xoun6m8w" path="res://assets/audio/talk1.wav" id="8_b3mjc"]
@@ -18,9 +15,12 @@
 [ext_resource type="AudioStream" uid="uid://fcmgigv05mn5" path="res://assets/audio/talk2.wav" id="9_qhayu"]
 [ext_resource type="Texture2D" uid="uid://cnqclndh3ttc" path="res://assets/imgs/castle2.jpg" id="9_u66v4"]
 [ext_resource type="AudioStream" uid="uid://dnwg0627yigia" path="res://assets/audio/talk3.wav" id="10_5mm1x"]
+[ext_resource type="Texture2D" uid="uid://bwgxyfwfvfpu4" path="res://assets/imgs/buscaminas2.png" id="10_m1824"]
 [ext_resource type="AudioStream" uid="uid://bg2avlqebkytl" path="res://assets/audio/talk4.wav" id="11_34fsk"]
 [ext_resource type="AudioStream" uid="uid://si4lb6dmsull" path="res://assets/audio/buscaminas.wav" id="13_5mm1x"]
 [ext_resource type="Shader" uid="uid://b6vbnq7o1yjt2" path="res://scenes/portal.gdshader" id="13_qhayu"]
+[ext_resource type="FontFile" uid="uid://byhrep8piue7x" path="res://assets/fonts/NotJamOldStyle14.ttf" id="15_svk7x"]
+[ext_resource type="Texture2D" uid="uid://ctstqvr7fqknv" path="res://assets/imgs/historiaCajaTexto.png" id="21_svk7x"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vtt1t"]
 shader = ExtResource("4_rchb1")
@@ -33,17 +33,12 @@ shader_parameter/velocidad = 0.0
 shader_parameter/color_portal = Color(0.15, 0.55, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ot215"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
-bg_color = Color(0.91764706, 0.7176471, 0.7137255, 1)
+bg_color = Color(0.3254902, 0.12156863, 0.1882353, 0.8627451)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 shadow_color = Color(0.44705883, 0.21176471, 0.22352941, 0.33333334)
-shadow_size = 2
 shadow_offset = Vector2(0, 1)
 
 [node name="HistoriaEscena" type="Control" unique_id=2083391954 node_paths=PackedStringArray("burbuja", "texto", "nombre", "spritePersonaje", "Portal", "musica", "fondo")]
@@ -78,7 +73,7 @@ layout_mode = 0
 offset_top = -19.0
 offset_right = 1152.0
 offset_bottom = 690.0
-texture = ExtResource("2_qhayu")
+texture = ExtResource("10_m1824")
 expand_mode = 2
 
 [node name="SpriteNPC" type="TextureRect" parent="." unique_id=425572514]
@@ -101,18 +96,23 @@ grow_vertical = 2
 [node name="Regresar" parent="." unique_id=120396452 groups=["botones_menu"] instance=ExtResource("3_rchb1")]
 layout_mode = 0
 offset_left = 40.0
-offset_top = 40.0
+offset_top = 30.0
 offset_right = 208.0
-offset_bottom = 72.0
+offset_bottom = 62.0
 text = "Regresar"
 
 [node name="TextBox" type="PanelContainer" parent="." unique_id=1360376769]
 layout_mode = 0
-offset_left = 132.0
-offset_top = 489.0
-offset_right = 1021.0
-offset_bottom = 624.0
+offset_left = 136.0
+offset_top = 494.0
+offset_right = 1035.0
+offset_bottom = 639.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ot215")
+
+[node name="TextBoxMarco" type="TextureRect" parent="TextBox" unique_id=1970340181]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("21_svk7x")
 
 [node name="Margin" type="MarginContainer" parent="TextBox" unique_id=1894028221]
 layout_mode = 2
@@ -125,14 +125,24 @@ theme_override_constants/margin_bottom = 15
 layout_mode = 2
 
 [node name="Nombre" type="Label" parent="TextBox/Margin/VBox" unique_id=1607267453]
+texture_filter = 1
 layout_mode = 2
-theme_override_colors/font_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
-theme_override_fonts/font = ExtResource("5_rhdqg")
+theme_override_colors/font_color = Color(0.92932045, 0.5773827, 0.70299196, 1)
+theme_override_colors/font_shadow_color = Color(0.16078432, 0.023529412, 0.05882353, 1)
+theme_override_fonts/font = ExtResource("15_svk7x")
+theme_override_font_sizes/font_size = 25
 
 [node name="Texto" type="RichTextLabel" parent="TextBox/Margin/VBox" unique_id=1005224325]
+texture_filter = 1
 layout_mode = 2
-theme_override_colors/default_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
-theme_override_fonts/normal_font = ExtResource("6_lfuhp")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.16078432, 0.023529412, 0.05882353, 1)
+theme_override_fonts/normal_font = ExtResource("15_svk7x")
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+theme_override_font_sizes/mono_font_size = 20
 bbcode_enabled = true
 fit_content = true
 script = ExtResource("7_vtt1t")

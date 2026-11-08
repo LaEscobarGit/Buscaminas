@@ -5,17 +5,15 @@
 [ext_resource type="AudioStream" uid="uid://dbbstxuyl584p" path="res://assets/audio/flag.wav" id="2_dthvl"]
 [ext_resource type="PackedScene" uid="uid://cqsdkjg38h6jq" path="res://scenes/tablero.tscn" id="3_3uriw"]
 [ext_resource type="AudioStream" uid="uid://db3u7mps161fp" path="res://assets/audio/click1.wav" id="3_r01d7"]
-[ext_resource type="FontFile" uid="uid://b6y4qw4h75aht" path="res://assets/fonts/PixelMplus10-Bold.ttf" id="4_rxmqw"]
 [ext_resource type="AudioStream" uid="uid://7ahdcx130bpj" path="res://assets/audio/bomb.wav" id="4_vnpv3"]
 [ext_resource type="Script" uid="uid://cp5xfxjrr83o4" path="res://scripts/FondoPasto.cs" id="5_4m8lb"]
-[ext_resource type="AudioStream" uid="uid://cptn8rna5lx5w" path="res://assets/audio/Velaria.wav" id="5_mjl5p"]
-[ext_resource type="AudioStream" uid="uid://cfc1eneqqaxlh" path="res://assets/audio/Banderella.wav" id="6_2yu03"]
 [ext_resource type="Texture2D" uid="uid://21qqhs83vbr5" path="res://assets/imgs/grassSpritesheet.png" id="6_mjl5p"]
-[ext_resource type="AudioStream" uid="uid://cd3s0ps225maf" path="res://assets/audio/Detonia.wav" id="7_5vo8s"]
 [ext_resource type="Texture2D" uid="uid://boribcvc4b737" path="res://assets/imgs/vida.png" id="7_r01d7"]
 [ext_resource type="Script" uid="uid://bn1ysn323x0h1" path="res://scripts/GuardarPuntaje.cs" id="10_4m8lb"]
+[ext_resource type="FontFile" uid="uid://byhrep8piue7x" path="res://assets/fonts/NotJamOldStyle14.ttf" id="10_mjl5p"]
+[ext_resource type="PackedScene" uid="uid://byj0a3na3fu4y" path="res://scenes/boton.tscn" id="12_2yu03"]
 
-[node name="GameScreen" type="Control" unique_id=2083391954 node_paths=PackedStringArray("sfx", "musica", "Vida1", "Vida2", "Vida3")]
+[node name="GameScreen" type="Control" unique_id=2083391954 node_paths=PackedStringArray("sfx", "musica", "Vida1", "Vida2", "Vida3", "botonRendirse")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,7 +29,8 @@ SonidoBomba = ExtResource("4_vnpv3")
 Vida1 = NodePath("VBoxContainer/Vida1")
 Vida2 = NodePath("VBoxContainer/Vida2")
 Vida3 = NodePath("VBoxContainer/Vida3")
-canciones = Array[AudioStream]([ExtResource("5_mjl5p"), ExtResource("6_2yu03"), ExtResource("7_5vo8s")])
+canciones = Array[AudioStream]([])
+botonRendirse = NodePath("BotonRendirse")
 
 [node name="FondoPasto" type="Sprite2D" parent="." unique_id=152782763]
 script = ExtResource("5_4m8lb")
@@ -89,7 +88,7 @@ offset_left = 351.0
 offset_top = 584.035
 offset_right = 807.0
 offset_bottom = 619.035
-theme_override_fonts/font = ExtResource("4_rxmqw")
+theme_override_fonts/font = ExtResource("10_mjl5p")
 theme_override_font_sizes/font_size = 28
 text = "000"
 horizontal_alignment = 1
@@ -108,5 +107,13 @@ bus = &"SFX"
 
 [node name="GuardarPuntaje" type="Node" parent="." unique_id=369626410]
 script = ExtResource("10_4m8lb")
+
+[node name="BotonRendirse" parent="." unique_id=511730408 instance=ExtResource("12_2yu03")]
+layout_mode = 0
+offset_left = 952.0
+offset_top = 591.0
+offset_right = 1120.0
+offset_bottom = 623.0
+text = "Rendirse"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

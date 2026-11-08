@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://byj0a3na3fu4y"]
 
-[ext_resource type="FontFile" uid="uid://b6y4qw4h75aht" path="res://assets/fonts/PixelMplus10-Bold.ttf" id="1_kbunx"]
+[ext_resource type="FontFile" uid="uid://byhrep8piue7x" path="res://assets/fonts/NotJamOldStyle14.ttf" id="1_a3hf0"]
 [ext_resource type="Script" uid="uid://br6pg3auwuarj" path="res://scripts/Boton.cs" id="1_rawf5"]
 [ext_resource type="StyleBox" uid="uid://cqby6w8yrgwqf" path="res://botonNormal.tres" id="2_5rts8"]
 [ext_resource type="AudioStream" uid="uid://db3u7mps161fp" path="res://assets/audio/click1.wav" id="3_05w2u"]
@@ -18,8 +18,8 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.9843137, 0.9411765, 0.9372549, 1)
-theme_override_fonts/font = ExtResource("1_kbunx")
-theme_override_font_sizes/font_size = 15
+theme_override_fonts/font = ExtResource("1_a3hf0")
+theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = ExtResource("2_5rts8")
 theme_override_styles/pressed = ExtResource("2_5rts8")
 theme_override_styles/hover = ExtResource("3_dciyr")

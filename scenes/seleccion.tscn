@@ -11,6 +11,7 @@
 [ext_resource type="FontFile" uid="uid://byhrep8piue7x" path="res://assets/fonts/NotJamOldStyle14.ttf" id="8_i6v5p"]
 [ext_resource type="PackedScene" uid="uid://byj0a3na3fu4y" path="res://scenes/boton.tscn" id="8_ux1hj"]
 [ext_resource type="Texture2D" uid="uid://defrl2u4srccg" path="res://assets/imgs/seleccionPersonajesContainer.png" id="9_4ttul"]
+[ext_resource type="Texture2D" uid="uid://c6y836twyyxdi" path="res://assets/imgs/buffsFlagless.png" id="9_i6v5p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tr1rn"]
 bg_color = Color(0.54901963, 0.12156863, 0.19215687, 0.93333334)
@@ -144,7 +145,7 @@ autowrap_mode = 3
 [node name="ImgBuff" type="TextureRect" parent="Container/MarginContainer/VBox/VBoxBuff" unique_id=1271208028]
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("7_e664m")
+texture = ExtResource("9_i6v5p")
 
 [node name="DescripcionBuff" type="Label" parent="Container/MarginContainer/VBox/VBoxBuff" unique_id=1077158615]
 custom_maximum_size = Vector2(400, -1)

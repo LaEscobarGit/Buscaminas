@@ -5,8 +5,15 @@
 [ext_resource type="PackedScene" uid="uid://byj0a3na3fu4y" path="res://scenes/boton.tscn" id="3_4iuo0"]
 [ext_resource type="AudioStream" uid="uid://1a575cbc8chc" path="res://assets/audio/Fondo1.wav" id="4_abq0j"]
 [ext_resource type="Texture2D" uid="uid://c0l4vd10cs2o1" path="res://assets/imgs/configTablero.png" id="5_abq0j"]
-[ext_resource type="Texture2D" uid="uid://0l8uotro4p1b" path="res://assets/imgs/mina.png" id="6_mo5ol"]
 [ext_resource type="FontFile" uid="uid://byhrep8piue7x" path="res://assets/fonts/NotJamOldStyle14.ttf" id="6_wma0d"]
+[ext_resource type="Texture2D" uid="uid://blee702nli435" path="res://assets/imgs/buffsMuerteSubita.png" id="7_sj6va"]
+[ext_resource type="Texture2D" uid="uid://def261i07wwx6" path="res://assets/imgs/buffsTiempo.png" id="8_7g3ho"]
+[ext_resource type="Texture2D" uid="uid://c32t8jaawxbfx" path="res://assets/imgs/buffsCeldaPista.png" id="9_waoly"]
+[ext_resource type="Texture2D" uid="uid://cf1ik7si3xqcs" path="res://assets/imgs/buffsCeldaMisteriosa.png" id="10_sk65a"]
+[ext_resource type="Texture2D" uid="uid://d2fkro32x7mv3" path="res://assets/imgs/buffsBanderaProtectora.png" id="11_5x147"]
+[ext_resource type="Texture2D" uid="uid://dpjf5r4i1hos4" path="res://assets/imgs/buffsMasVida.png" id="13_7g3ho"]
+[ext_resource type="Texture2D" uid="uid://c6y836twyyxdi" path="res://assets/imgs/buffsFlagless.png" id="13_qafyn"]
+[ext_resource type="Texture2D" uid="uid://biopm6dcnh70" path="res://assets/imgs/buffsMenosVida.png" id="14_waoly"]
 
 [node name="ConfigJuego" type="Control" unique_id=2083391954 node_paths=PackedStringArray("filasBox", "colsBox", "minasBox", "textoTablero", "tableroContainer", "textoBD", "bdContainer", "limiteCheck", "tiempoLabel", "tiempoSpin")]
 layout_mode = 3
@@ -91,6 +98,7 @@ theme_override_font_sizes/font_size = 26
 text = "Configura el tablero a tu gusto!"
 
 [node name="TableroContainer" type="Container" parent="." unique_id=602560184]
+visible = false
 texture_filter = 1
 layout_mode = 0
 offset_left = 444.0
@@ -180,7 +188,6 @@ theme_override_font_sizes/font_size = 26
 text = "Personaliza tus buffs y debuffs!"
 
 [node name="B&DContainer" type="Container" parent="." unique_id=319062961]
-visible = false
 layout_mode = 0
 offset_left = 434.0
 offset_top = 194.0
@@ -193,21 +200,77 @@ theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 2
 
-[node name="MasVida" parent="B&DContainer/GridContainer" unique_id=2097516549 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
+[node name="Flagless" parent="B&DContainer/GridContainer" unique_id=2097516549 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
 layout_mode = 2
-icon = ExtResource("6_mo5ol")
+text = "Flagless"
 
-[node name="MenosVida" parent="B&DContainer/GridContainer" unique_id=554953992 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
+[node name="MuerteSubita" parent="B&DContainer/GridContainer" unique_id=554953992 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
 layout_mode = 2
-icon = ExtResource("6_mo5ol")
+text = "Muerte súbita"
 
-[node name="MasVida4" parent="B&DContainer/GridContainer" unique_id=1549382755 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
+[node name="CeldasMisteriosas" parent="B&DContainer/GridContainer" unique_id=1549382755 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
 layout_mode = 2
-icon = ExtResource("6_mo5ol")
+text = "Celdas ???"
 
-[node name="MasVida2" parent="B&DContainer/GridContainer" unique_id=664781265 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
+[node name="BanderaEscudo" parent="B&DContainer/GridContainer" unique_id=1639057218 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
 layout_mode = 2
-icon = ExtResource("6_mo5ol")
+text = "Bandera Escudo"
+
+[node name="CeldasPista" parent="B&DContainer/GridContainer" unique_id=1611126874 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
+layout_mode = 2
+text = "Celdas pista"
+
+[node name="MasVida" parent="B&DContainer/GridContainer" unique_id=1571912121 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
+layout_mode = 2
+text = "Más Vida"
+
+[node name="MenosVida" parent="B&DContainer/GridContainer" unique_id=664781265 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
+layout_mode = 2
+text = "Menos Vida"
+
+[node name="MenosVida2" parent="B&DContainer/GridContainer" unique_id=885160676 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
+layout_mode = 2
+text = "Tiempo"
+
+[node name="BuffsMuerteSubita" type="Sprite2D" parent="B&DContainer/GridContainer" unique_id=2029626411]
+texture_filter = 1
+position = Vector2(370, 16)
+texture = ExtResource("7_sj6va")
+
+[node name="BuffsTiempo" type="Sprite2D" parent="B&DContainer/GridContainer" unique_id=1672838063]
+texture_filter = 1
+position = Vector2(370, 143)
+texture = ExtResource("8_7g3ho")
+
+[node name="BuffsCeldaPista" type="Sprite2D" parent="B&DContainer/GridContainer" unique_id=728061418]
+texture_filter = 1
+position = Vector2(-23, 100)
+texture = ExtResource("9_waoly")
+
+[node name="BuffsCeldaMisteriosa" type="Sprite2D" parent="B&DContainer/GridContainer" unique_id=1713691213]
+texture_filter = 1
+position = Vector2(-23, 58)
+texture = ExtResource("10_sk65a")
+
+[node name="BuffsBanderaProtectora" type="Sprite2D" parent="B&DContainer/GridContainer" unique_id=1386219540]
+texture_filter = 1
+position = Vector2(370, 58)
+texture = ExtResource("11_5x147")
+
+[node name="BuffsFlagless" type="Sprite2D" parent="B&DContainer/GridContainer" unique_id=1457505382]
+texture_filter = 1
+position = Vector2(-23, 16)
+texture = ExtResource("13_qafyn")
+
+[node name="BuffsMasVida" type="Sprite2D" parent="B&DContainer/GridContainer" unique_id=649407738]
+texture_filter = 1
+position = Vector2(370, 100)
+texture = ExtResource("13_7g3ho")
+
+[node name="BuffsMenosVida" type="Sprite2D" parent="B&DContainer/GridContainer" unique_id=489473974]
+texture_filter = 1
+position = Vector2(-23, 143)
+texture = ExtResource("14_waoly")
 
 [node name="¡A Jugar!" parent="." unique_id=456125997 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
 layout_mode = 0

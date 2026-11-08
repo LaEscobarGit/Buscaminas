@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dhh2qk4pbyqya" path="res://scripts/Historia.cs" id="1_ot215"]
 [ext_resource type="AudioStream" uid="uid://1a575cbc8chc" path="res://assets/audio/Fondo1.wav" id="2_5mm1x"]
-[ext_resource type="Texture2D" uid="uid://bcwltox7oxj04" path="res://assets/imgs/buscaminas.png" id="2_qhayu"]
 [ext_resource type="AudioStream" uid="uid://0lmly4i4xipp" path="res://assets/audio/Fondo2.wav" id="3_cfjir"]
 [ext_resource type="Texture2D" uid="uid://c7or4wpcq0mis" path="res://assets/imgs/coast.png" id="3_m1824"]
 [ext_resource type="PackedScene" uid="uid://byj0a3na3fu4y" path="res://scenes/boton.tscn" id="3_rchb1"]
@@ -22,7 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://bwgxyfwfvfpu4" path="res://assets/imgs/buscaminas2.png" id="10_m1824"]
 [ext_resource type="AudioStream" uid="uid://bg2avlqebkytl" path="res://assets/audio/talk4.wav" id="11_34fsk"]
 [ext_resource type="AudioStream" uid="uid://si4lb6dmsull" path="res://assets/audio/buscaminas.wav" id="13_5mm1x"]
-[ext_resource type="Shader" uid="uid://b6vbnq7o1yjt2" path="res://scenes/portal.gdshader" id="13_qhayu"]
+[ext_resource type="Shader" uid="uid://b6vbnq7o1yjt2" path="res://portal.gdshader" id="13_qhayu"]
 [ext_resource type="FontFile" uid="uid://byhrep8piue7x" path="res://assets/fonts/NotJamOldStyle14.ttf" id="15_svk7x"]
 [ext_resource type="Texture2D" uid="uid://ctstqvr7fqknv" path="res://assets/imgs/historiaCajaTexto.png" id="21_svk7x"]
 

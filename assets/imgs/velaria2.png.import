@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3ndtu5fawfi5"
-path="res://.godot/imported/Kingdom3.png-2c12f9747a2566a313fa0736720acc71.ctex"
+uid="uid://dawnl2k0uyd2j"
+path="res://.godot/imported/velaria2.png-e9c13ce32188a895e30f194f34fc1611.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/fonts/Kingdom3.png"
-dest_files=["res://.godot/imported/Kingdom3.png-2c12f9747a2566a313fa0736720acc71.ctex"]
+source_file="res://assets/imgs/velaria2.png"
+dest_files=["res://.godot/imported/velaria2.png-e9c13ce32188a895e30f194f34fc1611.ctex"]
 
 [params]
 

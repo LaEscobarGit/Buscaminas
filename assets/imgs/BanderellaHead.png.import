@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b022e8l8kmic"
-path="res://.godot/imported/velina1.png-26fa2cbac864525044904028330f52de.ctex"
+uid="uid://db6fmbe42y86h"
+path="res://.godot/imported/BanderellaHead.png-fcb5d1ad7d3e012716d05b51c9ea7892.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/imgs/velina1.png"
-dest_files=["res://.godot/imported/velina1.png-26fa2cbac864525044904028330f52de.ctex"]
+source_file="res://assets/imgs/BanderellaHead.png"
+dest_files=["res://.godot/imported/BanderellaHead.png-fcb5d1ad7d3e012716d05b51c9ea7892.ctex"]
 
 [params]
 

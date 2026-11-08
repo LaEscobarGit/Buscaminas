@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://cs434u2bnhh2"]
+
+[ext_resource type="Script" uid="uid://yh6lwno2m1k3" path="res://scripts/Final.cs" id="1_3hs2o"]
+[ext_resource type="Texture2D" uid="uid://bcqfkfb7g6f8t" path="res://assets/imgs/puntajesFondo.png" id="2_dqvmu"]
+[ext_resource type="Texture2D" uid="uid://borve4g71rtvx" path="res://assets/imgs/puntajesMarco.png" id="3_xxe6l"]
+[ext_resource type="FontFile" uid="uid://dx25chtipg51m" path="res://assets/fonts/OldeTome.ttf" id="4_vf3a0"]
+[ext_resource type="FontFile" uid="uid://byhrep8piue7x" path="res://assets/fonts/NotJamOldStyle14.ttf" id="5_30t23"]
+[ext_resource type="PackedScene" uid="uid://byj0a3na3fu4y" path="res://scenes/boton.tscn" id="6_6b1qv"]
+[ext_resource type="AudioStream" uid="uid://5n6j8natf7n3" path="res://assets/audio/FinalScreen.wav" id="7_3hs2o"]
+
+[node name="Final" type="Control" unique_id=1255806433 node_paths=PackedStringArray("volverButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3hs2o")
+volverButton = NodePath("CenterContainer/VBoxContainer/CenterContainer/VolverButton")
+
+[node name="Fondo" type="TextureRect" parent="." unique_id=955697318]
+layout_mode = 1
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("2_dqvmu")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Polvo" type="CPUParticles2D" parent="Fondo" unique_id=954850658]
+position = Vector2(568.61, 321)
+scale = Vector2(0.78, 0.78)
+amount = 50
+lifetime = 12.0
+preprocess = 12.0
+emission_shape = 3
+emission_rect_extents = Vector2(960, 450)
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 20.0
+scale_amount_min = 0.5
+scale_amount_max = 3.0
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=963051634]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -260.0
+offset_right = 315.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.54901963, 0.12156863, 0.19215687, 0.93333334)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=910493192]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -260.0
+offset_right = 315.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_xxe6l")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=819219386]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=244759247]
+layout_mode = 2
+
+[node name="TituloLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1022956023]
+texture_filter = 1
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.29803923)
+theme_override_fonts/font = ExtResource("4_vf3a0")
+theme_override_font_sizes/font_size = 40
+text = "Esta historia se ha terminado..."
+
+[node name="ListaLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1646812788]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_30t23")
+theme_override_font_sizes/font_size = 20
+text = "
+¡Gracias por jugar!
+"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer" unique_id=2111577132]
+layout_mode = 2
+
+[node name="VolverButton" parent="CenterContainer/VBoxContainer/CenterContainer" unique_id=511730408 instance=ExtResource("6_6b1qv")]
+layout_mode = 2
+text = "Ir al menú"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1745424777]
+stream = ExtResource("7_3hs2o")
+autoplay = true
+bus = &"Musica"

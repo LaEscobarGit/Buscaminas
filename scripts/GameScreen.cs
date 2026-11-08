@@ -10,12 +10,14 @@ public partial class GameScreen : Control
 	[Export] private AudioStreamPlayer sfx;
 	[Export] private AudioStreamPlayer musica;
 	[Export] private AudioStream SonidoBomba;
+	[Export] private AudioStream sonidoCelda;
+	[Export] private AudioStream sonidoFlag;
 	[Export] private TextureRect Vida1;
 	[Export] private TextureRect Vida2;
 	[Export] private TextureRect Vida3;
 	[Export] private AudioStream[] canciones;
 	[Export] private Boton botonRendirse;
-	[Export] private AcceptDialog dialog;
+	[Export] private Control dialog;
 	[Export] private PanelContainer menuMuerte;
 	[Export] private TextureRect[] imgDB;
 	[Export] private Button buffPista;
@@ -73,7 +75,8 @@ public partial class GameScreen : Control
 		
 		botonRendirse.Click += OnRendirseClick;
 		
-		//musica.Stream = canciones[GameManager.getActual()];
+		buffPista.Visible = false;
+		pistaLabel.Visible = false;
 		if(GameManager.buffs.Contains(0)){
 			imgDB[0].Visible = true;
 		}if(GameManager.buffs.Contains(1)){
@@ -169,11 +172,14 @@ public partial class GameScreen : Control
 		return countMines;
 	}
  
-	private void RevealCelda(int srcRow, int srcCol)
+	private void RevealCelda(int srcRow, int srcCol, bool sonido = true)
 	{
 		Celda celda = tablero.GetCelda(srcRow, srcCol);
 		if (celda.Revelado || celda.Banderado || juegoTerminado) return;
- 
+ 		
+		if (sonido)
+			ReproducirSonidoRevelar();
+		
 		if (celda.EsMina){
 			celda.RevelarMina();
 			if(GameManager.buffs.Contains(2) && cargasBandera > 0){
@@ -197,7 +203,7 @@ public partial class GameScreen : Control
 		int countMines = GetSurroundingMines(srcRow, srcCol);
 		bool incognita = false;
 		if(GameManager.debuffs.Contains(0) && cargasIncognita > 0 && countMines > 0){
-			incognita = GD.Randf() < 0.25f;
+			incognita = GD.Randf() < 0.20f;
 			if (incognita)
 				cargasIncognita--;
 		}
@@ -219,7 +225,7 @@ public partial class GameScreen : Control
 				for (int col = srcCol - 1; col <= srcCol + 1; col++)
 				{
 					if (tablero.EnRango(fila, col) && !tablero.GetCelda(fila, col).Revelado)
-						RevealCelda(fila, col);
+						RevealCelda(fila, col,false);
 				}
 			}
 		}
@@ -351,7 +357,6 @@ public partial class GameScreen : Control
 			t.TweenProperty(vida, "position:x", x, 0.1f);
 		}
 		if (vidas == 0){
-			GD.Print("murio");
 			explotarTablero();
 			TerminarJuego(false);
 		}
@@ -408,17 +413,19 @@ public partial class GameScreen : Control
 		if(Tiempo!=0){
 			timerLabel.Text = Convert.ToString(Tiempo - seg);
 			if(seg == Tiempo){
-				//se acabo
+				explotarTablero();
+				TerminarJuego(false);
 			}
 		}else
 			timerLabel.Text = Convert.ToString(seg);
 	}
 	
 	// agregué esto aquí - miguel (o 3 o)
-	private void OnRendirseClick(Boton boton)
-	{
+	private void OnRendirseClick(Boton boton){
 		timer.Stop();
 		GetTree().ChangeSceneToFile("res://scenes/menu.tscn");
+	}
+	
 	private void onPistaToggled(bool toggledOn){
 		pistaToggle = toggledOn;
 	}
@@ -432,5 +439,11 @@ public partial class GameScreen : Control
 				GetTree().ChangeSceneToFile("res://scenes/menu.tscn");
 				break;
 		}
+	}
+	
+	private void ReproducirSonidoRevelar(){
+		sfx.Stop();
+		sfx.Stream = sonidoCelda;
+		sfx.Play();
 	}
 }

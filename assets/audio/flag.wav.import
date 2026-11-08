@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://dbbstxuyl584p"
-path="res://.godot/imported/flag.wav-703381ef0012b8a9ddeb15d0933a0585.sample"
+uid="uid://bu7hgkuk3qk3k"
+path="res://.godot/imported/Flag.wav-7874c9eb7917b87b5448d9eb82669fbe.sample"
 
 [deps]
 
-source_file="res://assets/audio/flag.wav"
-dest_files=["res://.godot/imported/flag.wav-703381ef0012b8a9ddeb15d0933a0585.sample"]
+source_file="res://assets/audio/Flag.wav"
+dest_files=["res://.godot/imported/Flag.wav-7874c9eb7917b87b5448d9eb82669fbe.sample"]
 
 [params]
 

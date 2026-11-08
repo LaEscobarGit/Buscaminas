@@ -21,8 +21,10 @@ public partial class Historia : Control
 		{ "celda", GD.Load<Texture2D>("res://assets/imgs/celda.png") },
 		{ "banderella", GD.Load<Texture2D>("res://assets/imgs/banderella.png") },
 		{ "velaria", GD.Load<Texture2D>("res://assets/imgs/velaria.png") },
-		{ "detonia", GD.Load<Texture2D>("res://assets/imgs/detonia.png") }
+		{ "reina detonia", GD.Load<Texture2D>("res://assets/imgs/detonia.png") }
 	};
+	
+	private Tween tweenSprite;
 	
 	public override void _Ready()
 	{
@@ -38,6 +40,8 @@ public partial class Historia : Control
 		
 		dialogManager.iniciarDialogo(GameManager.dialogoActual);
 		actualizarPresentacion();
+		
+		GameManager.clearBuffsDebuffs();
 	}
 	
 	public override void _ExitTree(){
@@ -92,7 +96,7 @@ public partial class Historia : Control
 				break;
 			case "region1_antes": GameManager.setDialogoActual("region1_despues");
 				fondo.Texture = fondos[2];
-				GameManager.setJuego(12,12,80,200,3);
+				GameManager.setJuego(10,10,20,200,3);
 				GameManager.setDebuff(0);
 				break;
 			case "region1_despues": GameManager.setDialogoActual("region2_antes");
@@ -101,7 +105,7 @@ public partial class Historia : Control
 				break;
 			case "region2_antes": GameManager.setDialogoActual("region2_despues");
 				fondo.Texture = fondos[4];
-				GameManager.setJuego(14,14,80,200,3);
+				GameManager.setJuego(12,12,30,200,3);
 				GameManager.setDebuff(1);
 				break;
 			case "region2_despues": GameManager.setDialogoActual("region3_antes");
@@ -110,7 +114,7 @@ public partial class Historia : Control
 				break;
 			case "region3_antes": GameManager.setDialogoActual("region3_despues");
 				fondo.Texture = fondos[6];
-				GameManager.setJuego(16,16,80,150,3);
+				GameManager.setJuego(14,14,40,150,3);
 				GameManager.setDebuff(2);
 				break;
 			case "region3_despues":
@@ -155,58 +159,44 @@ public partial class Historia : Control
 	}
 	
 	public async void onPersonajeSale(string personaje){
+		string saliendo = personaje.ToLower();
+		if (personajeActual != saliendo) return;
+
 		await desvanecer();
+
+		if (personajeActual != saliendo) return;
+		spritePersonaje.Visible = false;
 		spritePersonaje.Texture = null;
 		personajeActual = "";
 	}
+
 	public async void onPersonajeEntra(string personaje){
 		personajeActual = personaje.ToLower();
 		spritePersonaje.Texture = sprites[personajeActual].As<Texture2D>();
 		await aparecer();
 	}
 
-	//---- CAMBIAR SPRITE ----
-	public async Task cambiarPersonaje(String quien){
-		if(quien == personajeActual || quien=="")
-			return;
-		personajeActual = quien;
-		String key = "";
-		switch(quien){
-			case "Celda": key = "celda";
-				break;
-			case "Banderella": key = "banderella";
-				break;
-			case "Velaria": key = "velaria";
-				break;
-			case "Reina Detonia": key = "detonia";
-				break;
-			case "Jugador":
-				break;
-		}
-		if(sprites.ContainsKey(key)){
-			spritePersonaje.Texture = sprites[key].AsGodotObject() as Texture2D;
-		}
-	}
-
 	public async Task aparecer(){
 		spritePersonaje.Visible = true;
-		Tween tween = CreateTween();
 		var material = spritePersonaje.Material as ShaderMaterial;
-		tween.TweenMethod(Callable.From<float>(v =>
-		material?.SetShaderParameter("progress", v)), 0.0f, 1.0f, 0.5);
-		await ToSignal(tween, Tween.SignalName.Finished);
+		material?.SetShaderParameter("progress", 0.0f);
+
+		tweenSprite?.Kill();
+		tweenSprite = CreateTween();
+		tweenSprite.TweenMethod(Callable.From<float>(v =>
+			material?.SetShaderParameter("progress", v)), 0.0f, 1.0f, 0.5);
+		await ToSignal(tweenSprite, Tween.SignalName.Finished);
 	}
 
 	public async Task desvanecer(){
-		if(!spritePersonaje.Visible)
-			return;
-		Tween tween = CreateTween();
+		if (!spritePersonaje.Visible) return;
+
 		var material = spritePersonaje.Material as ShaderMaterial;
-		tween.TweenMethod(Callable.From<float>(v =>
-		material?.SetShaderParameter("progress", v)), 1.0f, 0.0f, 0.5);
-		
-		await ToSignal(tween, Tween.SignalName.Finished);
-		spritePersonaje.Visible = false;
+		tweenSprite?.Kill();
+		tweenSprite = CreateTween();
+		tweenSprite.TweenMethod(Callable.From<float>(v =>
+			material?.SetShaderParameter("progress", v)), 1.0f, 0.0f, 0.5);
+		await ToSignal(tweenSprite, Tween.SignalName.Finished);
 	}
 	//---- FIN CAMBIAR SPRITE ----
 	

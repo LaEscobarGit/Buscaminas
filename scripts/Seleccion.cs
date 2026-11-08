@@ -38,10 +38,6 @@ public partial class Seleccion : Control
 		selector.Select(0);
 		onItemSelected(0);
 	}
-
-	public override void _Process(double delta)
-	{
-	}
 	
 	private void OnBotonClick(Boton boton)
 	{

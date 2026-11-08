@@ -1,0 +1,6 @@
+[gd_resource type="Theme" format=3 uid="uid://c1cceqc4vnbym"]
+
+[ext_resource type="FontFile" uid="uid://byhrep8piue7x" path="res://assets/fonts/NotJamOldStyle14.ttf" id="1_vpajg"]
+
+[resource]
+default_font = ExtResource("1_vpajg")

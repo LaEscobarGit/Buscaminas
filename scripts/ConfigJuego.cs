@@ -44,6 +44,8 @@ public partial class ConfigJuego : Control
 		limiteCheck.Toggled += onLimiteToggled;
 		onLimiteToggled(false);
 		MostrarPestana(true);
+		
+		GameManager.clearBuffsDebuffs();
 	}
 	
 	private void MostrarPestana(bool tablero)
@@ -74,9 +76,6 @@ public partial class ConfigJuego : Control
 				else{
 					//
 				}
-				break;
-			case "Extras":
-				
 				break;
 			case "Regresar":
 				GetTree().ChangeSceneToFile("res://scenes/menu.tscn");
@@ -123,13 +122,13 @@ public partial class ConfigJuego : Control
 	}
 	public void onBuffMouseEntered(Button boton){
 		switch(boton.Name){
-			case "Pista":
+			case "CeldasPista":
 				buffDesc.Text = "+3 cargas de pistas. Haz click en la celda deseada para descubrir su contenido. En caso de contener una mina, no se recibe daño.";
 				break;
-			case "Bandera":
+			case "BanderaEscudo":
 				buffDesc.Text = "+3 cargas de Bandera Protectora. Si revelas una mina con una bandera en las celdas de alrededor, no sufres daño.";
 				break;
-			case "Incognita":
+			case "CeldasMisteriosas":
 				buffDesc.Text = "Algunas celdas reveladas aparecerán con una incógnita (?) en vez de el número de minas adyacentes.";
 				break;
 			case "Flagless":

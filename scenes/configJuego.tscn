@@ -6,14 +6,12 @@
 [ext_resource type="AudioStream" uid="uid://1a575cbc8chc" path="res://assets/audio/Fondo1.wav" id="4_abq0j"]
 [ext_resource type="Texture2D" uid="uid://c0l4vd10cs2o1" path="res://assets/imgs/configTablero.png" id="5_abq0j"]
 [ext_resource type="FontFile" uid="uid://byhrep8piue7x" path="res://assets/fonts/NotJamOldStyle14.ttf" id="6_wma0d"]
-[ext_resource type="Texture2D" uid="uid://blee702nli435" path="res://assets/imgs/buffsMuerteSubita.png" id="7_sj6va"]
-[ext_resource type="Texture2D" uid="uid://def261i07wwx6" path="res://assets/imgs/buffsTiempo.png" id="8_7g3ho"]
+[ext_resource type="Theme" uid="uid://c1cceqc4vnbym" path="res://temaSpin.tres" id="7_s6wu2"]
+[ext_resource type="StyleBox" uid="uid://dqfga57i77pe1" path="res://botonHover.tres" id="8_vyr2r"]
 [ext_resource type="Texture2D" uid="uid://c32t8jaawxbfx" path="res://assets/imgs/buffsCeldaPista.png" id="9_waoly"]
 [ext_resource type="Texture2D" uid="uid://cf1ik7si3xqcs" path="res://assets/imgs/buffsCeldaMisteriosa.png" id="10_sk65a"]
 [ext_resource type="Texture2D" uid="uid://d2fkro32x7mv3" path="res://assets/imgs/buffsBanderaProtectora.png" id="11_5x147"]
-[ext_resource type="Texture2D" uid="uid://dpjf5r4i1hos4" path="res://assets/imgs/buffsMasVida.png" id="13_7g3ho"]
 [ext_resource type="Texture2D" uid="uid://c6y836twyyxdi" path="res://assets/imgs/buffsFlagless.png" id="13_qafyn"]
-[ext_resource type="Texture2D" uid="uid://biopm6dcnh70" path="res://assets/imgs/buffsMenosVida.png" id="14_waoly"]
 
 [node name="ConfigJuego" type="Control" unique_id=2083391954 node_paths=PackedStringArray("filasBox", "colsBox", "minasBox", "vidasBox", "textoTablero", "tableroContainer", "textoBD", "bdContainer", "limiteCheck", "tiempoLabel", "tiempoSpin", "buffDesc", "pista", "bandera", "incognita", "flagless")]
 layout_mode = 3
@@ -35,9 +33,9 @@ limiteCheck = NodePath("TableroContainer/Grid/Limite")
 tiempoLabel = NodePath("TableroContainer/Grid/LabelTiempo")
 tiempoSpin = NodePath("TableroContainer/Grid/Tiempo")
 buffDesc = NodePath("B&DContainer/VBoxContainer/Label")
-pista = NodePath("B&DContainer/VBoxContainer/GridContainer/Pista")
-bandera = NodePath("B&DContainer/VBoxContainer/GridContainer/Bandera")
-incognita = NodePath("B&DContainer/VBoxContainer/GridContainer/Incognita")
+pista = NodePath("B&DContainer/VBoxContainer/GridContainer/CeldasPista")
+bandera = NodePath("B&DContainer/VBoxContainer/GridContainer/BanderaEscudo")
+incognita = NodePath("B&DContainer/VBoxContainer/GridContainer/CeldasMisteriosas")
 flagless = NodePath("B&DContainer/VBoxContainer/GridContainer/Flagless")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=876782601]
@@ -127,6 +125,7 @@ text = "Filas"
 
 [node name="Filas" type="SpinBox" parent="TableroContainer/Grid" unique_id=930247490]
 layout_mode = 2
+theme = ExtResource("7_s6wu2")
 min_value = 4.0
 max_value = 16.0
 value = 10.0
@@ -140,6 +139,7 @@ text = "Columnas"
 
 [node name="Columnas" type="SpinBox" parent="TableroContainer/Grid" unique_id=1750662013]
 layout_mode = 2
+theme = ExtResource("7_s6wu2")
 min_value = 4.0
 max_value = 16.0
 value = 10.0
@@ -153,6 +153,7 @@ text = "Minas"
 
 [node name="Minas" type="SpinBox" parent="TableroContainer/Grid" unique_id=1837828266]
 layout_mode = 2
+theme = ExtResource("7_s6wu2")
 min_value = 4.0
 max_value = 99.0
 value = 30.0
@@ -160,12 +161,13 @@ value = 30.0
 [node name="LabelVida" type="Label" parent="TableroContainer/Grid" unique_id=629056989]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_du3kj")
+theme_override_fonts/font = ExtResource("6_wma0d")
 theme_override_font_sizes/font_size = 18
 text = "Vidas"
 
 [node name="Vidas" type="SpinBox" parent="TableroContainer/Grid" unique_id=1292732506]
 layout_mode = 2
+theme = ExtResource("7_s6wu2")
 min_value = 1.0
 max_value = 3.0
 value = 3.0
@@ -189,6 +191,7 @@ text = "Tiempo limite (seg)"
 
 [node name="Tiempo" type="SpinBox" parent="TableroContainer/Grid" unique_id=437695456]
 layout_mode = 2
+theme = ExtResource("7_s6wu2")
 min_value = 10.0
 max_value = 999.0
 value = 200.0
@@ -223,81 +226,54 @@ theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 2
 
-[node name="Flagless" parent="B&DContainer/GridContainer" unique_id=2097516549 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
+[node name="Flagless" parent="B&DContainer/VBoxContainer/GridContainer" unique_id=2097516549 groups=["botones_buff"] instance=ExtResource("3_4iuo0")]
 layout_mode = 2
+theme_override_styles/pressed = ExtResource("8_vyr2r")
+toggle_mode = true
 text = "Flagless"
 
-[node name="MuerteSubita" parent="B&DContainer/GridContainer" unique_id=554953992 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
+[node name="CeldasMisteriosas" parent="B&DContainer/VBoxContainer/GridContainer" unique_id=1549382755 groups=["botones_buff"] instance=ExtResource("3_4iuo0")]
 layout_mode = 2
-text = "Muerte súbita"
-
-[node name="CeldasMisteriosas" parent="B&DContainer/GridContainer" unique_id=1549382755 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
-layout_mode = 2
+theme_override_styles/pressed = ExtResource("8_vyr2r")
+toggle_mode = true
 text = "Celdas ???"
 
-[node name="BanderaEscudo" parent="B&DContainer/GridContainer" unique_id=1639057218 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
+[node name="BanderaEscudo" parent="B&DContainer/VBoxContainer/GridContainer" unique_id=1639057218 groups=["botones_buff"] instance=ExtResource("3_4iuo0")]
 layout_mode = 2
+theme_override_styles/pressed = ExtResource("8_vyr2r")
+toggle_mode = true
 text = "Bandera Escudo"
 
-[node name="CeldasPista" parent="B&DContainer/GridContainer" unique_id=1611126874 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
+[node name="CeldasPista" parent="B&DContainer/VBoxContainer/GridContainer" unique_id=1611126874 groups=["botones_buff"] instance=ExtResource("3_4iuo0")]
 layout_mode = 2
+theme_override_styles/pressed = ExtResource("8_vyr2r")
+toggle_mode = true
 text = "Celdas pista"
 
-[node name="MasVida" parent="B&DContainer/GridContainer" unique_id=1571912121 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
-layout_mode = 2
-text = "Más Vida"
-
-[node name="MenosVida" parent="B&DContainer/GridContainer" unique_id=664781265 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
-layout_mode = 2
-text = "Menos Vida"
-
-[node name="MenosVida2" parent="B&DContainer/GridContainer" unique_id=885160676 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
-layout_mode = 2
-text = "Tiempo"
-
-[node name="BuffsMuerteSubita" type="Sprite2D" parent="B&DContainer/GridContainer" unique_id=2029626411]
-texture_filter = 1
-position = Vector2(370, 16)
-texture = ExtResource("7_sj6va")
-
-[node name="BuffsTiempo" type="Sprite2D" parent="B&DContainer/GridContainer" unique_id=1672838063]
-texture_filter = 1
-position = Vector2(370, 143)
-texture = ExtResource("8_7g3ho")
-
-[node name="BuffsCeldaPista" type="Sprite2D" parent="B&DContainer/GridContainer" unique_id=728061418]
-texture_filter = 1
-position = Vector2(-23, 100)
-texture = ExtResource("9_waoly")
-
-[node name="BuffsCeldaMisteriosa" type="Sprite2D" parent="B&DContainer/GridContainer" unique_id=1713691213]
-texture_filter = 1
-position = Vector2(-23, 58)
-texture = ExtResource("10_sk65a")
-
-[node name="BuffsBanderaProtectora" type="Sprite2D" parent="B&DContainer/GridContainer" unique_id=1386219540]
+[node name="BuffsCeldaPista" type="Sprite2D" parent="B&DContainer/VBoxContainer/GridContainer" unique_id=728061418]
 texture_filter = 1
 position = Vector2(370, 58)
+texture = ExtResource("9_waoly")
+
+[node name="BuffsCeldaMisteriosa" type="Sprite2D" parent="B&DContainer/VBoxContainer/GridContainer" unique_id=1713691213]
+texture_filter = 1
+position = Vector2(370, 16)
+texture = ExtResource("10_sk65a")
+
+[node name="BuffsBanderaProtectora" type="Sprite2D" parent="B&DContainer/VBoxContainer/GridContainer" unique_id=1386219540]
+texture_filter = 1
+position = Vector2(-23, 58)
 texture = ExtResource("11_5x147")
 
-[node name="BuffsFlagless" type="Sprite2D" parent="B&DContainer/GridContainer" unique_id=1457505382]
+[node name="BuffsFlagless" type="Sprite2D" parent="B&DContainer/VBoxContainer/GridContainer" unique_id=1457505382]
 texture_filter = 1
 position = Vector2(-23, 16)
 texture = ExtResource("13_qafyn")
 
-[node name="BuffsMasVida" type="Sprite2D" parent="B&DContainer/GridContainer" unique_id=649407738]
-texture_filter = 1
-position = Vector2(370, 100)
-texture = ExtResource("13_7g3ho")
-
-[node name="BuffsMenosVida" type="Sprite2D" parent="B&DContainer/GridContainer" unique_id=489473974]
-texture_filter = 1
-position = Vector2(-23, 143)
-texture = ExtResource("14_waoly")
-
 [node name="Label" type="Label" parent="B&DContainer/VBoxContainer" unique_id=1545725010]
 custom_maximum_size = Vector2(345, -1)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_wma0d")
 autowrap_mode = 3
 
 [node name="¡A Jugar!" parent="." unique_id=456125997 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]

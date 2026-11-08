@@ -71,4 +71,9 @@ public partial class GameManager : Node
 	public static void removeDebuff(int db){
 		debuffs.Remove(db);
 	}
+	
+	public static void clearBuffsDebuffs(){
+		debuffs.Clear();
+		buffs.Clear();
+	}
 }

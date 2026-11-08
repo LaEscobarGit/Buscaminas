@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bcqfkfb7g6f8t" path="res://assets/imgs/puntajesFondo.png" id="2_lxf5l"]
 [ext_resource type="FontFile" uid="uid://dx25chtipg51m" path="res://assets/fonts/OldeTome.ttf" id="3_lxf5l"]
 [ext_resource type="FontFile" uid="uid://byhrep8piue7x" path="res://assets/fonts/NotJamOldStyle14.ttf" id="4_wgolm"]
+[ext_resource type="AudioStream" uid="uid://0lmly4i4xipp" path="res://assets/audio/Fondo2.wav" id="7_wgolm"]
 
 [node name="RankingScreen" type="Control" unique_id=1255806433]
 layout_mode = 3
@@ -98,3 +99,8 @@ theme_override_font_sizes/font_size = 25
 [node name="VolverButton" parent="CenterContainer/VBoxContainer" unique_id=511730408 instance=ExtResource("2_6t2tb")]
 layout_mode = 2
 text = "Regresar"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1745424777]
+stream = ExtResource("7_wgolm")
+autoplay = true
+bus = &"Musica"

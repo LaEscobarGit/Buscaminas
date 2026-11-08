@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dawnl2k0uyd2j"
-path="res://.godot/imported/velina2.png-c080d5af39483f86593b28738ed02763.ctex"
+uid="uid://b022e8l8kmic"
+path="res://.godot/imported/velaria1.png-1bb485b4f29725dae7c89f343db12a59.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/imgs/velina2.png"
-dest_files=["res://.godot/imported/velina2.png-c080d5af39483f86593b28738ed02763.ctex"]
+source_file="res://assets/imgs/velaria1.png"
+dest_files=["res://.godot/imported/velaria1.png-1bb485b4f29725dae7c89f343db12a59.ctex"]
 
 [params]
 

@@ -27,6 +27,8 @@ public partial class Menu : Control
 		sliderSFX.ValueChanged += onSliderSFXValueChanged;
 		
 		material = blur.Material as ShaderMaterial;
+		
+		GameManager.clearBuffsDebuffs();
 	}
 	
 	private void OnBotonClick(Boton boton)

@@ -3,9 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-public partial class GuardarPuntaje : AcceptDialog
+public partial class GuardarPuntaje : Control
 {
 	[Export] private LineEdit campoNombre;
+	[Export] private Button guardarBot;
 
 	private bool ganoPendiente;
 	private int puntosPendientes;
@@ -15,11 +16,8 @@ public partial class GuardarPuntaje : AcceptDialog
 	{
 		GameScreen pantalla = GetParent<GameScreen>();
 		pantalla.JuegoTerminado += OnJuegoTerminado;
-
-		RegisterTextEnter(campoNombre);
-
-		Confirmed += GuardarYSalir;
-		Canceled += GuardarYSalir;
+		campoNombre.TextSubmitted += (texto) => GuardarYSalir();
+		guardarBot.Pressed += GuardarYSalir;
 	}
 
 	private void OnJuegoTerminado(bool gano, int puntos){
@@ -31,12 +29,13 @@ public partial class GuardarPuntaje : AcceptDialog
 		yaGuardado = false;
 
 		campoNombre.Text = "";
-		PopupCentered(new Vector2I(400, 130));
+		Visible = true;
 		campoNombre.GrabFocus();
 	}
 	//Esto tambien es lo del nombre 
 	private void GuardarYSalir()
 	{
+		Visible = false;
 		if (yaGuardado)
 			return;
 		yaGuardado = true;

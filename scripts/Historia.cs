@@ -88,14 +88,11 @@ public partial class Historia : Control
 				musica.Play();
 				break;
 			case "numeria": GameManager.setDialogoActual("region1_antes");
-				//fondo.Texture = fondos[1];
-				//musica.Stream = canciones[0];
-				//musica.Play();
 				GetTree().ChangeSceneToFile("res://scenes/mapa.tscn");
 				break;
 			case "region1_antes": GameManager.setDialogoActual("region1_despues");
 				fondo.Texture = fondos[2];
-				GameManager.setJuego(16,16,90,200,3);
+				GameManager.setJuego(12,12,80,200,3);
 				GameManager.setDebuff(0);
 				break;
 			case "region1_despues": GameManager.setDialogoActual("region2_antes");
@@ -104,7 +101,7 @@ public partial class Historia : Control
 				break;
 			case "region2_antes": GameManager.setDialogoActual("region2_despues");
 				fondo.Texture = fondos[4];
-				GameManager.setJuego(16,16,90,200,3);
+				GameManager.setJuego(14,14,80,200,3);
 				GameManager.setDebuff(1);
 				break;
 			case "region2_despues": GameManager.setDialogoActual("region3_antes");
@@ -113,7 +110,7 @@ public partial class Historia : Control
 				break;
 			case "region3_antes": GameManager.setDialogoActual("region3_despues");
 				fondo.Texture = fondos[6];
-				GameManager.setJuego(16,16,90,150,3);
+				GameManager.setJuego(16,16,80,150,3);
 				GameManager.setDebuff(2);
 				break;
 			case "region3_despues":
@@ -132,25 +129,29 @@ public partial class Historia : Control
 		switch (actual){
 			case "introduccion": break;
 			case "numeria": fondo.Texture = fondos[0];
+				musica.Stream = canciones[1];
 				break;
 			case "region1_antes": fondo.Texture = fondos[1];
+				musica.Stream = canciones[2];
 				break;
 			case "region1_despues": fondo.Texture = fondos[2];
+				musica.Stream = canciones[1];
 				break;
 			case "region2_antes": fondo.Texture = fondos[3];
+				musica.Stream = canciones[2];
 				break;
 			case "region2_despues": fondo.Texture = fondos[4];
+				musica.Stream = canciones[1];
 				break;
 			case "region3_antes": fondo.Texture = fondos[5];
+				musica.Stream = canciones[2];
 				break;
 			case "region3_despues": fondo.Texture = fondos[6];
+				musica.Stream = canciones[3];
 				break;
 		}
 
-		if (actual != "introduccion"){
-			musica.Stream = canciones[0];
-			musica.Play();
-		}
+		musica.Play();
 	}
 	
 	public async void onPersonajeSale(string personaje){

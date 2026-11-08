@@ -3,10 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-public partial class GuardarPuntaje : Node
+public partial class GuardarPuntaje : AcceptDialog
 {
-	private AcceptDialog dialogo;
-	private LineEdit campoNombre;
+	[Export] private LineEdit campoNombre;
 
 	private bool ganoPendiente;
 	private int puntosPendientes;
@@ -16,34 +15,14 @@ public partial class GuardarPuntaje : Node
 	{
 		GameScreen pantalla = GetParent<GameScreen>();
 		pantalla.JuegoTerminado += OnJuegoTerminado;
-		//Esto es lo del nombre
-		dialogo = new AcceptDialog();
-		dialogo.Title = "Fin de la partida";
-		dialogo.DialogText = "";
-		dialogo.GetOkButton().Text = "Guardar";
 
-		VBoxContainer caja = new VBoxContainer();
+		RegisterTextEnter(campoNombre);
 
-		Label etiqueta = new Label();
-		etiqueta.Text = "Escribe tu nombre:";
-		caja.AddChild(etiqueta);
-
-		campoNombre = new LineEdit();
-		campoNombre.PlaceholderText = "Nombre";
-		campoNombre.MaxLength = 15;
-		caja.AddChild(campoNombre);
-
-		dialogo.AddChild(caja);
-		AddChild(dialogo);
-
-		dialogo.RegisterTextEnter(campoNombre);
-
-		dialogo.Confirmed += GuardarYSalir;
-		dialogo.Canceled += GuardarYSalir;
+		Confirmed += GuardarYSalir;
+		Canceled += GuardarYSalir;
 	}
 
-	private void OnJuegoTerminado(bool gano, int puntos)
-	{
+	private void OnJuegoTerminado(bool gano, int puntos){
 		if (puntos < 0)
 			puntos = 0;
 
@@ -52,7 +31,7 @@ public partial class GuardarPuntaje : Node
 		yaGuardado = false;
 
 		campoNombre.Text = "";
-		dialogo.PopupCentered(new Vector2I(400, 130));
+		PopupCentered(new Vector2I(400, 130));
 		campoNombre.GrabFocus();
 	}
 	//Esto tambien es lo del nombre 
@@ -78,10 +57,7 @@ public partial class GuardarPuntaje : Node
 
 		PuntajeStorage.Guardar(p);
 
-		//if (ganoPendiente)
-			//GetTree().ChangeSceneToFile("res://scenes/ranking.tscn");
-		//else
-			GetTree().ChangeSceneToFile("res://scenes/menu.tscn");
+		GetTree().ChangeSceneToFile("res://scenes/menu.tscn");
 	}
 }
 
@@ -97,7 +73,6 @@ public class Puntaje
 
 public class PuntajeStorage
 {
-
 	public static string JugadorActual = "Anonimo";
 
 	private static string Ruta = ProjectSettings.GlobalizePath("user://puntajes.txt");

@@ -15,6 +15,7 @@ public partial class GameManager : Node
 	public static int actual = 0;
 	
 	public static string dialogoActual = "introduccion";
+	public static bool modoAventura = false;
 	
 	public static void completarNivel(int region){
 		if(region == -1) return;
@@ -53,13 +54,21 @@ public partial class GameManager : Node
 	
 	public static void setBuff(int b){
 		buffs.Add(b);
-		if(buffs.Contains(0))
+		if(b == 0)
 			tiempo += 50;
 	}
 	
 	public static void setDebuff(int db){
 		debuffs.Add(db);
-		if(debuffs.Contains(2))
+		if(db == 2)
 			vidas = 1;
+	}
+	
+	public static void removeBuff(int b){
+		buffs.Remove(b);
+	}
+	
+	public static void removeDebuff(int db){
+		debuffs.Remove(db);
 	}
 }

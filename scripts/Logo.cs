@@ -7,7 +7,6 @@ public partial class Logo : TextureRect
 
 	public override void _Ready()
 	{
-
 		((ShaderMaterial)Material).SetShaderParameter("opacidad", 0.0f);
 
 		Tween entrada = CreateTween().SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.Out);

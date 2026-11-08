@@ -2,8 +2,12 @@
 
 [ext_resource type="Script" uid="uid://dhh2qk4pbyqya" path="res://scripts/Historia.cs" id="1_ot215"]
 [ext_resource type="AudioStream" uid="uid://1a575cbc8chc" path="res://assets/audio/Fondo1.wav" id="2_5mm1x"]
+[ext_resource type="Texture2D" uid="uid://bcwltox7oxj04" path="res://assets/imgs/buscaminas.png" id="2_qhayu"]
+[ext_resource type="AudioStream" uid="uid://0lmly4i4xipp" path="res://assets/audio/Fondo2.wav" id="3_cfjir"]
 [ext_resource type="Texture2D" uid="uid://c7or4wpcq0mis" path="res://assets/imgs/coast.png" id="3_m1824"]
 [ext_resource type="PackedScene" uid="uid://byj0a3na3fu4y" path="res://scenes/boton.tscn" id="3_rchb1"]
+[ext_resource type="AudioStream" uid="uid://co21212t43l50" path="res://assets/audio/Final.wav" id="4_in3ko"]
+[ext_resource type="AudioStream" uid="uid://b2whkm7djhlet" path="res://assets/audio/Fondo3.wav" id="4_rapo4"]
 [ext_resource type="Shader" uid="uid://blf4keind4orm" path="res://client_desvanecer.gdshader" id="4_rchb1"]
 [ext_resource type="Texture2D" uid="uid://upbuovhe1h1q" path="res://assets/imgs/church1.png" id="4_svk7x"]
 [ext_resource type="Texture2D" uid="uid://chlqk1aoqnhu6" path="res://assets/imgs/church2.png" id="5_cfjir"]
@@ -54,7 +58,7 @@ texto = NodePath("TextBox/Margin/VBox/Texto")
 nombre = NodePath("TextBox/Margin/VBox/Nombre")
 spritePersonaje = NodePath("SpriteNPC")
 Portal = NodePath("Portal")
-canciones = Array[AudioStream]([ExtResource("2_5mm1x")])
+canciones = Array[AudioStream]([ExtResource("2_5mm1x"), ExtResource("3_cfjir"), ExtResource("4_rapo4"), ExtResource("4_in3ko")])
 musica = NodePath("PlayerMusica")
 fondo = NodePath("Fondo")
 fondos = Array[Texture2D]([ExtResource("3_m1824"), ExtResource("4_svk7x"), ExtResource("5_cfjir"), ExtResource("6_in3ko"), ExtResource("7_rapo4"), ExtResource("8_ot2no"), ExtResource("9_u66v4")])

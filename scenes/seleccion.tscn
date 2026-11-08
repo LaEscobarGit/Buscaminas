@@ -4,6 +4,7 @@
 [ext_resource type="VideoStream" uid="uid://bonr80tgw1pdq" path="res://assets/imgs/Fondo.ogv" id="1_guc25"]
 [ext_resource type="Texture2D" uid="uid://2s835ybxqoxl" path="res://assets/imgs/seleccionSpriteContainer.png" id="3_4ttul"]
 [ext_resource type="Texture2D" uid="uid://bycjxqxmxlkda" path="res://assets/imgs/seleccionContainer.png" id="4_4335n"]
+[ext_resource type="AudioStream" uid="uid://1a575cbc8chc" path="res://assets/audio/Fondo1.wav" id="3_guc25"]
 [ext_resource type="Texture2D" uid="uid://dutcerofhl2s3" path="res://assets/imgs/celda.png" id="4_tr1rn"]
 [ext_resource type="Texture2D" uid="uid://4v73wdbdotwr" path="res://assets/imgs/seleccionSpriteContainerMarco.png" id="5_tr1rn"]
 [ext_resource type="Texture2D" uid="uid://b5i2v4ns2m77e" path="res://assets/imgs/bandera.png" id="7_e664m"]
@@ -43,6 +44,7 @@ autoplay = true
 loop = true
 
 [node name="PlayerMusica" type="AudioStreamPlayer" parent="." unique_id=1877754882]
+stream = ExtResource("3_guc25")
 autoplay = true
 bus = &"Musica"
 

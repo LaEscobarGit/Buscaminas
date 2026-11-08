@@ -2,9 +2,9 @@
 
 [ext_resource type="VideoStream" uid="uid://bonr80tgw1pdq" path="res://assets/imgs/Fondo.ogv" id="1_8mhku"]
 [ext_resource type="Script" uid="uid://b2lov1k70vqv6" path="res://scripts/GameScreen.cs" id="1_85ytm"]
-[ext_resource type="AudioStream" uid="uid://dbbstxuyl584p" path="res://assets/audio/flag.wav" id="2_dthvl"]
 [ext_resource type="PackedScene" uid="uid://cqsdkjg38h6jq" path="res://scenes/tablero.tscn" id="3_3uriw"]
 [ext_resource type="AudioStream" uid="uid://db3u7mps161fp" path="res://assets/audio/click1.wav" id="3_r01d7"]
+[ext_resource type="FontFile" uid="uid://b6y4qw4h75aht" path="res://assets/fonts/PixelMplus10-Bold.ttf" id="4_rxmqw"]
 [ext_resource type="AudioStream" uid="uid://7ahdcx130bpj" path="res://assets/audio/bomb.wav" id="4_vnpv3"]
 [ext_resource type="Script" uid="uid://cp5xfxjrr83o4" path="res://scripts/FondoPasto.cs" id="5_4m8lb"]
 [ext_resource type="Texture2D" uid="uid://21qqhs83vbr5" path="res://assets/imgs/grassSpritesheet.png" id="6_mjl5p"]
@@ -14,6 +14,46 @@
 [ext_resource type="PackedScene" uid="uid://byj0a3na3fu4y" path="res://scenes/boton.tscn" id="12_2yu03"]
 
 [node name="GameScreen" type="Control" unique_id=2083391954 node_paths=PackedStringArray("sfx", "musica", "Vida1", "Vida2", "Vida3", "botonRendirse")]
+[ext_resource type="FontFile" uid="uid://d33yvu28wn2o3" path="res://assets/fonts/DinkieBitmap-7pxDemo.ttf" id="15_3a7ej"]
+[ext_resource type="PackedScene" uid="uid://byj0a3na3fu4y" path="res://scenes/boton.tscn" id="16_bd51b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3a7ej"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.3254902, 0.12156863, 0.1882353, 0.2901961)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+shadow_color = Color(0.44705883, 0.21176471, 0.22352941, 0.33333334)
+shadow_size = 2
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bd51b"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.009274051, 0.0014683446, 0.0031516105, 0.8039216)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9830095, 0.9394583, 0.9385605, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+shadow_color = Color(0.44705883, 0.21176471, 0.22352941, 0.33333334)
+shadow_size = 2
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_oknyi"]
+load_path = "res://.godot/imported/gamePanel.png-8ff6ffe765d89af3cfe9aa3445415a86.ctex"
+
+[node name="GameScreen" type="Control" unique_id=2083391954 node_paths=PackedStringArray("sfx", "musica", "Vida1", "Vida2", "Vida3", "dialog", "menuMuerte", "imgDB", "buffPista", "pistaLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,14 +63,17 @@ grow_vertical = 2
 script = ExtResource("1_85ytm")
 sfx = NodePath("PlayerSFX")
 musica = NodePath("PlayerMusica")
-SonidoBandera = ExtResource("2_dthvl")
-SonidoClick = ExtResource("3_r01d7")
 SonidoBomba = ExtResource("4_vnpv3")
 Vida1 = NodePath("VBoxContainer/Vida1")
 Vida2 = NodePath("VBoxContainer/Vida2")
 Vida3 = NodePath("VBoxContainer/Vida3")
-canciones = Array[AudioStream]([])
 botonRendirse = NodePath("BotonRendirse")
+canciones = Array[AudioStream]([ExtResource("5_mjl5p"), ExtResource("6_2yu03"), ExtResource("7_5vo8s")])
+dialog = NodePath("AcceptDialog")
+menuMuerte = NodePath("MenuMuerte")
+imgDB = [NodePath("VBoxBuffs/buff1"), NodePath("VBoxBuffs/buff2"), NodePath("VBoxBuffs/buff3"), NodePath("VBoxBuffs/debuff1"), NodePath("VBoxBuffs/debuff2"), NodePath("VBoxBuffs/debuff3")]
+buffPista = NodePath("VboxHelp/BuffPista")
+pistaLabel = NodePath("VboxHelp/Label")
 
 [node name="FondoPasto" type="Sprite2D" parent="." unique_id=152782763]
 script = ExtResource("5_4m8lb")
@@ -81,6 +124,62 @@ layout_mode = 2
 texture = ExtResource("7_r01d7")
 expand_mode = 5
 
+[node name="VboxHelp" type="VBoxContainer" parent="." unique_id=647342431]
+layout_mode = 0
+offset_left = 214.0
+offset_top = 295.0
+offset_right = 289.0
+offset_bottom = 516.0
+theme_override_constants/separation = 2
+
+[node name="BuffPista" type="Button" parent="VboxHelp" unique_id=132595047]
+visible = false
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_3a7ej")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_bd51b")
+toggle_mode = true
+text = "t"
+
+[node name="Label" type="Label" parent="VboxHelp" unique_id=1021199238]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Cargas: 3"
+horizontal_alignment = 1
+
+[node name="VBoxBuffs" type="VBoxContainer" parent="." unique_id=1249518684]
+layout_mode = 0
+offset_left = 868.0
+offset_top = 31.0
+offset_right = 943.0
+offset_bottom = 252.0
+theme_override_constants/separation = 10
+
+[node name="buff1" type="TextureRect" parent="VBoxBuffs" unique_id=1852416121]
+visible = false
+layout_mode = 2
+
+[node name="buff2" type="TextureRect" parent="VBoxBuffs" unique_id=704098020]
+visible = false
+layout_mode = 2
+
+[node name="buff3" type="TextureRect" parent="VBoxBuffs" unique_id=2001461778]
+visible = false
+layout_mode = 2
+
+[node name="debuff1" type="TextureRect" parent="VBoxBuffs" unique_id=2058008268]
+visible = false
+layout_mode = 2
+
+[node name="debuff2" type="TextureRect" parent="VBoxBuffs" unique_id=1166983777]
+visible = false
+layout_mode = 2
+
+[node name="debuff3" type="TextureRect" parent="VBoxBuffs" unique_id=1246424526]
+visible = false
+layout_mode = 2
+
 [node name="TimerLabel" type="Label" parent="." unique_id=461294384]
 texture_filter = 1
 layout_mode = 0
@@ -105,8 +204,80 @@ bus = &"SFX"
 
 [node name="Timer" type="Timer" parent="." unique_id=951713294]
 
-[node name="GuardarPuntaje" type="Node" parent="." unique_id=369626410]
+[node name="AcceptDialog" type="AcceptDialog" parent="." unique_id=1377847976 node_paths=PackedStringArray("campoNombre")]
+oversampling_override = 1.0
+title = "Fin de la partida"
+initial_position = 1
+size = Vector2i(260, 130)
+ok_button_text = "Guardar"
 script = ExtResource("10_4m8lb")
+campoNombre = NodePath("VBoxContainer/CampoNombre")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AcceptDialog" unique_id=50486418]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 252.0
+offset_bottom = 81.0
+
+[node name="Label" type="Label" parent="AcceptDialog/VBoxContainer" unique_id=941957430]
+layout_mode = 2
+text = "Escribe tu nombre:"
+
+[node name="CampoNombre" type="LineEdit" parent="AcceptDialog/VBoxContainer" unique_id=2062824317]
+layout_mode = 2
+placeholder_text = "Nombre"
+alignment = 1
+max_length = 15
+
+[node name="MenuMuerte" type="PanelContainer" parent="." unique_id=865979558]
+visible = false
+layout_mode = 0
+offset_left = 418.0
+offset_top = 205.0
+offset_right = 743.0
+offset_bottom = 457.0
+
+[node name="TextureRect" type="TextureRect" parent="MenuMuerte" unique_id=1784497181]
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("CompressedTexture2D_oknyi")
+expand_mode = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="MenuMuerte" unique_id=1139173167]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuMuerte/CenterContainer" unique_id=1766766005]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="RichTextLabel" type="Label" parent="MenuMuerte/CenterContainer/VBoxContainer" unique_id=1424393474]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
+theme_override_fonts/font = ExtResource("4_rxmqw")
+theme_override_font_sizes/font_size = 25
+text = "¡Moriste!"
+horizontal_alignment = 1
+
+[node name="LabelMaster" type="Label" parent="MenuMuerte/CenterContainer/VBoxContainer" unique_id=1713203757]
+custom_maximum_size = Vector2(250, -1)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
+theme_override_fonts/font = ExtResource("15_3a7ej")
+text = "¡No te rindas! El futuro de Numeria está en tus manos."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Reiniciar" parent="MenuMuerte/CenterContainer/VBoxContainer" unique_id=511730408 groups=["botones_menu"] instance=ExtResource("16_bd51b")]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "¡No me rendiré!"
+
+[node name="Regresar" parent="MenuMuerte/CenterContainer/VBoxContainer" unique_id=1558467154 groups=["botones_menu"] instance=ExtResource("16_bd51b")]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "No puedo más..."
 
 [node name="BotonRendirse" parent="." unique_id=511730408 instance=ExtResource("12_2yu03")]
 layout_mode = 0

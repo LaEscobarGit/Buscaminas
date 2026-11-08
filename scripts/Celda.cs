@@ -11,6 +11,8 @@ public partial class Celda : Button
 	[Export] private Color verdeOscuro = new Color("5a8964ff");
 	[Export] private Color reveladoClaro = new Color("e5c29f");
 	[Export] private Color reveladoOscuro = new Color("d7b899");
+	[Export] private AudioStreamPlayer sfx;
+	[Export] private AudioStream[] sonidos;
 	
 	[Signal] public delegate void ClickIzquierdoEventHandler(Celda celda);
 	[Signal] public delegate void ClickDerechoEventHandler(Celda celda);
@@ -20,6 +22,10 @@ public partial class Celda : Button
 	public bool Revelado { get; private set; }
 	public bool EsMina { get; private set; }
 	public bool Banderado { get; private set; }
+
+	//efecto escudo
+	[Export] private TextureRect efectoEscudo;
+	private Tween tweenProteccion;
 
 	public void Init(int fila, int col)
 	{
@@ -53,13 +59,17 @@ public partial class Celda : Button
 		Text = "";
 	}
 
-	public void Revelar(int minasAlrededor)
+	public void Revelar(int minasAlrededor, bool incognita)
 	{
 		if(Banderado) return;
 		Revelado = true;
 		Banderado = false;
 		Disabled = true;
 		Icon = null;
+		if(incognita){
+			Text = "?";
+			return;
+		}
 		if(minasAlrededor > 0){
 			Text = minasAlrededor.ToString();
 		}else{
@@ -90,22 +100,39 @@ public partial class Celda : Button
 	}
 	
 	// estos métodos los puse para que las celdas alternen color
-	private void AplicarColores()
-	{
-	bool par = (Fila + Col) % 2 == 0;
-	Color normal = par ? verdeClaro : verdeOscuro;
-	Color revelado = par ? reveladoClaro : reveladoOscuro;
+	private void AplicarColores(){
+		bool par = (Fila + Col) % 2 == 0;
+		Color normal = par ? verdeClaro : verdeOscuro;
+		Color revelado = par ? reveladoClaro : reveladoOscuro;
 
-	AddThemeStyleboxOverride("normal", CrearEstilo(normal));
-	AddThemeStyleboxOverride("hover", CrearEstilo(normal.Lightened(0.15f)));
-	AddThemeStyleboxOverride("pressed", CrearEstilo(normal.Darkened(0.1f)));
-	AddThemeStyleboxOverride("disabled", CrearEstilo(revelado));
+		AddThemeStyleboxOverride("normal", CrearEstilo(normal));
+		AddThemeStyleboxOverride("hover", CrearEstilo(normal.Lightened(0.15f)));
+		AddThemeStyleboxOverride("pressed", CrearEstilo(normal.Darkened(0.1f)));
+		AddThemeStyleboxOverride("disabled", CrearEstilo(revelado));
 	}
 
-	private StyleBoxFlat CrearEstilo(Color color)
-	{
-	StyleBoxFlat estilo = new StyleBoxFlat();
-	estilo.BgColor = color;
-	return estilo;
+	private StyleBoxFlat CrearEstilo(Color color){
+		StyleBoxFlat estilo = new StyleBoxFlat();
+		estilo.BgColor = color;
+		return estilo;
+	}
+
+	public void mostrarProteccion(){
+		tweenProteccion?.Kill();
+
+		efectoEscudo.Visible = true;
+		efectoEscudo.Modulate = new Color(1, 1, 1, 0);
+		efectoEscudo.Scale = new Vector2(0.5f, 0.5f);
+		efectoEscudo.PivotOffset = efectoEscudo.Size / 2;
+
+		tweenProteccion = CreateTween();
+		tweenProteccion.TweenProperty(efectoEscudo,"modulate",Colors.White,0.12f);
+		tweenProteccion.Parallel().TweenProperty(efectoEscudo,"scale",new Vector2(1.2f, 1.2f),0.12f);
+		tweenProteccion.Chain().TweenProperty(efectoEscudo,"modulate",new Color(1, 1, 1, 0),0.45f);
+		tweenProteccion.Parallel().TweenProperty(efectoEscudo,"scale",new Vector2(0.8f, 0.8f),0.45f);
+
+		tweenProteccion.Finished += () => {
+			efectoEscudo.Visible = false;
+		};
 	}
 }

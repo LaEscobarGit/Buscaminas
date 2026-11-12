@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0l0cijv34chh"
-path="res://.godot/imported/detonia2.png-dcb551b3af9e4ba6b8a560226fc7a166.ctex"
+uid="uid://dm3xp7egdhqnf"
+path="res://.godot/imported/celda2.png-4ba9d2892aec9661c64b140c3d333b1c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/imgs/detonia2.png"
-dest_files=["res://.godot/imported/detonia2.png-dcb551b3af9e4ba6b8a560226fc7a166.ctex"]
+source_file="res://assets/imgs/celda2.png"
+dest_files=["res://.godot/imported/celda2.png-4ba9d2892aec9661c64b140c3d333b1c.ctex"]
 
 [params]
 

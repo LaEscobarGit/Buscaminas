@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8hys5563g6tu"
-path="res://.godot/imported/detonia3.png-e1a83a9bda14ec4302eb9a6133c022ee.ctex"
+uid="uid://dhm0m0u4n8v7p"
+path="res://.godot/imported/banderellaEv.png-cdebdf05487342a3111abc02a15fe80b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/imgs/detonia3.png"
-dest_files=["res://.godot/imported/detonia3.png-e1a83a9bda14ec4302eb9a6133c022ee.ctex"]
+source_file="res://assets/imgs/banderellaEv.png"
+dest_files=["res://.godot/imported/banderellaEv.png-cdebdf05487342a3111abc02a15fe80b.ctex"]
 
 [params]
 

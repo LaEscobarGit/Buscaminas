@@ -18,7 +18,7 @@ public partial class RankingScreen : Control
 		MostrarRanking();
 	}
 
-	private void MostrarRanking()
+	private async void MostrarRanking()
 	{
 		List<Puntaje> ranking = PuntajeStorage.RankingGeneral();
 
@@ -42,8 +42,8 @@ public partial class RankingScreen : Control
 		listaLabel.Text = texto;
 	}
 
-	private void OnVolverPressed()
+	private async void OnVolverPressed()
 	{
-		GetTree().ChangeSceneToFile("res://scenes/menu.tscn");
+		await Transicion.instancia.cambiarEscena("res://scenes/menu.tscn");
 	}
 }

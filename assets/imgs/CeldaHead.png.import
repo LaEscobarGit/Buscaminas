@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1mhsy110ulmt"
-path="res://.godot/imported/detoniaOutline.png-b2a0a1a365e4cdb1b3cc65366322e8a0.ctex"
+uid="uid://d7ednjwgussp"
+path="res://.godot/imported/CeldaHead.png-189370986f75c99833ed6f2f7c1126a5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/imgs/detoniaOutline.png"
-dest_files=["res://.godot/imported/detoniaOutline.png-b2a0a1a365e4cdb1b3cc65366322e8a0.ctex"]
+source_file="res://assets/imgs/CeldaHead.png"
+dest_files=["res://.godot/imported/CeldaHead.png-189370986f75c99833ed6f2f7c1126a5.ctex"]
 
 [params]
 

@@ -14,12 +14,12 @@ public partial class Mapa : Control
 		}
 	}
 	
-	private void OnBotonClick(Boton boton)
+	private async void OnBotonClick(Boton boton)
 	{
 		switch (boton.Name)
 		{
 			case "Regresar":
-				GetTree().ChangeSceneToFile("res://scenes/menu.tscn");
+				await Transicion.instancia.cambiarEscena("res://scenes/menu.tscn");
 				break;
 		}
 	}

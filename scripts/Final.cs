@@ -9,7 +9,7 @@ public partial class Final : Control
 		volverButton.Pressed += OnVolverPressed;
 	}
 
-	private void OnVolverPressed(){
-		GetTree().ChangeSceneToFile("res://scenes/menu.tscn");
+	private async void OnVolverPressed(){
+		await Transicion.instancia.cambiarEscena("res://scenes/menu.tscn");
 	}
 }

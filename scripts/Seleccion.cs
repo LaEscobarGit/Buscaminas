@@ -39,7 +39,7 @@ public partial class Seleccion : Control
 		onItemSelected(0);
 	}
 	
-	private void OnBotonClick(Boton boton)
+	private async void OnBotonClick(Boton boton)
 	{
 		if(boton.Name.Equals("Seleccionar")){
 			switch(seleccionada){
@@ -51,7 +51,7 @@ public partial class Seleccion : Control
 					break;
 			}
 		}
-		GetTree().ChangeSceneToFile("res://scenes/game_screen.tscn");
+		await Transicion.instancia.cambiarEscena("res://scenes/game_screen.tscn");
 	}
 	
 	private void onItemSelected(long index){

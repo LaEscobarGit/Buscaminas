@@ -19,11 +19,11 @@ public partial class Profecia : Control
 		botonSkip.Pressed += onVideoFinished;
 	}
 
-	private void onVideoFinished(){
+	private async void onVideoFinished(){
 		if (cambioEscena) return;
 		cambioEscena = true;
 
 		GameManager.setDialogoActual("introduccion");
-		GetTree().ChangeSceneToFile("res://scenes/historia.tscn");
+		await Transicion.instancia.cambiarEscena("res://scenes/historia.tscn");
 	}
 }

@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://cqsdkjg38h6jq" path="res://scenes/tablero.tscn" id="3_3uriw"]
 [ext_resource type="AudioStream" uid="uid://x1dnkdiiey7t" path="res://assets/audio/Click.wav" id="3_8e4ax"]
 [ext_resource type="AudioStream" uid="uid://bu7hgkuk3qk3k" path="res://assets/audio/Flag.wav" id="4_51grn"]
-[ext_resource type="FontFile" uid="uid://b6y4qw4h75aht" path="res://assets/fonts/PixelMplus10-Bold.ttf" id="4_rxmqw"]
 [ext_resource type="AudioStream" uid="uid://7ahdcx130bpj" path="res://assets/audio/bomb.wav" id="4_vnpv3"]
 [ext_resource type="Script" uid="uid://cp5xfxjrr83o4" path="res://scripts/FondoPasto.cs" id="5_4m8lb"]
 [ext_resource type="AudioStream" uid="uid://cptn8rna5lx5w" path="res://assets/audio/Velaria.wav" id="5_mjl5p"]
@@ -19,13 +18,13 @@
 [ext_resource type="Texture2D" uid="uid://c32t8jaawxbfx" path="res://assets/imgs/buffsCeldaPista.png" id="12_87fqc"]
 [ext_resource type="Texture2D" uid="uid://d2fkro32x7mv3" path="res://assets/imgs/buffsBanderaProtectora.png" id="13_4u5i3"]
 [ext_resource type="Texture2D" uid="uid://cf1ik7si3xqcs" path="res://assets/imgs/buffsCeldaMisteriosa.png" id="14_f2213"]
-[ext_resource type="FontFile" uid="uid://d33yvu28wn2o3" path="res://assets/fonts/DinkieBitmap-7pxDemo.ttf" id="15_3a7ej"]
 [ext_resource type="Texture2D" uid="uid://c6y836twyyxdi" path="res://assets/imgs/buffsFlagless.png" id="15_8imdr"]
 [ext_resource type="Texture2D" uid="uid://blee702nli435" path="res://assets/imgs/buffsMuerteSubita.png" id="16_8e4ax"]
 [ext_resource type="PackedScene" uid="uid://byj0a3na3fu4y" path="res://scenes/boton.tscn" id="16_bd51b"]
 [ext_resource type="Theme" uid="uid://c1cceqc4vnbym" path="res://temaSpin.tres" id="18_87fqc"]
 [ext_resource type="Texture2D" uid="uid://bktljy51giaqj" path="res://assets/imgs/opcionesMarco.png" id="20_f2213"]
 [ext_resource type="FontFile" uid="uid://dx25chtipg51m" path="res://assets/fonts/OldeTome.ttf" id="21_8imdr"]
+[ext_resource type="Script" uid="uid://dtakrm1y1wf40" path="res://scripts/PanelTween.cs" id="25_8imdr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3a7ej"]
 content_margin_left = 5.0
@@ -66,7 +65,7 @@ bg_color = Color(0.3254902, 0.12156863, 0.1882353, 0.8627451)
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_oknyi"]
 load_path = "res://.godot/imported/gamePanel.png-8ff6ffe765d89af3cfe9aa3445415a86.ctex"
 
-[node name="GameScreen" type="Control" unique_id=2083391954 node_paths=PackedStringArray("sfx", "musica", "Vida1", "Vida2", "Vida3", "botonRendirse", "dialog", "menuMuerte", "imgDB", "buffPista", "pistaLabel")]
+[node name="GameScreen" type="Control" unique_id=2083391954 node_paths=PackedStringArray("sfx", "musica", "Vida1", "Vida2", "Vida3", "botonRendirse", "dialog", "puntajeLabel", "menuMuerte", "menuGanar", "imgDB", "buffPista", "pistaLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -85,7 +84,9 @@ Vida3 = NodePath("VBoxContainer/Vida3")
 canciones = Array[AudioStream]([ExtResource("5_mjl5p"), ExtResource("6_2yu03"), ExtResource("7_5vo8s")])
 botonRendirse = NodePath("BotonRendirse")
 dialog = NodePath("AcceptDialog")
+puntajeLabel = NodePath("AcceptDialog/MarginContainer/VBoxContainer/ScoreLabel")
 menuMuerte = NodePath("MenuMuerte")
+menuGanar = NodePath("Ganaste")
 imgDB = [NodePath("VBoxBuffs/buff1"), NodePath("VBoxBuffs/buff2"), NodePath("VBoxBuffs/buff3"), NodePath("VBoxBuffs/debuff1"), NodePath("VBoxBuffs/debuff2"), NodePath("VBoxBuffs/debuff3")]
 buffPista = NodePath("VboxHelp/BuffPista")
 pistaLabel = NodePath("VboxHelp/Label")
@@ -245,6 +246,7 @@ offset_left = 415.0
 offset_top = 211.0
 offset_right = 740.0
 offset_bottom = 434.0
+pivot_offset = Vector2(162, 111)
 theme = ExtResource("18_87fqc")
 theme_override_styles/panel = SubResource("StyleBoxFlat_87fqc")
 script = ExtResource("10_4m8lb")
@@ -276,6 +278,12 @@ theme_override_fonts/font = ExtResource("21_8imdr")
 theme_override_font_sizes/font_size = 30
 text = "Fin de la partida!"
 
+[node name="ScoreLabel" type="Label" parent="AcceptDialog/MarginContainer/VBoxContainer" unique_id=989800780]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("10_mjl5p")
+text = "Puntaje: "
+horizontal_alignment = 1
+
 [node name="Label" type="Label" parent="AcceptDialog/MarginContainer/VBoxContainer" unique_id=941957430]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_mjl5p")
@@ -295,6 +303,56 @@ layout_mode = 2
 layout_mode = 2
 text = "Guardar"
 
+[node name="Ganaste" type="PanelContainer" parent="." unique_id=852213110]
+visible = false
+layout_mode = 0
+offset_left = 415.0
+offset_top = 211.0
+offset_right = 740.0
+offset_bottom = 434.0
+pivot_offset = Vector2(162, 111)
+theme = ExtResource("18_87fqc")
+theme_override_styles/panel = SubResource("StyleBoxFlat_87fqc")
+script = ExtResource("25_8imdr")
+
+[node name="TextureRect" type="TextureRect" parent="Ganaste" unique_id=358716387]
+layout_mode = 2
+texture = ExtResource("20_f2213")
+
+[node name="MarginContainer" type="MarginContainer" parent="Ganaste" unique_id=1906167817]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Ganaste/MarginContainer" unique_id=379483726]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Label2" type="Label" parent="Ganaste/MarginContainer/VBoxContainer" unique_id=686839213]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("21_8imdr")
+theme_override_font_sizes/font_size = 30
+text = "¡Ganaste!"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Ganaste/MarginContainer/VBoxContainer" unique_id=1563987040]
+custom_maximum_size = Vector2(265, -1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("10_mjl5p")
+text = "Cada vez más cerca de recuperar nuestro reino"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="Ganaste/MarginContainer/VBoxContainer" unique_id=1315329384]
+layout_mode = 2
+
+[node name="Continuar" parent="Ganaste/MarginContainer/VBoxContainer/CenterContainer" unique_id=2032810806 groups=["botones_menu"] instance=ExtResource("16_bd51b")]
+layout_mode = 2
+text = "Continuar"
+
 [node name="MenuMuerte" type="PanelContainer" parent="." unique_id=865979558]
 visible = false
 layout_mode = 0
@@ -302,6 +360,8 @@ offset_left = 418.0
 offset_top = 205.0
 offset_right = 743.0
 offset_bottom = 457.0
+pivot_offset = Vector2(162, 126)
+script = ExtResource("25_8imdr")
 
 [node name="TextureRect" type="TextureRect" parent="MenuMuerte" unique_id=1784497181]
 texture_filter = 1
@@ -320,8 +380,8 @@ alignment = 1
 [node name="RichTextLabel" type="Label" parent="MenuMuerte/CenterContainer/VBoxContainer" unique_id=1424393474]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
-theme_override_fonts/font = ExtResource("4_rxmqw")
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("21_8imdr")
+theme_override_font_sizes/font_size = 35
 text = "¡Moriste!"
 horizontal_alignment = 1
 
@@ -330,7 +390,7 @@ custom_maximum_size = Vector2(250, -1)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.3647059, 0.16470589, 0.1764706, 1)
-theme_override_fonts/font = ExtResource("15_3a7ej")
+theme_override_fonts/font = ExtResource("10_mjl5p")
 text = "¡No te rindas! El futuro de Numeria está en tus manos."
 horizontal_alignment = 1
 autowrap_mode = 3

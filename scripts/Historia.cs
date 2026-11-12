@@ -20,8 +20,11 @@ public partial class Historia : Control
 	Godot.Collections.Dictionary sprites = new(){
 		{ "celda", GD.Load<Texture2D>("res://assets/imgs/celda.png") },
 		{ "banderella", GD.Load<Texture2D>("res://assets/imgs/banderella.png") },
+		{ "banderellaev", GD.Load<Texture2D>("res://assets/imgs/banderellaEv.png") },
 		{ "velaria", GD.Load<Texture2D>("res://assets/imgs/velaria.png") },
-		{ "reina detonia", GD.Load<Texture2D>("res://assets/imgs/detonia.png") }
+		{ "velariaev", GD.Load<Texture2D>("res://assets/imgs/velariaEv.png") },
+		{ "reina detonia", GD.Load<Texture2D>("res://assets/imgs/detonia.png") },
+		{ "reina detoniaev", GD.Load<Texture2D>("res://assets/imgs/detoniaEv.png") }
 	};
 	
 	private Tween tweenSprite;
@@ -32,6 +35,11 @@ public partial class Historia : Control
 		gameManager = GetNode<GameManager>("/root/GameManager");
 		var material = spritePersonaje.Material as ShaderMaterial;
 		material?.SetShaderParameter("progress", 0.0f);
+
+		foreach (Node nodo in GetTree().GetNodesInGroup("botones_menu")){
+			if (nodo is Boton boton)
+				boton.Click += OnBotonClick;
+		}
 
 		dialogManager.DialogoActualizado += onDialogoActualizado;
 		dialogManager.DialogoTerminado += onDialogoTerminado;
@@ -92,7 +100,7 @@ public partial class Historia : Control
 				musica.Play();
 				break;
 			case "numeria": GameManager.setDialogoActual("region1_antes");
-				GetTree().ChangeSceneToFile("res://scenes/mapa.tscn");
+				await Transicion.instancia.cambiarEscena("res://scenes/mapa.tscn");
 				break;
 			case "region1_antes": GameManager.setDialogoActual("region1_despues");
 				fondo.Texture = fondos[2];
@@ -119,13 +127,13 @@ public partial class Historia : Control
 				break;
 			case "region3_despues":
 				GameManager.completarNivel(2);
-				GetTree().ChangeSceneToFile("res://scenes/final.tscn");
+				await Transicion.instancia.cambiarEscena("res://scenes/final.tscn");
 				return;
 		}
 		if(actual.Contains("antes"))
-			GetTree().ChangeSceneToFile("res://scenes/seleccion.tscn");
+			await Transicion.instancia.cambiarEscena("res://scenes/seleccion.tscn");
 		else if(actual.Contains("despues"))
-			GetTree().ChangeSceneToFile("res://scenes/mapa.tscn");
+			await Transicion.instancia.cambiarEscena("res://scenes/mapa.tscn");
 	}
 	
 	private void actualizarPresentacion(){
@@ -158,6 +166,16 @@ public partial class Historia : Control
 		musica.Play();
 	}
 	
+	private async void OnBotonClick(Boton boton){
+		switch (boton.Name)
+		{
+			case "Regresar":
+				await Transicion.instancia.cambiarEscena("res://scenes/menu.tscn");
+				break;
+		}
+	}
+	
+	//--CAMBIAR SPRITE
 	public async void onPersonajeSale(string personaje){
 		string saliendo = personaje.ToLower();
 		if (personajeActual != saliendo) return;
@@ -171,7 +189,14 @@ public partial class Historia : Control
 	}
 
 	public async void onPersonajeEntra(string personaje){
-		personajeActual = personaje.ToLower();
+		string clave = personaje.ToLower();
+		string dialogo = GameManager.getDialogoActual();
+		
+		bool malvado = (dialogo == "region1_antes" && clave == "velaria") || (dialogo == "region2_antes" && clave == "banderella") || (dialogo == "region3_antes" && clave == "reina detonia");
+		if (malvado)
+			clave += "ev";
+		
+		personajeActual = clave;
 		spritePersonaje.Texture = sprites[personajeActual].As<Texture2D>();
 		await aparecer();
 	}

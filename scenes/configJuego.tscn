@@ -3,8 +3,10 @@
 [ext_resource type="Script" uid="uid://bmme3d1gabdao" path="res://scripts/ConfigJuego.cs" id="1_mo5ol"]
 [ext_resource type="VideoStream" uid="uid://bonr80tgw1pdq" path="res://assets/imgs/Fondo.ogv" id="2_3wuio"]
 [ext_resource type="PackedScene" uid="uid://byj0a3na3fu4y" path="res://scenes/boton.tscn" id="3_4iuo0"]
+[ext_resource type="FontFile" uid="uid://klmj38jtc355" path="res://assets/fonts/NotJamOldStyle11.ttf" id="4_7g3ho"]
 [ext_resource type="AudioStream" uid="uid://1a575cbc8chc" path="res://assets/audio/Fondo1.wav" id="4_abq0j"]
 [ext_resource type="Texture2D" uid="uid://c0l4vd10cs2o1" path="res://assets/imgs/configTablero.png" id="5_abq0j"]
+[ext_resource type="StyleBox" uid="uid://cqby6w8yrgwqf" path="res://botonNormal.tres" id="5_waoly"]
 [ext_resource type="FontFile" uid="uid://byhrep8piue7x" path="res://assets/fonts/NotJamOldStyle14.ttf" id="6_wma0d"]
 [ext_resource type="Theme" uid="uid://c1cceqc4vnbym" path="res://temaSpin.tres" id="7_s6wu2"]
 [ext_resource type="StyleBox" uid="uid://dqfga57i77pe1" path="res://botonHover.tres" id="8_vyr2r"]
@@ -13,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://d2fkro32x7mv3" path="res://assets/imgs/buffsBanderaProtectora.png" id="11_5x147"]
 [ext_resource type="Texture2D" uid="uid://c6y836twyyxdi" path="res://assets/imgs/buffsFlagless.png" id="13_qafyn"]
 
-[node name="ConfigJuego" type="Control" unique_id=2083391954 node_paths=PackedStringArray("filasBox", "colsBox", "minasBox", "vidasBox", "textoTablero", "tableroContainer", "textoBD", "bdContainer", "limiteCheck", "tiempoLabel", "tiempoSpin", "buffDesc", "pista", "bandera", "incognita", "flagless")]
+[node name="ConfigJuego" type="Control" unique_id=2083391954 node_paths=PackedStringArray("musicaPlayer", "filasBox", "colsBox", "minasBox", "vidasBox", "textoTablero", "tableroContainer", "textoBD", "bdContainer", "limiteCheck", "tiempoLabel", "tiempoSpin", "buffDesc", "pista", "bandera", "incognita", "flagless", "cancionOpcion")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,6 +23,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mo5ol")
+musicaPlayer = NodePath("PlayerMusica")
 filasBox = NodePath("TableroContainer/Grid/Filas")
 colsBox = NodePath("TableroContainer/Grid/Columnas")
 minasBox = NodePath("TableroContainer/Grid/Minas")
@@ -37,6 +40,7 @@ pista = NodePath("B&DContainer/VBoxContainer/GridContainer/CeldasPista")
 bandera = NodePath("B&DContainer/VBoxContainer/GridContainer/BanderaEscudo")
 incognita = NodePath("B&DContainer/VBoxContainer/GridContainer/CeldasMisteriosas")
 flagless = NodePath("B&DContainer/VBoxContainer/GridContainer/Flagless")
+cancionOpcion = NodePath("BotonContainer/Canciones")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=876782601]
 texture_filter = 1
@@ -63,6 +67,34 @@ text = "Tablero"
 [node name="B&D" parent="BotonContainer" unique_id=737292347 groups=["botones_menu"] instance=ExtResource("3_4iuo0")]
 layout_mode = 2
 text = "Buffs & Debuffs"
+
+[node name="Canciones" type="OptionButton" parent="BotonContainer" unique_id=556467924]
+layout_mode = 2
+theme = ExtResource("7_s6wu2")
+theme_override_fonts/font = ExtResource("4_7g3ho")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = ExtResource("5_waoly")
+theme_override_styles/pressed_mirrored = ExtResource("5_waoly")
+theme_override_styles/hover = ExtResource("5_waoly")
+item_count = 9
+popup/item_0/text = "LogicBound"
+popup/item_0/id = 0
+popup/item_1/text = "Velaria"
+popup/item_1/id = 1
+popup/item_2/text = "Banderella"
+popup/item_2/id = 2
+popup/item_3/text = "Detonia"
+popup/item_3/id = 3
+popup/item_4/text = "En camino"
+popup/item_4/id = 8
+popup/item_5/text = "La aventura"
+popup/item_5/id = 7
+popup/item_6/text = "La maldición"
+popup/item_6/id = 6
+popup/item_7/text = "El final"
+popup/item_7/id = 4
+popup/item_8/text = "Celebración"
+popup/item_8/id = 5
 
 [node name="PlayerMusica" type="AudioStreamPlayer" parent="." unique_id=1357234752]
 stream = ExtResource("4_abq0j")
@@ -102,7 +134,6 @@ theme_override_font_sizes/font_size = 26
 text = "Configura el tablero a tu gusto!"
 
 [node name="TableroContainer" type="Container" parent="." unique_id=602560184]
-visible = false
 texture_filter = 1
 layout_mode = 0
 offset_left = 444.0
@@ -210,6 +241,7 @@ theme_override_font_sizes/font_size = 26
 text = "Personaliza tus buffs y debuffs!"
 
 [node name="B&DContainer" type="Container" parent="." unique_id=319062961]
+visible = false
 layout_mode = 0
 offset_left = 434.0
 offset_top = 194.0

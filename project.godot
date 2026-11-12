@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Buscaminas"
+config/name="LogicBound"
 run/main_scene="uid://da3txj26a0ckg"
 config/features=PackedStringArray("4.7", "C#", "Mobile")
 config/icon="res://icon.svg"
@@ -23,6 +23,7 @@ buses/default_bus_layout="uid://ccaj30a8v2j0s"
 
 GameManager="*uid://bh3h0y2jbf1ii"
 DialogManager="*uid://dgjj21dyhnqh0"
+Transicion="*uid://nhmbp75fycnh"
 
 [display]
 

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-public partial class GuardarPuntaje : Control
+public partial class GuardarPuntaje : PanelTween
 {
 	[Export] private LineEdit campoNombre;
 	[Export] private Button guardarBot;
@@ -33,7 +33,7 @@ public partial class GuardarPuntaje : Control
 		campoNombre.GrabFocus();
 	}
 	//Esto tambien es lo del nombre 
-	private void GuardarYSalir()
+	private async void GuardarYSalir()
 	{
 		Visible = false;
 		if (yaGuardado)
@@ -56,7 +56,7 @@ public partial class GuardarPuntaje : Control
 
 		PuntajeStorage.Guardar(p);
 
-		GetTree().ChangeSceneToFile("res://scenes/menu.tscn");
+		await Transicion.instancia.cambiarEscena("res://scenes/menu.tscn");
 	}
 }
 

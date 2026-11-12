@@ -4,6 +4,7 @@ using System;
 public partial class ConfigJuego : Control
 {
 	[Signal] public delegate void ClickEventHandler(Boton boton);
+	[Export] private AudioStreamPlayer musicaPlayer;
 	[Export] private SpinBox filasBox;
 	[Export] private SpinBox colsBox;
 	[Export] private SpinBox minasBox;
@@ -20,6 +21,21 @@ public partial class ConfigJuego : Control
 	[Export] private Button bandera;
 	[Export] private Button incognita;
 	[Export] private Button flagless;
+
+	//cambiar musiquita
+	[Export] private OptionButton cancionOpcion;
+	private AudioStream[] canciones = new AudioStream[]
+	{
+		GD.Load<AudioStream>("res://assets/audio/Main Theme.wav"),
+		GD.Load<AudioStream>("res://assets/audio/Velaria.wav"),
+		GD.Load<AudioStream>("res://assets/audio/Banderella.wav"),
+		GD.Load<AudioStream>("res://assets/audio/Detonia.wav"),
+		GD.Load<AudioStream>("res://assets/audio/Fondo1.wav"),
+		GD.Load<AudioStream>("res://assets/audio/Fondo2.wav"),
+		GD.Load<AudioStream>("res://assets/audio/Fondo3.wav"),
+		GD.Load<AudioStream>("res://assets/audio/Final.wav"),
+		GD.Load<AudioStream>("res://assets/audio/FinalScreen.wav")
+	};
 	
 	private bool limite;
 	
@@ -41,6 +57,8 @@ public partial class ConfigJuego : Control
 		incognita.Toggled += onIncognitaToggled;
 		flagless.Toggled += onFlaglessToggled;
 		
+		cancionOpcion.ItemSelected += cambiarMusica;
+		
 		limiteCheck.Toggled += onLimiteToggled;
 		onLimiteToggled(false);
 		MostrarPestana(true);
@@ -56,7 +74,7 @@ public partial class ConfigJuego : Control
 		bdContainer.Visible = !tablero;
 	}
 	
-	private void OnBotonClick(Boton boton)
+	private async void OnBotonClick(Boton boton)
 	{
 		switch (boton.Name)
 		{
@@ -71,14 +89,16 @@ public partial class ConfigJuego : Control
 				if(limite)
 					GameManager.tiempo = (int) tiempoSpin.Value;
 				int espacios = (GameManager.filas*GameManager.columnas)-10;
-				if(GameManager.minas < espacios)
-					GetTree().ChangeSceneToFile("res://scenes/game_screen.tscn");
+				if(GameManager.minas < espacios){
+					GameManager.musica = musicaPlayer.Stream;
+					await Transicion.instancia.cambiarEscena("res://scenes/game_screen.tscn");
+				}
 				else{
 					//
 				}
 				break;
 			case "Regresar":
-				GetTree().ChangeSceneToFile("res://scenes/menu.tscn");
+				await Transicion.instancia.cambiarEscena("res://scenes/menu.tscn");
 				break;
 		}
 	}
@@ -138,5 +158,11 @@ public partial class ConfigJuego : Control
 	}
 	public void onBuffMouseExited(Button boton){
 		buffDesc.Text = "";
+	}
+	
+	private void cambiarMusica(long indice){
+		musicaPlayer.Stop();
+		musicaPlayer.Stream = canciones[indice];
+		musicaPlayer.Play();
 	}
 }

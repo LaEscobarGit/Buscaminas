@@ -21,7 +21,7 @@ public partial class Region : Sprite2D
 		material.SetShaderParameter("outline_alpha", 0.0f);
 	}
 	
-	public override void _Process(double delta)
+	public override async void _Process(double delta)
 	{
 		if(!habilitado)
 			return;
@@ -37,7 +37,7 @@ public partial class Region : Sprite2D
 		}
 		if (hovering && Input.IsActionJustPressed("click"))
 		{
-			GetTree().ChangeSceneToFile("res://scenes/historia.tscn");
+			await Transicion.instancia.cambiarEscena("res://scenes/historia.tscn");
 		}
 	}
 	

@@ -1,6 +1,14 @@
 [gd_resource type="Theme" format=3 uid="uid://c1cceqc4vnbym"]
 
+[ext_resource type="StyleBox" uid="uid://dqfga57i77pe1" path="res://botonHover.tres" id="1_na467"]
 [ext_resource type="FontFile" uid="uid://byhrep8piue7x" path="res://assets/fonts/NotJamOldStyle14.ttf" id="1_vpajg"]
+[ext_resource type="StyleBox" uid="uid://cqby6w8yrgwqf" path="res://botonNormal.tres" id="2_r7gqe"]
 
 [resource]
 default_font = ExtResource("1_vpajg")
+OptionButton/font_sizes/font_size = 14
+PopupMenu/font_sizes/font_separator_size = 14
+PopupMenu/font_sizes/font_size = 14
+PopupMenu/font_sizes/title_font_size = 14
+PopupMenu/styles/hover = ExtResource("1_na467")
+PopupMenu/styles/panel = ExtResource("2_r7gqe")

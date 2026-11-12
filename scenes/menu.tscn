@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://nda4fbi56lnu" path="res://scripts/Logo.cs" id="8_13sgg"]
 [ext_resource type="Texture2D" uid="uid://dyiyar4pydwhg" path="res://assets/imgs/logoBlack2.png" id="9_70i5f"]
 [ext_resource type="Texture2D" uid="uid://bktljy51giaqj" path="res://assets/imgs/opcionesMarco.png" id="9_mj5lg"]
+[ext_resource type="Script" uid="uid://dtakrm1y1wf40" path="res://scripts/PanelTween.cs" id="10_6cdou"]
 [ext_resource type="FontFile" uid="uid://byhrep8piue7x" path="res://assets/fonts/NotJamOldStyle14.ttf" id="10_ufwb2"]
 [ext_resource type="Shader" uid="uid://dgnts5eb6ry1r" path="res://borroso.gdshader" id="11_borroso"]
 
@@ -151,8 +152,10 @@ visible = false
 layout_mode = 0
 offset_left = 406.0
 offset_top = 207.0
-offset_right = 731.0
+offset_right = 774.0
 offset_bottom = 459.0
+pivot_offset = Vector2(184, 126)
+script = ExtResource("10_6cdou")
 
 [node name="ColorRect" type="ColorRect" parent="Opciones" unique_id=1326595299]
 layout_mode = 2

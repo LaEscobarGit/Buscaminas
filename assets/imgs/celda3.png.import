@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://quogj3a5gdw3"
-path="res://.godot/imported/banderella2.png-0687ec042a29ca79d011f6555115695e.ctex"
+uid="uid://xigeuvometwy"
+path="res://.godot/imported/celda3.png-b7e09ce9ad88b042b808e4f7cd9ae9df.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/imgs/banderella2.png"
-dest_files=["res://.godot/imported/banderella2.png-0687ec042a29ca79d011f6555115695e.ctex"]
+source_file="res://assets/imgs/celda3.png"
+dest_files=["res://.godot/imported/celda3.png-b7e09ce9ad88b042b808e4f7cd9ae9df.ctex"]
 
 [params]
 

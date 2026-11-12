@@ -17,6 +17,8 @@ public partial class GameManager : Node
 	public static string dialogoActual = "introduccion";
 	public static bool modoAventura = false;
 	
+	public static AudioStream musica = null;
+	
 	public static void completarNivel(int region){
 		if(region == -1) return;
 		jugados[region] = true;

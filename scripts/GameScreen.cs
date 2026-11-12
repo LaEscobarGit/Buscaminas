@@ -17,8 +17,10 @@ public partial class GameScreen : Control
 	[Export] private TextureRect Vida3;
 	[Export] private AudioStream[] canciones;
 	[Export] private Boton botonRendirse;
-	[Export] private Control dialog;
-	[Export] private PanelContainer menuMuerte;
+	[Export] private PanelTween dialog;
+	[Export] private Label puntajeLabel;
+	[Export] private PanelTween menuMuerte;
+	[Export] private PanelTween menuGanar;
 	[Export] private TextureRect[] imgDB;
 	[Export] private Button buffPista;
 	[Export] private Label pistaLabel;
@@ -100,7 +102,16 @@ public partial class GameScreen : Control
 		
 		configurarVidas();
 		
-		musica.Stream = canciones[GameManager.getActual()];
+		if(GameManager.modoAventura)
+			musica.Stream = canciones[GameManager.getActual()];
+		else{
+			AudioStream cancion = GameManager.musica;
+			if(cancion != null){
+				musica.Stream = cancion;
+			}else
+				musica.Stream = canciones[1];
+		}
+			
 		musica.Play();
 		
 		NuevaPartida();
@@ -246,20 +257,25 @@ public partial class GameScreen : Control
 		return true;
 	}
  
-	private void TerminarJuego(bool vivir){
+	private async void TerminarJuego(bool vivir){
 		if (juegoTerminado) return;
 		juegoTerminado = true;
  		timer.Stop();
  
 		CalcularPuntaje();
 		if(!GameManager.modoAventura){
+			await dialog.aparecer();
+			puntajeLabel.Text = "Puntaje: " + puntos.ToString();
 			dialog.Visible = true;
 			EmitSignal(SignalName.JuegoTerminado, vivir, puntos);
 		}else{
-			if(vivir)
-				GetTree().ChangeSceneToFile("res://scenes/historia.tscn");
+			if(vivir){
+				menuGanar.Visible = true;
+				await menuGanar.aparecer();
+			}
 			else{
 				menuMuerte.Visible = true;
+				await menuMuerte.aparecer();
 			}
 		}
 	}
@@ -421,22 +437,25 @@ public partial class GameScreen : Control
 	}
 	
 	// agregué esto aquí - miguel (o 3 o)
-	private void OnRendirseClick(Boton boton){
+	private async void OnRendirseClick(Boton boton){
 		timer.Stop();
-		GetTree().ChangeSceneToFile("res://scenes/menu.tscn");
+		await Transicion.instancia.cambiarEscena("res://scenes/menu.tscn");
 	}
 	
 	private void onPistaToggled(bool toggledOn){
 		pistaToggle = toggledOn;
 	}
 	
-	private void OnBotonClick(Boton boton){
+	private async void OnBotonClick(Boton boton){
 		switch (boton.Name){
 			case "Reiniciar":
-				GetTree().ChangeSceneToFile("res://scenes/seleccion.tscn");
+				await Transicion.instancia.cambiarEscena("res://scenes/seleccion.tscn");
 				break;
 			case "Regresar":
-				GetTree().ChangeSceneToFile("res://scenes/menu.tscn");
+				await Transicion.instancia.cambiarEscena("res://scenes/menu.tscn");
+				break;
+			case "Continuar":
+				await Transicion.instancia.cambiarEscena("res://scenes/historia.tscn");
 				break;
 		}
 	}

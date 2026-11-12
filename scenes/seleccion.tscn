@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://defrl2u4srccg" path="res://assets/imgs/seleccionPersonajesContainer.png" id="9_4ttul"]
 [ext_resource type="Texture2D" uid="uid://c6y836twyyxdi" path="res://assets/imgs/buffsFlagless.png" id="9_i6v5p"]
 [ext_resource type="Texture2D" uid="uid://doudwluarevmk" path="res://assets/imgs/VelariaHead.png" id="12_e664m"]
+[ext_resource type="Texture2D" uid="uid://d7ednjwgussp" path="res://assets/imgs/CeldaHead.png" id="12_ux1hj"]
 [ext_resource type="Texture2D" uid="uid://db6fmbe42y86h" path="res://assets/imgs/BanderellaHead.png" id="13_ux1hj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tr1rn"]
@@ -181,7 +182,7 @@ offset_bottom = 633.0
 item_count = 3
 max_columns = 3
 fixed_icon_size = Vector2i(59, 59)
-item_0/icon = ExtResource("12_e664m")
+item_0/icon = ExtResource("12_ux1hj")
 item_1/icon = ExtResource("12_e664m")
 item_2/icon = ExtResource("13_ux1hj")
 
